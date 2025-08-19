@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="transition-colors duration-300">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,27 +7,30 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-    body { background: #f8f9fa; color: #333; line-height: 1.6; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); line-height: 1.6; scroll-behavior: smooth; transition: background 0.3s, color 0.3s; }
     a { text-decoration: none; color: inherit; }
 
-    p a { color: #007BFF; font-weight: 600; transition: color 0.3s ease; }
-    p a:hover { text-decoration: underline; color: #0056b3; }
+    p a { color: var(--link); font-weight: 600; transition: color 0.3s ease; }
+    p a:hover { text-decoration: underline; color: var(--link-hover); }
 
     header { 
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 2rem; background: #fff; 
+      padding: 1rem 2rem; background: var(--card-bg); 
       box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-      position: sticky; top: 0; z-index: 1000; transition: box-shadow 0.3s ease; 
+      position: sticky; top: 0; z-index: 1000; transition: box-shadow 0.3s ease, background 0.3s ease; 
       flex-wrap: wrap;
     }
     header h1 { font-size: 1.5rem; }
-    nav { display: flex; flex-wrap: wrap; gap: 1rem; }
-    nav a { font-weight: bold; color: #333; position: relative; }
+    nav { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+    nav a { font-weight: bold; color: var(--text); position: relative; }
     nav a::after {
       content: ""; position: absolute; left: 0; bottom: -4px;
-      width: 0; height: 2px; background: #007BFF; transition: width 0.3s ease;
+      width: 0; height: 2px; background: var(--link); transition: width 0.3s ease;
     }
     nav a:hover::after { width: 100%; }
+
+    .theme-toggle { cursor: pointer; background: none; border: none; padding: .4rem; border-radius: 6px; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+    .theme-toggle:hover { background: var(--hover); }
 
     section { padding: 4rem 2rem; text-align: center; opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
     section.visible { opacity: 1; transform: translateY(0); }
@@ -37,34 +40,65 @@
     .hero img { border-radius: 50%; width: 150px; margin-bottom: 1.5rem; transition: transform 0.4s ease; }
     .hero img:hover { transform: scale(1.08); }
     .hero h2 { font-size: 2.2rem; margin-bottom: .5rem; }
-    .hero p { font-size: 1.1rem; color: #555; }
+    .hero p { font-size: 1.1rem; color: var(--subtext); }
 
     .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; justify-content: center; }
-    .card { background: #fff; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card { background: var(--card-bg); border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s; }
     .card:hover { transform: translateY(-8px); box-shadow: 0 8px 18px rgba(0,0,0,0.15); }
     .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 6px; margin-bottom: 1rem; }
     .card h3 { margin: .5rem 0; }
-    .card p { font-size: 0.95rem; margin-bottom: 1rem; color: #555; }
+    .card p { font-size: 0.95rem; margin-bottom: 1rem; color: var(--subtext); }
 
     .buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
-    .btn { background: #007BFF; color: #fff; padding: .6rem 1.2rem; border: none; border-radius: 5px; cursor: pointer; transition: transform 0.3s ease, background 0.3s; display: flex; align-items: center; gap: 0.5rem; }
-    .btn:hover { background: #0056b3; transform: translateY(-3px) scale(1.05); }
+    .btn { background: var(--link); color: #fff; padding: .6rem 1.2rem; border: none; border-radius: 5px; cursor: pointer; transition: transform 0.3s ease, background 0.3s; display: flex; align-items: center; gap: 0.5rem; }
+    .btn:hover { background: var(--link-hover); transform: translateY(-3px) scale(1.05); }
 
     .contact-links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem; }
-    .contact-links a { display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem; background: #fff; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-weight: 500; transition: transform 0.3s ease, background 0.3s; }
-    .contact-links a:hover { transform: scale(1.08); background: #f1f1f1; }
+    .contact-links a { display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem; background: var(--card-bg); border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-weight: 500; transition: transform 0.3s ease, background 0.3s; }
+    .contact-links a:hover { transform: scale(1.08); background: var(--hover); }
 
-    footer { background: #111; color: #bbb; padding: 2rem; text-align: center; }
+    footer { background: var(--footer-bg); color: var(--footer-text); padding: 2rem; text-align: center; transition: background 0.3s, color 0.3s; }
     footer .links { margin: 1rem 0; display: flex; flex-direction: column; gap: .5rem; }
+    footer a { color: var(--footer-link); }
 
-    .back-to-top { margin: 2rem auto 0; display: inline-block; background: #007BFF; color: #fff; padding: 0.8rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: transform 0.3s ease, background 0.3s; }
-    .back-to-top:hover { background: #0056b3; transform: scale(1.08); }
+    .back-to-top { margin: 2rem auto 0; display: inline-block; background: var(--link); color: #fff; padding: 0.8rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: transform 0.3s ease, background 0.3s; }
+    .back-to-top:hover { background: var(--link-hover); transform: scale(1.08); }
 
-    #tagline {
-      font-size: 1.1rem; color: #555; border-right: 2px solid #007BFF;
-      white-space: nowrap; display: inline-block; animation: blink-cursor 0.7s infinite; padding-right: 5px;
+    #tagline { font-size: 1.1rem; color: var(--subtext); border-right: 2px solid var(--link); white-space: nowrap; display: inline-block; animation: blink-cursor 0.7s infinite; padding-right: 5px; }
+    @keyframes blink-cursor { 0%, 50% { border-color: var(--link); } 51%, 100% { border-color: transparent; } }
+
+    /* Light Theme Variables */
+    :root {
+      --bg: #f8f9fa;
+      --text: #333;
+      --subtext: #555;
+      --link: #007BFF;
+      --link-hover: #0056b3;
+      --card-bg: #fff;
+      --hover: #f1f1f1;
+      --footer-bg: #111;
+      --footer-text: #bbb;
+      --footer-link: #ddd;
     }
-    @keyframes blink-cursor { 0%, 50% { border-color: #007BFF; } 51%, 100% { border-color: transparent; } }
+
+    /* Dark Theme Variables */
+    .dark {
+      --bg: #121212;
+      --text: #eee;
+      --subtext: #aaa;
+      --link: #4dabf7;
+      --link-hover: #1c7ed6;
+      --card-bg: #1e1e1e;
+      --hover: #2a2a2a;
+      --footer-bg: #000;
+      --footer-text: #888;
+      --footer-link: #bbb;
+    }
+
+    /* Make theme selector icon white in dark mode */
+    html.dark #theme-toggle svg {
+      stroke: white;
+    }
 
     @media (max-width: 992px) {
       header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
@@ -98,13 +132,18 @@
       <a href="#projects">Projects</a>
       <a href="#certificates">Certificates</a>
       <a href="#contact">Contact</a>
+      <button class="theme-toggle" id="theme-toggle"><i data-lucide="moon"></i></button>
     </nav>
   </header>
 
-  <section class="hero">
+ <section class="hero">
     <img src="your-photo.jpg" alt="Rainier Pearson Saputra">
     <h2>Rainier Pearson Saputra</h2>
     <p id="tagline"></p>
+
+    <div style="margin: 1.5rem 0; text-align:center;">
+      <button style="background:#ccc; color:#666; padding:0.7rem 1.5rem; border:none; border-radius:6px; cursor:not-allowed; font-weight:bold; font-size:1rem; pointer-events:none;">Download Resume (Coming Soon)</button>
+    </div>
   </section>
 
   <section id="about">
@@ -115,18 +154,9 @@
   <section id="skills">
     <h2>Skills</h2>
     <div class="cards">
-      <div class="card">
-        <h3>Arduino</h3>
-        <p>Built IoT projects with sensors and actuators.</p>
-      </div>
-      <div class="card">
-        <h3>3D Printing</h3>
-        <p>Designed and assembled mechanical projects.</p>
-      </div>
-      <div class="card">
-        <h3>Programming</h3>
-        <p>I have some experience in basic coding.</p>
-      </div>
+      <div class="card"><h3>Arduino</h3><p>I have skills making IoT projects with sensors and actuators.</p></div>
+      <div class="card"><h3>3D Printing & PCB Design</h3><p>I am able to design and assemble 3D projects and electronics.</p></div>
+      <div class="card"><h3>Programming</h3><p>I have some experience in basic coding.</p></div>
     </div>
   </section>
 
@@ -139,25 +169,25 @@
         <p>WiFi fish feeder built with ESP32 and recylced materials.</p>
         <div class="buttons">
           <a href="#" class="btn"><i data-lucide="external-link"></i>Demo</a>
-          <a href="#" class="btn"><i data-lucide="github"></i>GitHub</a>
+          <a href="https://github.com/Rainier-PS/Light-Based-Canopy-System" class="btn"><i data-lucide="github"></i>GitHub</a>
         </div>
       </div>
       <div class="card">
-        <img src="project2.jpg" alt="Smart Light-Based Canopy">
+        <img src="https://github.com/Rainier-PS/Light-Based-Canopy-System/blob/main/Front-View.jpg" alt="Smart Light-Based Canopy">
         <h3>Smart Light-Based Canopy</h3>
         <p>An eco-friendly smart home prototype using a light dependent resistor (LDR) and Arduino Uno.</p>
         <div class="buttons">
           <a href="#" class="btn"><i data-lucide="external-link"></i>Demo</a>
-          <a href="#" class="btn"><i data-lucide="github"></i>GitHub</a>
+          <a href="https://github.com/Rainier-PS/Light-Based-Canopy-System" class="btn"><i data-lucide="github"></i>GitHub</a>
         </div>
       </div>
       <div class="card">
-        <img src="project3.jpg" alt="Hackpad">
+        <img src="https://github.com/Rainier-PS/Hackpad-Rainier/blob/main/images/CAD.png" alt="Hackpad">
         <h3>Hackpad</h3>
         <p>A DIY custom macropad built using a Xiao RP2040 for Hack Club's <strong>Highway to Undercity</strong> event.</p>
         <div class="buttons">
           <a href="#" class="btn"><i data-lucide="external-link"></i>Demo</a>
-          <a href="#" class="btn"><i data-lucide="github"></i>GitHub</a>
+          <a href="https://github.com/Rainier-PS/Hackpad-Rainier" class="btn"><i data-lucide="github"></i>GitHub</a>
         </div>
       </div>
     </div>
@@ -166,21 +196,9 @@
   <section id="certificates">
     <h2>Certificates</h2>
     <div class="cards">
-      <div class="card">
-        <img src="certificate1.jpg" alt="Certificate 1">
-        <h3>Certificate Title 1</h3>
-        <p>Description or issuing organization</p>
-      </div>
-      <div class="card">
-        <img src="certificate2.jpg" alt="Certificate 2">
-        <h3>Certificate Title 2</h3>
-        <p>Description or issuing organization</p>
-      </div>
-      <div class="card">
-        <img src="certificate3.jpg" alt="Certificate 3">
-        <h3>Certificate Title 3</h3>
-        <p>Description or issuing organization</p>
-      </div>
+      <div class="card"><img src="certificate1.jpg" alt="Certificate 1"><h3>Certificate Title 1</h3><p>Description or issuing organization</p></div>
+      <div class="card"><img src="certificate2.jpg" alt="Certificate 2"><h3>Certificate Title 2</h3><p>Description or issuing organization</p></div>
+      <div class="card"><img src="certificate3.jpg" alt="Certificate 3"><h3>Certificate Title 3</h3><p>Description or issuing organization</p></div>
     </div>
   </section>
   
@@ -196,9 +214,7 @@
     </div>
 
     <div style="margin-top:2rem; text-align:center;">
-      <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
-        Back to Top
-      </button>
+      <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">Back to Top</button>
     </div>
   </section>
 
@@ -220,18 +236,14 @@
     const sections = document.querySelectorAll("section");
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if(entry.isIntersecting) { entry.target.classList.add("visible"); }
+        if(entry.isIntersecting) entry.target.classList.add("visible");
       });
     }, { threshold: 0.1 });
     sections.forEach(sec => observer.observe(sec));
 
     const header = document.getElementById("header");
     window.addEventListener("scroll", () => {
-      if(window.scrollY > 50) {
-        header.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
-      } else {
-        header.style.boxShadow = "0 2px 5px rgba(0,0,0,0.1)";
-      }
+      header.style.boxShadow = window.scrollY > 50 ? "0 4px 12px rgba(0,0,0,0.2)" : "0 2px 5px rgba(0,0,0,0.1)";
     });
 
     const text = "High School Student • Aspiring Engineer • Tech Enthusiast";
@@ -242,11 +254,41 @@
         tagline.textContent += text.charAt(i);
         i++;
         setTimeout(typeWriter, 70);
-      } else {
-        tagline.style.borderRight = "none";
-      }
+      } else tagline.style.borderRight = "none";
     }
     window.addEventListener("DOMContentLoaded", typeWriter);
+
+    // Theme toggle logic
+    const themeToggle = document.getElementById("theme-toggle");
+    const html = document.documentElement;
+
+    function setTheme(mode) {
+      if(mode === "dark") {
+        html.classList.add("dark");
+        themeToggle.innerHTML = '<i data-lucide="sun"></i>';
+      } else {
+        html.classList.remove("dark");
+        themeToggle.innerHTML = '<i data-lucide="moon"></i>';
+      }
+      lucide.createIcons();
+      localStorage.setItem("theme", mode);
+    }
+
+    // Default: system preference or saved preference
+    const savedTheme = localStorage.getItem("theme");
+    if(savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      setTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    }
+
+    themeToggle.addEventListener("click", () => {
+      if(html.classList.contains("dark")) {
+        setTheme("light");
+      } else {
+        setTheme("dark");
+      }
+    });
   </script>
 </body>
 </html>
