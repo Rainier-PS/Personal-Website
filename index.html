@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rainier Pearson Saputra</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { background: #f8f9fa; color: #333; line-height: 1.6; scroll-behavior: smooth; }
+    a { text-decoration: none; color: inherit; }
+
+    p a { color: #007BFF; font-weight: 600; transition: color 0.3s ease; }
+    p a:hover { text-decoration: underline; color: #0056b3; }
+
+    header { 
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem; background: #fff; 
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+      position: sticky; top: 0; z-index: 1000; transition: box-shadow 0.3s ease; 
+      flex-wrap: wrap;
+    }
+    header h1 { font-size: 1.5rem; }
+    nav { display: flex; flex-wrap: wrap; gap: 1rem; }
+    nav a { font-weight: bold; color: #333; position: relative; }
+    nav a::after {
+      content: ""; position: absolute; left: 0; bottom: -4px;
+      width: 0; height: 2px; background: #007BFF; transition: width 0.3s ease;
+    }
+    nav a:hover::after { width: 100%; }
+
+    section { padding: 4rem 2rem; text-align: center; opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+    section.visible { opacity: 1; transform: translateY(0); }
+    h2 { font-size: 2rem; margin-bottom: 2rem; }
+
+    .hero { display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 2rem; }
+    .hero img { border-radius: 50%; width: 150px; margin-bottom: 1.5rem; transition: transform 0.4s ease; }
+    .hero img:hover { transform: scale(1.08); }
+    .hero h2 { font-size: 2.2rem; margin-bottom: .5rem; }
+    .hero p { font-size: 1.1rem; color: #555; }
+
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; justify-content: center; }
+    .card { background: #fff; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 8px 18px rgba(0,0,0,0.15); }
+    .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 6px; margin-bottom: 1rem; }
+    .card h3 { margin: .5rem 0; }
+    .card p { font-size: 0.95rem; margin-bottom: 1rem; color: #555; }
+
+    .buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn { background: #007BFF; color: #fff; padding: .6rem 1.2rem; border: none; border-radius: 5px; cursor: pointer; transition: transform 0.3s ease, background 0.3s; display: flex; align-items: center; gap: 0.5rem; }
+    .btn:hover { background: #0056b3; transform: translateY(-3px) scale(1.05); }
+
+    .contact-links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem; }
+    .contact-links a { display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem; background: #fff; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-weight: 500; transition: transform 0.3s ease, background 0.3s; }
+    .contact-links a:hover { transform: scale(1.08); background: #f1f1f1; }
+
+    footer { background: #111; color: #bbb; padding: 2rem; text-align: center; }
+    footer .links { margin: 1rem 0; display: flex; flex-direction: column; gap: .5rem; }
+
+    .back-to-top { margin: 2rem auto 0; display: inline-block; background: #007BFF; color: #fff; padding: 0.8rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: transform 0.3s ease, background 0.3s; }
+    .back-to-top:hover { background: #0056b3; transform: scale(1.08); }
+
+    #tagline {
+      font-size: 1.1rem; color: #555; border-right: 2px solid #007BFF;
+      white-space: nowrap; display: inline-block; animation: blink-cursor 0.7s infinite; padding-right: 5px;
+    }
+    @keyframes blink-cursor { 0%, 50% { border-color: #007BFF; } 51%, 100% { border-color: transparent; } }
+
+    @media (max-width: 992px) {
+      header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      nav { flex-wrap: wrap; gap: 0.8rem; }
+      .hero h2 { font-size: 1.8rem; }
+      h2 { font-size: 1.7rem; }
+    }
+
+    @media (max-width: 768px) {
+      body { font-size: 14px; }
+      header { padding: 1rem; }
+      nav { flex-direction: column; align-items: flex-start; width: 100%; }
+      nav a { padding: 0.5rem 0; }
+      .hero img { width: 120px; }
+      .hero h2 { font-size: 1.5rem; }
+      h2 { font-size: 1.4rem; }
+      .cards { grid-template-columns: 1fr; }
+      .card { padding: 1rem; }
+      .btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
+      .contact-links { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <header id="header">
+    <h1>Rainier P. S.</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <img src="your-photo.jpg" alt="Rainier Pearson Saputra">
+    <h2>Rainier Pearson Saputra</h2>
+    <p id="tagline"></p>
+  </section>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Hello! I am Rainier P.S., a student passionate about engineering, electronics, and innovation. I enjoy building projects that solve real-world problems while continuously learning new skills. Check out <a href="#projects">my projects</a> below!</p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Arduino</h3>
+        <p>Built IoT projects with sensors and actuators.</p>
+      </div>
+      <div class="card">
+        <h3>3D Printing</h3>
+        <p>Designed and assembled mechanical projects.</p>
+      </div>
+      <div class="card">
+        <h3>Programming</h3>
+        <p>I have some experience in basic coding.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="project1.jpg" alt="Smart WiFi Fish Feeder">
+        <h3>Smart WiFi Fish Feeder</h3>
+        <p>WiFi fish feeder built with ESP32 and recylced materials.</p>
+        <div class="buttons">
+          <a href="#" class="btn"><i data-lucide="external-link"></i>Demo</a>
+          <a href="#" class="btn"><i data-lucide="github"></i>GitHub</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="project2.jpg" alt="Smart Light-Based Canopy">
+        <h3>Smart Light-Based Canopy</h3>
+        <p>An eco-friendly smart home prototype using a light dependent resistor (LDR) and Arduino Uno.</p>
+        <div class="buttons">
+          <a href="#" class="btn"><i data-lucide="external-link"></i>Demo</a>
+          <a href="#" class="btn"><i data-lucide="github"></i>GitHub</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="project3.jpg" alt="Hackpad">
+        <h3>Hackpad</h3>
+        <p>A DIY custom macropad built using a Xiao RP2040 for Hack Club's <strong>Highway to Undercity</strong> event.</p>
+        <div class="buttons">
+          <a href="#" class="btn"><i data-lucide="external-link"></i>Demo</a>
+          <a href="#" class="btn"><i data-lucide="github"></i>GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certificates">
+    <h2>Certificates</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="certificate1.jpg" alt="Certificate 1">
+        <h3>Certificate Title 1</h3>
+        <p>Description or issuing organization</p>
+      </div>
+      <div class="card">
+        <img src="certificate2.jpg" alt="Certificate 2">
+        <h3>Certificate Title 2</h3>
+        <p>Description or issuing organization</p>
+      </div>
+      <div class="card">
+        <img src="certificate3.jpg" alt="Certificate 3">
+        <h3>Certificate Title 3</h3>
+        <p>Description or issuing organization</p>
+      </div>
+    </div>
+  </section>
+  
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Let’s connect! You can reach me through the links below:</p>
+    <div class="contact-links">
+      <a href="https://github.com/Rainier-PS"><i data-lucide="github"></i>GitHub</a>
+      <a href="mailto:rainierps8@gmail.com"><i data-lucide="mail"></i>Email</a>
+      <a href="https://instagram.com/rainierps8"><i data-lucide="instagram"></i>Instagram</a>
+      <a href="tel:+6281229233935"><i data-lucide="phone"></i>Phone</a>
+      <a href="https://www.google.com/maps/place/Semarang,+Indonesia" target="_blank"><i data-lucide="map-pin"></i>Semarang, Indonesia</a>
+    </div>
+
+    <div style="margin-top:2rem; text-align:center;">
+      <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+        Back to Top
+      </button>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Rainier Pearson Saputra</p>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p>All rights reserved.</p>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) { entry.target.classList.add("visible"); }
+      });
+    }, { threshold: 0.1 });
+    sections.forEach(sec => observer.observe(sec));
+
+    const header = document.getElementById("header");
+    window.addEventListener("scroll", () => {
+      if(window.scrollY > 50) {
+        header.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
+      } else {
+        header.style.boxShadow = "0 2px 5px rgba(0,0,0,0.1)";
+      }
+    });
+
+    const text = "High School Student • Aspiring Engineer • Tech Enthusiast";
+    const tagline = document.getElementById("tagline");
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        tagline.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 70);
+      } else {
+        tagline.style.borderRight = "none";
+      }
+    }
+    window.addEventListener("DOMContentLoaded", typeWriter);
+  </script>
+</body>
+</html>
