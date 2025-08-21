@@ -4,7 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rainier Pearson Saputra</title>
+
+  <!-- SEO Meta -->
+  <meta name="description" content="Portfolio of Rainier Pearson Saputra — student, aspiring engineer, and tech enthusiast.">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:title" content="Rainier Pearson Saputra">
+  <meta property="og:description" content="Student, aspiring engineer, and tech enthusiast. Explore my projects and skills.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="your-photo.jpg">
+  <meta property="og:url" content="https://yourdomain.com/">
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Styles -->
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
     body { background: var(--bg); color: var(--text); line-height: 1.6; scroll-behavior: smooth; transition: background 0.3s, color 0.3s; }
@@ -64,7 +82,7 @@
     }
 
     .buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
-    .btn { background: var(--link); color: #fff; padding: .6rem 1.2rem; border: none; border-radius: 5px; cursor: pointer; transition: transform 0.3s ease, background 0.3s; display: flex; align-items: center; gap: 0.5rem; }
+    .btn { background: var(--link); color: #fff; padding: .6rem 1.2rem; border: none; border-radius: 10px; cursor: pointer; transition: transform 0.3s ease, background 0.3s; display: flex; align-items: center; gap: 0.5rem; }
     .btn:hover { background: var(--link-hover); transform: translateY(-3px) scale(1.05); }
 
     .contact-links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem; }
@@ -178,6 +196,7 @@
     }
   </style>
 </head>
+
 <body id="top">
 
   <header id="header">
@@ -189,12 +208,12 @@
       <a href="#projects">PROJECTS</a>
       <a href="#certificates">CERTIFICATES</a>
       <a href="#contact">CONTACT</a>
-      <button class="theme-toggle" id="theme-toggle"><i data-lucide="moon"></i></button>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><i data-lucide="moon"></i></button>
     </nav>
   </header>
 
  <section class="hero">
-    <img src="your-photo.jpg" alt="Rainier Pearson Saputra">
+    <img src="your-photo.jpg" alt="Portrait of Rainier Pearson Saputra">
     <h2>Rainier Pearson Saputra</h2>
     <p id="tagline"></p>
 
@@ -213,8 +232,8 @@
       <section id="experience">
         <h2>Experience</h2>
         <ul>
-          <li>Hack Club Member</li>
-          <li>Club Leader Hack Club Binus School Semarang</li>
+          <li><a href="https://hackclub.com/">Hack Club</a> Member</li>
+          <li>Club Leader <a href="https://hackclub-binus-school-semarang.github.io/HackClub-BSS-Landing-Page/">Hack Club Binus School Semarang</a></li>
           <li>Hack the Hat Elective Member</li>
           <li>STEM Club Member</li>
           <li>Digital Journalism Elective Member</li>
