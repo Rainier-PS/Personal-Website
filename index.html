@@ -383,6 +383,47 @@
       .split-section { grid-template-columns: 1fr; }
       .contact-links { flex-direction: column; align-items: center; }
     }
+
+    /* CAROUSEL */
+    .carousel {
+      overflow: hidden;
+      position: relative;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .carousel .cards {
+      min-width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap: 2rem;
+    }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+    .carousel-dots button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: none;
+      background: #bbb;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .carousel-dots button.active {
+      background: var(--link);
+    }
+    .card.empty {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--subtext);
+      font-style: italic;
+    }
   </style>
 </head>
 
@@ -442,81 +483,107 @@
   </section>
 
   <section id="skills">
-  <h2>Skills</h2>
-  <div class="cards">
-    <div class="card">
-      <i data-lucide="cpu" style="width:40px;height:40px;margin-bottom:0.8rem;"></i>
-      <h3>Arduino</h3>
-      <p>I have skills making IoT projects with sensors and actuators.</p>
-    </div>
-    <div class="card">
-      <i data-lucide="layers" style="width:40px;height:40px;margin-bottom:0.8rem;"></i>
-      <h3>3D Printing & PCB Design</h3>
-      <p>I am able to design and assemble 3D projects and electronics.</p>
-    </div>
-    <div class="card">
-      <i data-lucide="code" style="width:40px;height:40px;margin-bottom:0.8rem;"></i>
-      <h3>Programming</h3>
-      <p>I have some experience in basic coding.</p>
-    </div>
-  </div>
-</section>
-
-
-  <section id="projects">
-    <h2>Projects</h2>
+    <h2>Skills</h2>
     <div class="cards">
       <div class="card">
-        <img src="project1.jpg" alt="Smart WiFi Fish Feeder">
-        <h3>Smart WiFi Fish Feeder</h3>
-        <p>WiFi fish feeder built with ESP32 and recylced materials.</p>
-        <div class="labels">
-          <span class="label">Hardware</span>
-          <span class="label">IoT</span>
-          <span class="label">ESP32</span>
-        </div>
-        <div class="buttons">
-          <a href="#" class="btn"><i data-lucide="external-link"></i>Demo</a>
-          <a href="https://github.com/Rainier-PS/Light-Based-Canopy-System" class="btn"><i data-lucide="github"></i>GitHub</a>
-        </div>
+        <i data-lucide="cpu" style="width:40px;height:40px;margin-bottom:0.8rem;"></i>
+        <h3>Arduino</h3>
+        <p>I have skills making IoT projects with sensors and actuators.</p>
       </div>
       <div class="card">
-        <img src="https://raw.githubusercontent.com/Rainier-PS/Light-Based-Canopy-System/main/Front-View.jpg" alt="Smart Light-Based Canopy">
-        <h3>Smart Light-Based Canopy</h3>
-        <p>An eco-friendly smart home prototype using a light dependent resistor (LDR) and Arduino Uno.</p>
-        <div class="labels">
-          <span class="label">Hardware</span>
-          <span class="label">Arduino</span>
-          <span class="label">Sustainability</span>
-        </div>
-        <div class="buttons">
-          <a href="https://rainier-ps.github.io/Light-Based-Canopy-System/" class="btn"><i data-lucide="external-link"></i>Demo</a>
-          <a href="https://github.com/Rainier-PS/Light-Based-Canopy-System" class="btn"><i data-lucide="github"></i>GitHub</a>
-        </div>
+        <i data-lucide="layers" style="width:40px;height:40px;margin-bottom:0.8rem;"></i>
+        <h3>3D Printing & PCB Design</h3>
+        <p>I am able to design and assemble 3D projects and electronics.</p>
       </div>
       <div class="card">
-        <img src="https://raw.githubusercontent.com/Rainier-PS/Hackpad-Rainier/main/images/CAD.png" alt="Hackpad">
-        <h3>Hackpad</h3>
-        <p>A DIY custom macropad built using a Xiao RP2040 for Hack Club's <strong>Highway to Undercity</strong> event.</p>
-        <div class="labels">
-          <span class="label">Hardware</span>
-          <span class="label">RP2040</span>
-          <span class="label">Mechanical</span>
-        </div>
-        <div class="buttons">
-          <a href="https://github.com/Rainier-PS/Hackpad-Rainier" class="btn"><i data-lucide="external-link"></i>Demo</a>
-          <a href="https://github.com/Rainier-PS/Hackpad-Rainier" class="btn"><i data-lucide="github"></i>GitHub</a>
-        </div>
+        <i data-lucide="code" style="width:40px;height:40px;margin-bottom:0.8rem;"></i>
+        <h3>Programming</h3>
+        <p>I have some experience in basic coding.</p>
       </div>
     </div>
   </section>
 
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="carousel" data-carousel>
+      <div class="carousel-track">
+        <!-- PAGE 1 -->
+        <div class="cards">
+          <div class="card">
+            <img src="project1.jpg" alt="Smart WiFi Fish Feeder">
+            <h3>Smart WiFi Fish Feeder</h3>
+            <p>WiFi fish feeder built with ESP32 and recylced materials.</p>
+            <div class="labels">
+              <span class="label">Hardware</span>
+              <span class="label">IoT</span>
+              <span class="label">ESP32</span>
+            </div>
+            <div class="buttons">
+              <a href="#" class="btn"><i data-lucide="external-link"></i>Demo</a>
+              <a href="https://github.com/Rainier-PS/Light-Based-Canopy-System" class="btn"><i data-lucide="github"></i>GitHub</a>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://raw.githubusercontent.com/Rainier-PS/Light-Based-Canopy-System/main/Front-View.jpg" alt="Smart Light-Based Canopy">
+            <h3>Smart Light-Based Canopy</h3>
+            <p>An eco-friendly smart home prototype using a light dependent resistor (LDR) and Arduino Uno.</p>
+            <div class="labels">
+              <span class="label">Hardware</span>
+              <span class="label">Arduino</span>
+              <span class="label">Sustainability</span>
+            </div>
+            <div class="buttons">
+              <a href="https://rainier-ps.github.io/Light-Based-Canopy-System/" class="btn"><i data-lucide="external-link"></i>Demo</a>
+              <a href="https://github.com/Rainier-PS/Light-Based-Canopy-System" class="btn"><i data-lucide="github"></i>GitHub</a>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://raw.githubusercontent.com/Rainier-PS/Hackpad-Rainier/main/images/CAD.png" alt="Hackpad">
+            <h3>Hackpad</h3>
+            <p>A DIY custom macropad built using a Xiao RP2040 for Hack Club's <strong>Highway to Undercity</strong> event.</p>
+            <div class="labels">
+              <span class="label">Hardware</span>
+              <span class="label">RP2040</span>
+              <span class="label">Mechanical</span>
+            </div>
+            <div class="buttons">
+              <a href="https://github.com/Rainier-PS/Hackpad-Rainier" class="btn"><i data-lucide="external-link"></i>Demo</a>
+              <a href="https://github.com/Rainier-PS/Hackpad-Rainier" class="btn"><i data-lucide="github"></i>GitHub</a>
+            </div>
+          </div>
+        </div>
+        <!-- PAGE 2 (empty slots for future projects) -->
+        <div class="cards">
+          <div class="card empty">More Projects Coming Soon</div>
+          <div class="card empty">More Projects Coming Soon</div>
+          <div class="card empty">More Projects Coming Soon</div>
+        </div>
+      </div>
+      <div class="carousel-dots"></div>
+    </div>
+  </section>
+
+  <!-- AWARDS -->
   <section id="awards">
     <h2>Awards</h2>
-    <div class="cards">
-      <div class="card"><img src="certificate1.jpg" alt="Certificate 1"><h3>Certificate Title 1</h3><p>Description or issuing organization</p></div>
-      <div class="card"><img src="certificate2.jpg" alt="Certificate 2"><h3>Certificate Title 2</h3><p>Description or issuing organization</p></div>
-      <div class="card"><img src="certificate3.jpg" alt="Certificate 3"><h3>Certificate Title 3</h3><p>Description or issuing organization</p></div>
+    <div class="carousel" data-carousel>
+      <div class="carousel-track">
+        <!-- PAGE 1 -->
+        <div class="cards">
+          <div class="card"><img src="certificate1.jpg" alt="Certificate 1"><h3>Certificate Title 1</h3><p>Description or issuing organization</p></div>
+          <div class="card"><img src="certificate2.jpg" alt="Certificate 2"><h3>Certificate Title 2</h3><p>Description or issuing organization</p></div>
+          <div class="card"><img src="certificate3.jpg" alt="Certificate 3"><h3>Certificate Title 3</h3><p>Description or issuing organization</p></div>
+        </div>
+        <!-- PAGE 2 (empty slots for future certs) -->
+        <div class="cards">
+          <div class="card empty">More Certificates Coming Soon</div>
+          <div class="card empty">More Certificates Coming Soon</div>
+          <div class="card empty">More Certificates Coming Soon</div>
+        </div>
+      </div>
+      <div class="carousel-dots"></div>
     </div>
   </section>
   
@@ -613,6 +680,24 @@
       } else {
         setTheme("dark");
       }
+    });
+
+    // Carousel logic
+    document.querySelectorAll("[data-carousel]").forEach(carousel => {
+      const track = carousel.querySelector(".carousel-track");
+      const pages = Array.from(track.children);
+      const dotsContainer = carousel.querySelector(".carousel-dots");
+
+      pages.forEach((_, idx) => {
+        const dot = document.createElement("button");
+        if (idx === 0) dot.classList.add("active");
+        dot.addEventListener("click", () => {
+          track.style.transform = `translateX(-${idx * 100}%)`;
+          dotsContainer.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+          dot.classList.add("active");
+        });
+        dotsContainer.appendChild(dot);
+      });
     });
   </script>
 </body>
