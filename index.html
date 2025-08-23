@@ -552,10 +552,10 @@
     const tagline = document.getElementById("tagline");
     let text = "High School Student • Aspiring Engineer • Tech Enthusiast";
 
-    // If mobile, replace dots with line breaks
+    // If mobile, replace separators with line breaks (no bullet)
     if (window.innerWidth <= 600) {
-      text = text.replace(/ • /g, "\n• ");
-      tagline.style.whiteSpace = "pre-wrap"; // respect line breaks
+      text = text.replace(/ • /g, "\n");   // replace with newline only
+      tagline.style.whiteSpace = "pre-wrap"; // respect \n
     }
 
     let i = 0;
