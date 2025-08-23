@@ -382,6 +382,43 @@
       .btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
       .split-section { grid-template-columns: 1fr; }
       .contact-links { flex-direction: column; align-items: center; }
+
+      #menu-toggle {
+        display: block;
+        margin-left: auto;
+      }
+      nav#nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: var(--card-bg);
+        margin-top: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      }
+      nav#nav-links.show {
+        display: flex;
+      }
+      nav#nav-links a {
+        padding: 0.7rem 0;
+        width: 100%;
+      }
+      nav#nav-links .theme-toggle {
+        align-self: flex-start;
+        margin-top: 0.5rem;
+      }
+
+      /* FOOTER mobile fixes */
+      footer .links {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem 1rem;
+        text-align: center;
+      }
+      footer p {
+        font-size: 0.85rem;
+      }
     }
 
     /* CAROUSEL */
@@ -429,9 +466,13 @@
 
 <body id="top">
 
+  <!-- HEADER -->
   <header id="header">
     <h1>Rainier P. S.</h1>
-    <nav>
+    <button id="menu-toggle" aria-label="Toggle menu" style="background:none;border:none;cursor:pointer;display:none;">
+      <i data-lucide="menu"></i>
+    </button>
+    <nav id="nav-links">
       <a href="#about">ABOUT</a>
       <a href="#experience-education">EXPERIENCE & EDUCATION</a>
       <a href="#skills">SKILLS</a>
@@ -698,6 +739,13 @@
         });
         dotsContainer.appendChild(dot);
       });
+    });
+
+    // Hamburger menu toggle
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
     });
   </script>
 </body>
