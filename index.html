@@ -549,8 +549,15 @@
       header.style.boxShadow = window.scrollY > 50 ? "0 4px 12px rgba(0,0,0,0.2)" : "0 2px 5px rgba(0,0,0,0.1)";
     });
 
-    const text = "High School Student • Aspiring Engineer • Tech Enthusiast";
     const tagline = document.getElementById("tagline");
+    let text = "High School Student • Aspiring Engineer • Tech Enthusiast";
+
+    // If mobile, replace dots with line breaks
+    if (window.innerWidth <= 600) {
+      text = text.replace(/ • /g, "\n• ");
+      tagline.style.whiteSpace = "pre-wrap"; // respect line breaks
+    }
+
     let i = 0;
     function typeWriter() {
       if (i < text.length) {
