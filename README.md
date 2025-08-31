@@ -3,7 +3,7 @@ Welcome to the official website of Rainier Pearson Saputra, a space where I shar
 
 ## Demo
 
-Check out this site live at: [Live Site](https://rainier-ps.github.io/Light-Based-Canopy-System/)!
+Check out this site live at: [Live Site](https://rainier-ps.github.io/Personal-Website/)!
 
 ## Usage
 
