@@ -1,45 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" class="transition-colors duration-300">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rainier Pearson Saputra</title>
 
   <!-- SEO Meta -->
-  <meta name="description" content="Portfolio of Rainier Pearson Saputra — student, aspiring engineer, and tech enthusiast.">
+  <meta name="description" content="Portfolio of Rainier Pearson Saputra — student, aspiring engineer, and tech enthusiast." />
+  <link rel="canonical" href="https://rainier-ps.github.io/Personal-Website/" />
 
   <!-- Open Graph / Social Sharing -->
-  <meta property="og:title" content="Rainier Pearson Saputra">
-  <meta property="og:description" content="Student, aspiring engineer, and tech enthusiast. Explore my projects and skills.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Pearson%20Saputra-Avatar.png">
-  <meta property="og:url" content="https://rainier-ps.github.io/Personal-Website/">
+  <meta property="og:title" content="Rainier Pearson Saputra" />
+  <meta property="og:description" content="Student, aspiring engineer, and tech enthusiast. Explore my projects and skills." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Pearson%20Saputra-Avatar.png" />
+  <meta property="og:url" content="https://rainier-ps.github.io/Personal-Website/" />
 
-  <!-- SVG Favicon -->
-  <link rel="icon" href="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Pearson%20Saputra-Favicon.png" type="image/svg+xml">
-
-  <!-- Fallback ICO Favicon -->
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <!-- Favicons -->
+  <link rel="icon" href="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Pearson%20Saputra-Favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/apple-touch-icon.png" />
+  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f8f9fa" media="(prefers-color-scheme: light)" />
 
   <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/lucide@latest" defer></script>
 
-    <!-- Canonical URL -->
-  <link rel="canonical" href="https://rainier-ps.github.io/Personal-Website/">
+  <!-- Keywords (optional, not impactful for modern SEO) -->
+  <meta name="keywords" content="Rainier Pearson Saputra, portfolio, projects, engineering student, tech enthusiast" />
 
-  <!-- Keywords -->
-  <meta name="keywords" content="Rainier Pearson Saputra, portfolio, projects, engineering student, tech enthusiast">
+  <!-- Robots -->
+  <meta name="robots" content="index, follow" />
 
-  <!-- Robots (helps indexing) -->
-  <meta name="robots" content="index, follow">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rainier Pearson Saputra" />
+  <meta name="twitter:description" content="Student, aspiring engineer, and tech enthusiast. Explore my projects and skills." />
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Pearson%20Saputra-Avatar.png" />
 
-  <!-- Twitter Card (for better preview on Twitter/X) -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Rainier Pearson Saputra">
-  <meta name="twitter:description" content="Student, aspiring engineer, and tech enthusiast. Explore my projects and skills.">
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Pearson%20Saputra-Avatar.png">
-
-  <!-- Structured Data (JSON-LD for Google rich results) -->
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -49,8 +48,8 @@
     "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Pearson%20Saputra.jpg",
     "description": "Student, aspiring engineer, and tech enthusiast.",
     "sameAs": [
-      "https://www.linkedin.com/in/yourusername",
       "https://github.com/Rainier-PS"
+      /* Add LinkedIn when ready, remove placeholder */
     ],
     "jobTitle": "Student",
     "knowsAbout": ["Engineering", "Programming", "Technology"]
@@ -62,471 +61,244 @@
   <!-- Styles -->
   <style>
     /* RESET & BASE */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      scroll-behavior: smooth;
-      transition: background 0.3s, color 0.3s;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.6; scroll-behavior: smooth; transition: background .3s, color .3s; }
 
     /* LINKS */
-    a {
-      color: var(--link);
-      text-decoration: underline;
-      text-underline-position: under;
-      transition: color 0.3s ease;
-    }
-    a:hover,
-    a:focus {
-      text-decoration-style: wavy;
-      color: var(--link-hover);
-    }
+    a { color: var(--link); text-decoration: underline; text-underline-position: under; transition: color .3s ease; }
+    a:hover, a:focus { text-decoration-style: wavy; color: var(--link-hover); }
     p a { font-weight: 600; }
-    nav a,
-    .contact-links a,
-    footer a { text-decoration: none; }
-    #about a[href="#projects"] {
-      text-decoration: underline;
-      text-underline-position: under;
-    }
-    #about a[href="#projects"]:hover,
-    #about a[href="#projects"]:focus {
-      text-decoration-style: wavy;
-      color: var(--link-hover);
-    }
+    nav a, .contact-links a, footer a { text-decoration: none; }
+    #about a[href="#projects"] { text-decoration: underline; text-underline-position: under; }
+    #about a[href="#projects"]:hover, #about a[href="#projects"]:focus { text-decoration-style: wavy; color: var(--link-hover); }
 
     /* HEADER */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: var(--card-bg);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      flex-wrap: wrap;
-      transition: box-shadow 0.3s ease, background 0.3s ease;
-    }
-    header h1 { font-size: 1.5rem; }
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: center;
-    }
-    nav a {
-      font-weight: bold;
-      color: var(--text);
-      position: relative;
-    }
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0;
-      height: 2px;
-      background: var(--link);
-      transition: width 0.3s ease;
-    }
-    nav a:hover::after { width: 100%; }
-    .theme-toggle {
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: .4rem;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.3s;
-    }
+    header { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; position:sticky; top:0; z-index:1000; padding:1rem 2rem; background:var(--card-bg); box-shadow:0 2px 5px rgba(0,0,0,.1); transition: box-shadow .3s ease, background .3s ease; }
+    header h1 { font-size:1.5rem; margin:0; }
+
+    .brand { display:flex; align-items:center; gap:.5rem; }
+    .brand .logo { width:40px; height:40px; border-radius:50%; object-fit:cover; }
+
+    /* By default, show light logo and hide dark logo */
+    .logo-light { display: block; }
+    .logo-dark { display: none; }
+
+    /* When dark theme is active */
+    html.dark .logo-light { display: none; }
+    html.dark .logo-dark { display: block; }
+
+    /* Navigation */
+    nav { display:flex; align-items:center; flex-wrap:wrap; gap:1rem; }
+    nav a { font-weight:bold; color:var(--text); position:relative; }
+    nav a::after { content:""; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:var(--link); transition: width .3s ease; }
+    nav a:hover::after { width:100%; }
+
+    /* Theme toggle button */
+    .theme-toggle { display:flex; align-items:center; justify-content:center; cursor:pointer; background:none; border:none; border-radius:6px; padding:.4rem; transition: background .3s; }
     .theme-toggle:hover { background: var(--hover); }
 
     /* SECTIONS */
-    section {
-      padding: 4rem 2rem;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease-out;
-    }
-    section p {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 2rem;
-    }
-    .hero img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 1.5rem;
-      transition: transform 0.4s ease;
-    }
+    section { padding:4rem 2rem; text-align:center; opacity:0; transform: translateY(40px); transition: all .8s ease-out; }
+    section p { max-width:700px; margin:0 auto; }
+    section.visible { opacity:1; transform: translateY(0); }
+    h2 { font-size:2rem; margin-bottom:2rem; }
+
+    .hero { display:flex; flex-direction:column; align-items:center; padding-top:2rem; }
+    .hero img { width:180px; height:180px; border-radius:50%; object-fit:cover; margin-bottom:1.5rem; transition: transform .4s ease; }
     .hero img:hover { transform: scale(1.08); }
-    .hero h2 {
-      font-size: 2.2rem;
-      margin-bottom: .5rem;
+    .hero h2 { font-size:2.2rem; margin-bottom:.5rem; }
+    .hero p { font-size:1.1rem; color: var(--subtext); }
+
+    .flip-card {
+      width: 200px;
+      height: 200px;
+      perspective: 1000px; /* needed for 3D flip */
     }
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--subtext);
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
     }
+
+    /* Flip on hover */
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      top: 0;
+      left: 0;
+    }
+
+    .flip-card-front img,
+    .flip-card-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%; /* optional */
+    }
+
+    /* Back side faces backward initially */
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+
+    /* Theme-based logo visibility (optional) */
+    .flip-card-back.logo-light { display: block; }
+    html.dark .flip-card-back.logo-light { display: none; }
+    .flip-card-back.logo-dark { display: none; }
+    html.dark .flip-card-back.logo-dark { display: block; }
 
     /* CARDS */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      justify-content: center;
-    }
-    .card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-    }
-    .card img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      border-radius: 6px;
-      margin-bottom: 1rem;
-    }
-    .card h3 { margin: .5rem 0; }
-    .card p {
-      font-size: 0.95rem;
-      margin-bottom: 0.75rem;
-      color: var(--subtext);
-    }
-    .labels {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .4rem;
-      justify-content: center;
-      margin-bottom: 1rem;
-    }
-    .label {
-      padding: .25rem .6rem;
-      border-radius: 999px;
-      background: var(--hover);
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--subtext);
-      user-select: none;
-      pointer-events: none;
-      white-space: nowrap;
-    }
+    .cards { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:2rem; justify-content:center; }
+    .card { background:var(--card-bg); border-radius:12px; padding:1.5rem; box-shadow:0 4px 10px rgba(0,0,0,.1); display:flex; flex-direction:column; align-items:center; text-align:center; transition: transform .3s ease, box-shadow .3s ease, background .3s; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 8px 18px rgba(0,0,0,.15); }
+    .card img { width:100%; height:280px; object-fit:cover; border-radius:6px; margin-bottom:1rem; }
+    .card h3 { margin:.5rem 0; }
+    .card p { font-size:.95rem; margin-bottom:.75rem; color: var(--subtext); }
+    .labels { display:flex; flex-wrap:wrap; gap:.4rem; justify-content:center; margin-bottom:1rem; }
+    .label { padding:.25rem .6rem; border-radius:999px; background:var(--hover); font-size:.75rem; font-weight:500; color: var(--subtext); user-select:none; pointer-events:none; white-space:nowrap; }
 
     /* BUTTONS & CONTACT */
-    .buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .btn {
-      background: var(--link);
-      color: #fff;
-      padding: .6rem 1.2rem;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.3s ease, background 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .btn:hover {
-      background: var(--link-hover);
-      color: #fff;
-      transform: translateY(-3px) scale(1.05);
-    }
-    .contact-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 1.5rem;
-    }
-    .contact-links a {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      padding: .6rem 1rem;
-      background: var(--card-bg);
-      border-radius: 6px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      font-weight: 500;
-      color: var(--text);
-      transition: transform 0.3s ease, background 0.3s;
-    }
-    .contact-links a:hover {
-      transform: scale(1.08);
-      background: var(--hover);
-    }
+    .buttons { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+    .btn { background:var(--link); color:#fff; padding:.6rem 1.2rem; border:none; border-radius:10px; cursor:pointer; transition: transform .3s ease, background .3s; display:flex; align-items:center; gap:.5rem; }
+    .btn:hover { background:var(--link-hover); color:#fff; transform: translateY(-3px) scale(1.05); }
+    .contact-links { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; margin-top:1.5rem; }
+    .contact-links a { display:flex; align-items:center; gap:.5rem; padding:.6rem 1rem; background:var(--card-bg); border-radius:6px; box-shadow:0 2px 5px rgba(0,0,0,.1); font-weight:500; color:var(--text); transition: transform .3s ease, background .3s; }
+    .contact-links a:hover { transform: scale(1.08); background:var(--hover); }
 
     /* FOOTER */
-    footer {
-      background: var(--footer-bg);
-      color: var(--footer-text);
-      padding: 2rem;
-      text-align: center;
-      transition: background 0.3s, color 0.3s;
-    }
-    footer .links {
-      margin: 1rem 0;
-      display: flex;
-      flex-direction: column;
-      gap: .5rem;
-      text-align: left;
-    }
+    footer { background:var(--footer-bg); color:var(--footer-text); padding:2rem; text-align:center; transition: background .3s, color .3s; }
+    footer .links { margin:1rem 0; display:flex; flex-direction:column; gap:.5rem; text-align:left; }
     footer a { color: var(--footer-link); }
 
     /* UTILITIES */
-    .back-to-top {
-      margin: 2rem auto 0;
-      display: inline-block;
-      background: var(--link);
-      color: #fff;
-      padding: 0.8rem 1.5rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease, background 0.3s;
-    }
-    .back-to-top:hover {
-      background: var(--link-hover);
-      transform: scale(1.08);
-    }
-    #tagline {
-      font-size: 1.1rem;
-      color: var(--subtext);
-      border-right: 2px solid var(--link);
-      white-space: nowrap;
-      display: inline-block;
-      animation: blink-cursor 0.7s infinite;
-      padding-right: 5px;
-    }
-    @keyframes blink-cursor {
-      0%, 50% { border-color: var(--link); }
-      51%, 100% { border-color: transparent; }
-    }
+    .back-to-top { margin:2rem auto 0; display:inline-block; background:var(--link); color:#fff; padding:.8rem 1.5rem; border:none; border-radius:8px; cursor:pointer; font-size:1rem; font-weight:bold; box-shadow:0 4px 8px rgba(0,0,0,.2); transition: transform .3s ease, background .3s; }
+    .back-to-top:hover { background:var(--link-hover); transform: scale(1.08); }
+
+    #tagline { font-size:1.1rem; color:var(--subtext); border-right:2px solid var(--link); white-space:nowrap; display:inline-block; animation: blink-cursor .7s infinite; padding-right:5px; }
+    @keyframes blink-cursor { 0%, 50% { border-color: var(--link); } 51%, 100% { border-color: transparent; } }
 
     /* THEMES */
     :root {
-      --bg: #f8f9fa;
-      --text: #333;
-      --subtext: #555;
-      --link: #007BFF;
-      --link-hover: #0056b3;
-      --card-bg: #fff;
-      --hover: #f1f1f1;
-      --footer-bg: #111;
-      --footer-text: #bbb;
-      --footer-link: #ddd;
+      --bg:#f8f9fa; --text:#333; --subtext:#555; --link:#007BFF; --link-hover:#0056b3; --card-bg:#fff; --hover:#f1f1f1; --footer-bg:#111; --footer-text:#bbb; --footer-link:#ddd;
     }
     .dark {
-      --bg: #121212;
-      --text: #eee;
-      --subtext: #aaa;
-      --link: #4dabf7;
-      --link-hover: #1c7ed6;
-      --card-bg: #1e1e1e;
-      --hover: #2a2a2a;
-      --footer-bg: #000;
-      --footer-text: #888;
-      --footer-link: #bbb;
+      --bg:#121212; --text:#eee; --subtext:#aaa; --link:#4dabf7; --link-hover:#1c7ed6; --card-bg:#1e1e1e; --hover:#2a2a2a; --footer-bg:#000; --footer-text:#888; --footer-link:#bbb;
     }
-    html.dark #theme-toggle svg { stroke: white; }
+    html.dark #theme-toggle svg { stroke:white; }
 
     /* SECTION BACKGROUNDS */
-    section:nth-of-type(odd) { background: #ffffff; }
-    section:nth-of-type(even) { background: #f7fbff; }
-    .dark section:nth-of-type(odd) { background: #121212; }
-    .dark section:nth-of-type(even) { background: #181a1d; }
-    .dark .split-section > section { background: #1e1e1e; }
-    .split-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: stretch;
-      text-align: left;
-    }
-    .split-section > section {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: background 0.3s;
-      display: flex;
-      flex-direction: column;
-    }
-    .split-section h2 { margin-bottom: 1rem; }
+    section:nth-of-type(odd) { background:#ffffff; }
+    section:nth-of-type(even) { background:#f7fbff; }
+    .dark section:nth-of-type(odd) { background:#121212; }
+    .dark section:nth-of-type(even) { background:#181a1d; }
+    .dark .split-section > section { background:#1e1e1e; }
+
+    .split-section { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:stretch; text-align:left; }
+    .split-section > section { background:var(--card-bg); border-radius:12px; padding:2rem; box-shadow:0 4px 10px rgba(0,0,0,.1); transition: background .3s; display:flex; flex-direction:column; }
+    .split-section h2 { margin-bottom:1rem; }
 
     /* RESPONSIVE */
     @media (max-width: 992px) {
-      header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-      nav { flex-wrap: wrap; gap: 0.8rem; }
-      .hero h2 { font-size: 1.8rem; }
-      h2 { font-size: 1.7rem; }
+      header { flex-direction:column; align-items:flex-start; gap:.5rem; }
+      nav { flex-wrap:wrap; gap:.8rem; }
+      .hero h2 { font-size:1.8rem; }
+      h2 { font-size:1.7rem; }
     }
     @media (max-width: 768px) {
-      body { font-size: 14px; }
-      header { padding: 1rem; }
-      nav { flex-direction: column; align-items: flex-start; width: 100%; }
-      nav a { padding: 0.5rem 0; }
-      .hero img { width: 120px; height: 120px; }
-      .hero h2 { font-size: 1.5rem; }
-      h2 { font-size: 1.4rem; }
-      .cards { grid-template-columns: 1fr; }
-      .card { padding: 1rem; }
-      .btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
-      .split-section { grid-template-columns: 1fr; }
-      .contact-links { flex-direction: column; align-items: center; }
+      body { font-size:14px; }
+      header { padding:1rem; }
+      nav { flex-direction:column; align-items:flex-start; width:100%; }
+      nav a { padding:.5rem 0; }
+      .hero img { width:120px; height:120px; }
+      .hero h2 { font-size:1.5rem; }
+      h2 { font-size:1.4rem; }
+      .cards { grid-template-columns:1fr; }
+      .card { padding:1rem; }
+      .btn { padding:.5rem 1rem; font-size:.9rem; }
+      .split-section { grid-template-columns:1fr; }
+      .contact-links { flex-direction:column; align-items:center; }
 
-      #menu-toggle {
-        display: block;
-        margin-left: auto;
-      }
-      nav#nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background: var(--card-bg);
-        margin-top: 0.5rem;
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      }
-      nav#nav-links.show {
-        display: flex;
-      }
-      nav#nav-links a {
-        padding: 0.7rem 0;
-        width: 100%;
-      }
-      nav#nav-links .theme-toggle {
-        align-self: flex-start;
-        margin-top: 0.5rem;
-      } 
+      #menu-toggle { display:block; margin-left:auto; }
+      nav#nav-links { display:none; flex-direction:column; width:100%; background:var(--card-bg); margin-top:.5rem; padding:.5rem 1rem; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.15); }
+      nav#nav-links.show { display:flex; }
+      nav#nav-links a { padding:.7rem 0; width:100%; }
+      nav#nav-links .theme-toggle { align-self:flex-start; margin-top:.5rem; }
 
-      /* FOOTER mobile fixes */
-      footer .links {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.5rem 1rem;
-        text-align: center;
-      }
-      footer p {
-        font-size: 0.85rem;
-      }
+      footer .links { display:grid; grid-template-columns:repeat(2,1fr); gap:.5rem 1rem; text-align:center; }
+      footer p { font-size:.85rem; }
     }
 
     /* CAROUSEL */
-    .carousel {
-      overflow: hidden;
-      position: relative;
-    }
-    .carousel-track {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-    .carousel .cards {
-      min-width: 100%;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-      gap: 2rem;
-    }
-    .carousel-dots {
-      display: flex;
-      justify-content: center;
-      gap: 0.6rem;
-      margin-top: 1rem;
-    }
-    .carousel-dots button {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      border: none;
-      background: #bbb;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .carousel-dots button.active {
-      background: var(--link);
-    }
-    .card.empty {
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color: var(--subtext);
-      font-style: italic;
-    }
+    .carousel { overflow:hidden; position:relative; }
+    .carousel-track { display:flex; transition: transform .5s ease; }
+    .carousel .cards { min-width:100%; display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:2rem; }
+    .carousel-dots { display:flex; justify-content:center; gap:.6rem; margin-top:1rem; }
+    .carousel-dots button { width:12px; height:12px; border-radius:50%; border:none; background:#bbb; cursor:pointer; transition: background .3s; }
+    .carousel-dots button.active { background: var(--link); }
+    .card.empty { display:flex; align-items:center; justify-content:center; color:var(--subtext); font-style:italic; }
   </style>
 </head>
 
 <body id="top">
+  <!-- Skip link for accessibility -->
+  <a href="#about" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
 
   <!-- HEADER -->
   <header id="header">
-    <h1>Rainier P. S.</h1>
-    <button id="menu-toggle" aria-label="Toggle menu" style="background:none;border:none;cursor:pointer;display:none;">
+    <div class="brand">
+      <img class="logo logo-light" src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Reversed.svg" alt="Rainier logo Reversed" />
+      <img class="logo logo-dark" src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Primary.svg" alt="Rainier Logo Primary">
+      <h1>Rainier P. S.</h1>
+    </div>
+
+
+    <button id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" style="background:none;border:none;cursor:pointer;display:none;">
       <i data-lucide="menu"></i>
     </button>
-    <nav id="nav-links">
+
+    <nav id="nav-links" aria-label="Primary">
       <a href="#about">ABOUT</a>
-      <a href="#experience-education">EXPERIENCE & EDUCATION</a>
+      <a href="#experience-education">EXPERIENCE &amp; EDUCATION</a>
       <a href="#skills">SKILLS</a>
       <a href="#projects">PROJECTS</a>
       <a href="#awards">AWARDS</a>
       <a href="#contact">CONTACT</a>
-      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><i data-lucide="moon"></i></button>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <i data-lucide="moon"></i>
+      </button>
     </nav>
   </header>
 
- <section class="hero">
-    <img src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Pearson%20Saputra-Avatar.png" alt="Portrait of Rainier Pearson Saputra">
+  <section class="hero">
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Pearson%20Saputra-Avatar.png" alt="Profile" />
+        </div>
+        <div class="flip-card-back logo-light">
+          <img src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Reversed.svg" alt="Logo Light" />
+        </div>
+        <div class="flip-card-back logo-dark">
+          <img src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Primary.svg" alt="Logo Dark" />
+        </div>
+      </div>
+    </div>
     <h2>Rainier Pearson Saputra</h2>
     <p id="tagline"></p>
 
-    <div style="margin: 1.5rem 0; text-align:center;">
-      <button style="background:#ccc; color:#666; padding:0.7rem 1.5rem; border:none; border-radius:6px; cursor:not-allowed; font-weight:bold; font-size:1rem; pointer-events:none;">Download Resume (Coming Soon) </button>
+
+    <div style="margin:1.5rem 0;text-align:center;">
+      <button disabled aria-disabled="true" title="Resume coming soon" style="background:#ccc;color:#666;padding:.7rem 1.5rem;border:none;border-radius:6px;font-weight:bold;font-size:1rem;">Download Resume (Coming Soon)</button>
     </div>
   </section>
 
@@ -540,8 +312,8 @@
       <section id="experience">
         <h2>Experience</h2>
         <ul>
-          <li><a href="https://hackclub.com/">Hack Club</a> Member</li>
-          <li>Club Leader <a href="https://hackclub-binus-school-semarang.github.io/HackClub-BSS-Landing-Page/">Hack Club Binus School Semarang</a></li>
+          <li><a href="https://hackclub.com/" target="_blank" rel="noopener">Hack Club</a> Member</li>
+          <li>Club Leader <a href="https://hackclub-binus-school-semarang.github.io/HackClub-BSS-Landing-Page/" target="_blank" rel="noopener">Hack Club Binus School Semarang</a></li>
           <li>Hack the Hat Elective Member (Raspberry Pi)</li>
           <li>STEM Club Member</li>
           <li>Digital Journalism Elective Member</li>
@@ -552,8 +324,8 @@
       <section id="education">
         <h2>Education</h2>
         <p>Binus School Semarang — High School (2024–Present)</p>
-        <p>Daniel Creative School — Junior High School (2021-2024)</p>
-        <p>Daniel Creative School — Elementary (2015-2021)</p>
+        <p>Daniel Creative School — Junior High School (2021–2024)</p>
+        <p>Daniel Creative School — Elementary (2015–2021)</p>
       </section>
     </div>
   </section>
@@ -562,34 +334,32 @@
     <h2>Skills</h2>
     <div class="cards">
       <div class="card">
-        <i data-lucide="atom" style="width:40px;height:40px;margin-bottom:0.8rem;"></i>
-        <h3>Maths & Science</h3>
+        <i data-lucide="atom" style="width:40px;height:40px;margin-bottom:.8rem;"></i>
+        <h3>Maths &amp; Science</h3>
         <p>I have strong foundational knowledge in mathematics and science, which I apply to problem-solving, experiments, research, and technical projects.</p>
       </div>
       <div class="card">
-        <i data-lucide="layers" style="width:40px;height:40px;margin-bottom:0.8rem;"></i>
-        <h3>3D Printing & PCB Design</h3>
-        <p>I am able to design and assemble mechanical and electronic projects using <strong>Fusion 360</strong> for 3D modeling and <strong>KiCad</strong> for PCB design, with hands-on experience in soldering and assembling custom electronics.</p>
+        <i data-lucide="layers" style="width:40px;height:40px;margin-bottom:.8rem;"></i>
+        <h3>3D Printing &amp; PCB Design</h3>
+        <p>I design and assemble mechanical and electronic projects using <strong>Fusion 360</strong> for 3D modeling and <strong>KiCad</strong> for PCB design, with hands-on experience in soldering and assembling custom electronics.</p>
       </div>
       <div class="card">
-        <i data-lucide="code" style="width:40px;height:40px;margin-bottom:0.8rem;"></i>
+        <i data-lucide="code" style="width:40px;height:40px;margin-bottom:.8rem;"></i>
         <h3>Programming</h3>
         <p>I have experience in several programming languages, including <strong>Python (basic)</strong>, <strong>HTML</strong>, <strong>CSS</strong>, and <strong>Arduino (C/C++)</strong>.</p>
       </div>
       <div class="card">
-        <i data-lucide="languages" style="width:40px;height:40px;margin-bottom:0.8rem;"></i>
+        <i data-lucide="languages" style="width:40px;height:40px;margin-bottom:.8rem;"></i>
         <h3>Languages</h3>
-        <p><ul>
-            <li>English (Fluent)</li>
-            <li>Chinese (Learning)</li>
-            <li>German (Learning)</li>
-            <li>Indonesian (Native)</li>
-          </ul>
-        </p>
+        <ul style="text-align:left;">
+          <li>English (Fluent)</li>
+          <li>Chinese (Learning)</li>
+          <li>German (Learning)</li>
+          <li>Indonesian (Native)</li>
+        </ul>
       </div>
     </div>
   </section>
-
 
   <!-- PROJECTS -->
   <section id="projects">
@@ -599,7 +369,7 @@
         <!-- PAGE 1 -->
         <div class="cards">
           <div class="card">
-            <img src="https://raw.githubusercontent.com/Rainier-PS/DIY-Bluetooth-Mechanical-Keyboard/main/images/3D%20Model.png" alt="Smart WiFi Fish Feeder">
+            <img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/Rainier-PS/DIY-Bluetooth-Mechanical-Keyboard/main/images/3D%20Model.png" alt="DIY Bluetooth mechanical keyboard 3D model" />
             <h3>DIY Bluetooth Mechanical Keyboard</h3>
             <p>This custom-designed DIY Bluetooth mechanical keyboard features hot-swappable switches, USB-C, a slide potentiometer, built-in NFC, and a 6° ergonomic tilt with wrist rest.</p>
             <div class="labels">
@@ -608,12 +378,12 @@
               <span class="label">Mechanical</span>
             </div>
             <div class="buttons">
-              <a href="https://github.com/Rainier-PS/DIY-Bluetooth-Mechanical-Keyboard" class="btn"><i data-lucide="external-link"></i>Demo</a>
-              <a href="https://github.com/Rainier-PS/DIY-Bluetooth-Mechanical-Keyboard" class="btn"><i data-lucide="github"></i>GitHub</a>
+              <a href="https://github.com/Rainier-PS/DIY-Bluetooth-Mechanical-Keyboard" class="btn" target="_blank" rel="noopener"><i data-lucide="external-link"></i>Demo</a>
+              <a href="https://github.com/Rainier-PS/DIY-Bluetooth-Mechanical-Keyboard" class="btn" target="_blank" rel="noopener"><i data-lucide="github"></i>GitHub</a>
             </div>
           </div>
           <div class="card">
-            <img src="https://raw.githubusercontent.com/Rainier-PS/Hackpad-Rainier/main/images/CAD.png" alt="Hackpad">
+            <img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/Rainier-PS/Hackpad-Rainier/main/images/CAD.png" alt="Hackpad macropad CAD render" />
             <h3>Hackpad</h3>
             <p>A DIY custom macropad built using a Xiao RP2040 for Hack Club's <strong>Highway to Undercity</strong> event.</p>
             <div class="labels">
@@ -622,12 +392,12 @@
               <span class="label">Mechanical</span>
             </div>
             <div class="buttons">
-              <a href="https://github.com/Rainier-PS/Hackpad-Rainier" class="btn"><i data-lucide="external-link"></i>Demo</a>
-              <a href="https://github.com/Rainier-PS/Hackpad-Rainier" class="btn"><i data-lucide="github"></i>GitHub</a>
+              <a href="https://github.com/Rainier-PS/Hackpad-Rainier" class="btn" target="_blank" rel="noopener"><i data-lucide="external-link"></i>Demo</a>
+              <a href="https://github.com/Rainier-PS/Hackpad-Rainier" class="btn" target="_blank" rel="noopener"><i data-lucide="github"></i>GitHub</a>
             </div>
           </div>
           <div class="card">
-            <img src="https://raw.githubusercontent.com/Rainier-PS/DogFace-PCB-Art/main/images/3D%20Model.png" alt="DogFace PCB Art Keychain">
+            <img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/Rainier-PS/DogFace-PCB-Art/main/images/3D%20Model.png" alt="DogFace PCB art keychain 3D model" />
             <h3>DogFace PCB Art Keychain</h3>
             <p>A dog-shaped interactive PCB art keychain with LEDs, buttons, a vibration motor, and a custom outline — made with KiCad.</p>
             <div class="labels">
@@ -636,16 +406,16 @@
               <span class="label">Mechanical</span>
             </div>
             <div class="buttons">
-              <a href="https://github.com/Rainier-PS/DogFace-PCB-Art" class="btn"><i data-lucide="external-link"></i>Demo</a>
-              <a href="https://github.com/Rainier-PS/DogFace-PCB-Art" class="btn"><i data-lucide="github"></i>GitHub</a>
+              <a href="https://github.com/Rainier-PS/DogFace-PCB-Art" class="btn" target="_blank" rel="noopener"><i data-lucide="external-link"></i>Demo</a>
+              <a href="https://github.com/Rainier-PS/DogFace-PCB-Art" class="btn" target="_blank" rel="noopener"><i data-lucide="github"></i>GitHub</a>
             </div>
           </div>
         </div>
         <!-- PAGE 2 -->
         <div class="cards">
           <div class="card">
-            <img src="https://raw.githubusercontent.com/Rainier-PS/Light-Based-Canopy-System/main/Front-View.jpg" alt="Smart Light-Based Canopy">
-            <h3>Smart Light-Based Canopy</h3>
+            <img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/Rainier-PS/Light-Based-Canopy-System/main/Front-View.jpg" alt="Smart light-based canopy system front view" />
+            <h3>Smart Light-Based Canopy System</h3>
             <p>An eco-friendly smart home prototype using a light dependent resistor (LDR) and Arduino Uno.</p>
             <div class="labels">
               <span class="label">Hardware</span>
@@ -653,54 +423,54 @@
               <span class="label">Sustainability</span>
             </div>
             <div class="buttons">
-              <a href="https://rainier-ps.github.io/Light-Based-Canopy-System/" class="btn"><i data-lucide="external-link"></i>Demo</a>
-              <a href="https://github.com/Rainier-PS/Light-Based-Canopy-System" class="btn"><i data-lucide="github"></i>GitHub</a>
+              <a href="https://rainier-ps.github.io/Light-Based-Canopy-System/" class="btn" target="_blank" rel="noopener"><i data-lucide="external-link"></i>Demo</a>
+              <a href="https://github.com/Rainier-PS/Light-Based-Canopy-System" class="btn" target="_blank" rel="noopener"><i data-lucide="github"></i>GitHub</a>
             </div>
           </div>
           <div class="card">
-            <img src="img.png" alt="Smart WiFi Fish Feeder">
+            <img loading="lazy" decoding="async" src="img.png" alt="Smart WiFi fish feeder device" />
             <h3>Smart WiFi Fish Feeder</h3>
             <p>A smart WiFi controlled fish feeder device built using an ESP32 devboard and a SG90 servo.</p>
             <div class="labels">
               <span class="label">Hardware</span>
               <span class="label">ESP32</span>
-              <span class="label">IOT</span>
+              <span class="label">IoT</span>
             </div>
             <div class="buttons">
-              <a href="https://github.com/Rainier-PS/Smart-WiFi-Fish-Feeder" class="btn"><i data-lucide="external-link"></i>Demo</a>
-              <a href="https://github.com/Rainier-PS/Smart-WiFi-Fish-Feeder" class="btn"><i data-lucide="github"></i>GitHub</a>
+              <a href="https://github.com/Rainier-PS/Smart-WiFi-Fish-Feeder" class="btn" target="_blank" rel="noopener"><i data-lucide="external-link"></i>Demo</a>
+              <a href="https://github.com/Rainier-PS/Smart-WiFi-Fish-Feeder" class="btn" target="_blank" rel="noopener"><i data-lucide="github"></i>GitHub</a>
             </div>
           </div>
           <div class="card">
-            <img src="https://raw.githubusercontent.com/Rainier-PS/SoundTune/master/SoundTune_Icon.jpg" alt="SoundTune Icon">
+            <img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/Rainier-PS/SoundTune/master/SoundTune_Icon.jpg" alt="SoundTune Android app icon" />
             <h3>SoundTune</h3>
-            <p>SoundTune is an Android application that automatically adjusts media volume based on ambient noise levels, it provides a seamless experience for managing audio volume in different environments.</p>
+            <p>SoundTune is an Android application that automatically adjusts media volume based on ambient noise levels for a seamless audio experience.</p>
             <div class="labels">
               <span class="label">Software</span>
               <span class="label">Android</span>
               <span class="label">App</span>
             </div>
             <div class="buttons">
-              <a href="https://github.com/Rainier-PS/Smart-WiFi-Fish-Feeder" class="btn"><i data-lucide="external-link"></i>Demo</a>
-              <a href="https://github.com/Rainier-PS/Smart-WiFi-Fish-Feeder" class="btn"><i data-lucide="github"></i>GitHub</a>
+              <a href="https://github.com/Rainier-PS/SoundTune" class="btn" target="_blank" rel="noopener"><i data-lucide="external-link"></i>Demo</a>
+              <a href="https://github.com/Rainier-PS/SoundTune" class="btn" target="_blank" rel="noopener"><i data-lucide="github"></i>GitHub</a>
             </div>
           </div>
         </div>
       </div>
-      <div class="carousel-dots"></div>
+      <div class="carousel-dots" aria-label="Slide pagination"></div>
     </div>
   </section>
 
   <!-- AWARDS -->
   <section id="awards">
-    <h2>Awards (Coming Soon)</h2>
+    <h2>Awards (Added Soon)</h2>
     <div class="carousel" data-carousel>
       <div class="carousel-track">
         <!-- PAGE 1 -->
         <div class="cards">
-          <div class="card"><img src="certificate1.jpg" alt="Certificate 1"><h3>Certificate Title 1</h3><p>Description or issuing organization</p></div>
-          <div class="card"><img src="certificate2.jpg" alt="Certificate 2"><h3>Certificate Title 2</h3><p>Description or issuing organization</p></div>
-          <div class="card"><img src="certificate3.jpg" alt="Certificate 3"><h3>Certificate Title 3</h3><p>Description or issuing organization</p></div>
+          <div class="card"><img loading="lazy" decoding="async" src="certificate1.jpg" alt="Certificate 1" /><h3>Certificate Title 1</h3><p>Description or issuing organization</p></div>
+          <div class="card"><img loading="lazy" decoding="async" src="certificate2.jpg" alt="Certificate 2" /><h3>Certificate Title 2</h3><p>Description or issuing organization</p></div>
+          <div class="card"><img loading="lazy" decoding="async" src="certificate3.jpg" alt="Certificate 3" /><h3>Certificate Title 3</h3><p>Description or issuing organization</p></div>
         </div>
         <!-- PAGE 2 (empty slots for future certs) -->
         <div class="cards">
@@ -709,22 +479,22 @@
           <div class="card empty">More Certificates Coming Soon</div>
         </div>
       </div>
-      <div class="carousel-dots"></div>
+      <div class="carousel-dots" aria-label="Slide pagination"></div>
     </div>
   </section>
-  
+
   <section id="contact">
     <h2>Contact</h2>
     <p>Let’s connect! You can reach me through the links below:</p>
     <div class="contact-links">
-      <a href="https://github.com/Rainier-PS"><i data-lucide="github"></i>GitHub</a>
+      <a href="https://github.com/Rainier-PS" target="_blank" rel="noopener"><i data-lucide="github"></i>GitHub</a>
       <a href="mailto:rainierps8@gmail.com"><i data-lucide="mail"></i>Email</a>
-      <a href="https://instagram.com/rainierps8"><i data-lucide="instagram"></i>Instagram</a>
-      <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank"><i data-lucide="linkedin"></i>LinkedIn</a>
-      <a href="https://www.google.com/maps/place/Semarang,+Indonesia" target="_blank"><i data-lucide="map-pin"></i>Semarang, Indonesia</a>
+      <a href="https://instagram.com/rainierps8" target="_blank" rel="noopener"><i data-lucide="instagram"></i>Instagram</a>
+      <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" rel="noopener"><i data-lucide="linkedin"></i>LinkedIn</a>
+      <a href="https://www.google.com/maps/place/Semarang,+Indonesia" target="_blank" rel="noopener"><i data-lucide="map-pin"></i>Semarang, Indonesia</a>
     </div>
 
-    <div style="margin-top:2rem; text-align:center;">
+    <div style="margin-top:2rem;text-align:center;">
       <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">Back to Top</button>
     </div>
   </section>
@@ -733,7 +503,7 @@
     <div class="links">
       <p><strong>Quick Links</strong></p>
       <a href="#about">About</a>
-      <a href="#experience-education">Experience & Education</a>
+      <a href="#experience-education">Experience &amp; Education</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
       <a href="#awards">Awards</a>
@@ -743,80 +513,54 @@
   </footer>
 
   <script>
-    lucide.createIcons();
+    // Ensure icons render after Lucide loads
+    if (window.lucide) { lucide.createIcons(); }
+    window.addEventListener("DOMContentLoaded", () => { if (window.lucide) lucide.createIcons(); });
 
+    // Animate sections on view
     const sections = document.querySelectorAll("section");
     const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) entry.target.classList.add("visible");
-      });
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); });
     }, { threshold: 0.1 });
     sections.forEach(sec => observer.observe(sec));
 
+    // Elevate header on scroll
     const header = document.getElementById("header");
     window.addEventListener("scroll", () => {
       header.style.boxShadow = window.scrollY > 50 ? "0 4px 12px rgba(0,0,0,0.2)" : "0 2px 5px rgba(0,0,0,0.1)";
     });
 
+    // Typewriter tagline with mobile line breaks
     const tagline = document.getElementById("tagline");
     let text = "High School Student • Aspiring Engineer • Tech Enthusiast";
-
-    // If mobile, replace separators with line breaks (no bullet)
-    if (window.innerWidth <= 600) {
-      text = text.replace(/ • /g, "\n");
-      tagline.style.whiteSpace = "pre-wrap";
-    }
-
+    if (window.innerWidth <= 600) { text = text.replace(/ • /g, "\n"); tagline.style.whiteSpace = "pre-wrap"; }
     let i = 0;
-    function typeWriter() {
-      if (i < text.length) {
-        tagline.textContent += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 70);
-      } else tagline.style.borderRight = "none";
-    }
-    window.addEventListener("DOMContentLoaded", typeWriter);
+    (function typeWriter(){
+      if (i < text.length) { tagline.textContent += text.charAt(i++); setTimeout(typeWriter, 70); }
+      else { tagline.style.borderRight = "none"; }
+    })();
 
-    // Theme toggle logic
+    // Theme toggle
     const themeToggle = document.getElementById("theme-toggle");
     const html = document.documentElement;
-
     function setTheme(mode) {
-      if(mode === "dark") {
-        html.classList.add("dark");
-        themeToggle.innerHTML = '<i data-lucide="sun"></i>';
-      } else {
-        html.classList.remove("dark");
-        themeToggle.innerHTML = '<i data-lucide="moon"></i>';
-      }
-      lucide.createIcons();
+      if (mode === "dark") { html.classList.add("dark"); themeToggle.innerHTML = '<i data-lucide="sun"></i>'; }
+      else { html.classList.remove("dark"); themeToggle.innerHTML = '<i data-lucide="moon"></i>'; }
+      if (window.lucide) lucide.createIcons();
       localStorage.setItem("theme", mode);
     }
-
-    // Default: system preference or saved preference
     const savedTheme = localStorage.getItem("theme");
-    if(savedTheme) {
-      setTheme(savedTheme);
-    } else {
-      setTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    }
+    if (savedTheme) setTheme(savedTheme); else setTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    themeToggle.addEventListener("click", () => { setTheme(html.classList.contains("dark") ? "light" : "dark"); });
 
-    themeToggle.addEventListener("click", () => {
-      if(html.classList.contains("dark")) {
-        setTheme("light");
-      } else {
-        setTheme("dark");
-      }
-    });
-
-    // Carousel logic
+    // Carousel (supports multiple carousels on the page)
     document.querySelectorAll("[data-carousel]").forEach(carousel => {
       const track = carousel.querySelector(".carousel-track");
       const pages = Array.from(track.children);
       const dotsContainer = carousel.querySelector(".carousel-dots");
-
       pages.forEach((_, idx) => {
         const dot = document.createElement("button");
+        dot.setAttribute("aria-label", `Go to slide ${idx + 1}`);
         if (idx === 0) dot.classList.add("active");
         dot.addEventListener("click", () => {
           track.style.transform = `translateX(-${idx * 100}%)`;
@@ -827,11 +571,13 @@
       });
     });
 
-    // Hamburger menu toggle
+    // Hamburger menu toggle (adds aria-expanded for a11y)
     const menuToggle = document.getElementById("menu-toggle");
     const navLinks = document.getElementById("nav-links");
     menuToggle.addEventListener("click", () => {
       navLinks.classList.toggle("show");
+      const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!expanded));
     });
   </script>
 </body>
