@@ -246,6 +246,55 @@
     .carousel-dots button { width:12px; height:12px; border-radius:50%; border:none; background:#bbb; cursor:pointer; transition: background .3s; }
     .carousel-dots button.active { background: var(--link); }
     .card.empty { display:flex; align-items:center; justify-content:center; color:var(--subtext); font-style:italic; }
+
+    /* Full screen overlay */
+    .terminal {
+      display: none; /* hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #0f0;
+      font-family: monospace;
+      font-size: 16px;
+      z-index: 9999;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+
+    .terminal-header {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .terminal-header button {
+      background: #111;
+      color: #0f0;
+      border: 1px solid #0f0;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .terminal-output {
+      height: calc(100% - 70px); /* header + input */
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    .terminal-input {
+      width: 100%;
+      background: #000;
+      color: #0f0;
+      border: none;
+      padding: 5px;
+      font-family: monospace;
+      font-size: 16px;
+      outline: none;
+    }
   </style>
 </head>
 
@@ -314,7 +363,7 @@
         <ul>
           <li><a href="https://hackclub.com/" target="_blank" rel="noopener">Hack Club</a> Member</li>
           <li>Club Leader <a href="https://hackclub-binus-school-semarang.github.io/HackClub-BSS-Landing-Page/" target="_blank" rel="noopener">Hack Club Binus School Semarang</a></li>
-          <li>Hack the Hat Elective Member (Raspberry Pi)</li>
+          <li>Hack the Hat Elective Member (Raspberry Pi & Sense HAT)</li>
           <li>STEM Club Member</li>
           <li>Digital Journalism Elective Member</li>
           <li>RevoU SECC - Coding Camp</li>
@@ -336,7 +385,7 @@
       <div class="card">
         <i data-lucide="atom" style="width:40px;height:40px;margin-bottom:.8rem;"></i>
         <h3>Maths &amp; Science</h3>
-        <p>I have strong foundational knowledge in mathematics and science, which I apply to problem-solving, experiments, research, and technical projects.</p>
+        <p>I have strong knowledge in mathematics and science, which I apply to problem-solving, experiments, research, and technical projects.</p>
       </div>
       <div class="card">
         <i data-lucide="layers" style="width:40px;height:40px;margin-bottom:.8rem;"></i>
@@ -485,7 +534,7 @@
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>Let’s connect! You can reach me through the links below:</p>
+    <p>Let’s connect! You can reach me through the links below: </p>
     <div class="contact-links">
       <a href="https://github.com/Rainier-PS" target="_blank" rel="noopener"><i data-lucide="github"></i>GitHub</a>
       <a href="mailto:rainierps8@gmail.com"><i data-lucide="mail"></i>Email</a>
@@ -498,6 +547,18 @@
       <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">Back to Top</button>
     </div>
   </section>
+
+  <!-- Terminal overlay -->
+  <div id="terminal" class="terminal">
+    <div class="terminal-header">
+      <button id="terminal-back">Back</button>
+      <button id="terminal-help">Help</button>
+    </div>
+    <div id="terminal-output" class="terminal-output">
+      <p>Booting terminal...</p>
+    </div>
+    <input id="terminal-input" class="terminal-input" placeholder="Type your command..." />
+  </div>
 
   <footer>
     <div class="links">
@@ -553,7 +614,7 @@
     if (savedTheme) setTheme(savedTheme); else setTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     themeToggle.addEventListener("click", () => { setTheme(html.classList.contains("dark") ? "light" : "dark"); });
 
-    // Carousel (supports multiple carousels on the page)
+    // Carousel
     document.querySelectorAll("[data-carousel]").forEach(carousel => {
       const track = carousel.querySelector(".carousel-track");
       const pages = Array.from(track.children);
@@ -571,13 +632,148 @@
       });
     });
 
-    // Hamburger menu toggle (adds aria-expanded for a11y)
+    // Hamburger menu toggle
     const menuToggle = document.getElementById("menu-toggle");
     const navLinks = document.getElementById("nav-links");
     menuToggle.addEventListener("click", () => {
       navLinks.classList.toggle("show");
       const expanded = menuToggle.getAttribute("aria-expanded") === "true";
       menuToggle.setAttribute("aria-expanded", String(!expanded));
+    });
+
+    const logos = document.querySelectorAll('.brand img.logo');
+    const terminal = document.getElementById('terminal');
+    const output = document.getElementById('terminal-output');
+    const input = document.getElementById('terminal-input');
+    const backBtn = document.getElementById('terminal-back');
+    const helpBtn = document.getElementById('terminal-help');
+
+    // Typing animation function
+    function typeLine(line, delay = 30, callback) {
+      let i = 0;
+      const interval = setInterval(() => {
+        output.innerHTML += line.charAt(i);
+        i++;
+        terminal.scrollTop = terminal.scrollHeight;
+        if (i === line.length) {
+          clearInterval(interval);
+          output.innerHTML += '\n';
+          if (callback) callback();
+        }
+      }, delay);
+    }
+
+    // Animated progress bar
+    function showProgressBar(label, total = 20, speed = 50, callback) {
+      let progress = 0;
+      const interval = setInterval(() => {
+        let bar = '#'.repeat(progress) + '-'.repeat(total - progress);
+        output.innerHTML = output.innerHTML.split('\n').slice(0, -1).join('\n') + `\n${label}: [${bar}] ${Math.floor((progress / total) * 100)}%`;
+        terminal.scrollTop = terminal.scrollHeight;
+        progress++;
+        if (progress > total) {
+          clearInterval(interval);
+          output.innerHTML += '\n';
+          if (callback) callback();
+        }
+      }, speed);
+    }
+
+    // Enhanced boot sequence
+    logos.forEach(logo => {
+      logo.addEventListener('click', () => {
+        terminal.style.display = 'block';
+        output.innerHTML = ''; // reset output
+        typeLine('Initializing system...', 30, () => {
+          showProgressBar('Loading modules', 30, 40, () => {
+            typeLine('Checking environment...', 30, () => {
+              typeLine('Terminal ready. Type "help" for commands.\n', 30, () => {
+                input.focus();
+              });
+            });
+          });
+        });
+      });
+    });
+
+    // Override command outputs to use typing animation
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const cmd = input.value.trim().toLowerCase();
+        if (!cmd) return;
+        output.innerHTML += `> ${cmd}\n`; // echo command
+
+        if (commands[cmd]) {
+          const result = typeof commands[cmd] === 'function' ? commands[cmd]() : commands[cmd];
+          if (typeof result === 'string') {
+            typeLine(result);
+          }
+        } else {
+          typeLine(`Command not found. Type 'help' for list of commands.`);
+        }
+
+        input.value = '';
+        terminal.scrollTop = terminal.scrollHeight;
+      }
+    });
+
+    // Commands
+    const commands = {
+      help: 'Available commands: help, about, projects, contact, clear, exit',
+      about: 'Hi! I\'m Rainier, a high school student passionate about technology, science, and innovation. I enjoy creating projects that solve real-world problems while constantly exploring new ideas and learning new skills, whether through STEM competitions or personal projects. Welcome to my portfolio.',
+      projects: 'Check out my projects in the Projects section!',
+      contact: 'You can reach me at rainierps8@gmail.com',
+      clear: () => { output.innerHTML = ''; return ''; },
+      exit: () => { 
+        terminal.style.display = 'none';
+        return 'Closing terminal...';
+      }
+    };
+
+    // Show terminal
+    logos.forEach(logo => {
+      logo.addEventListener('click', () => {
+        terminal.style.display = 'block';
+        output.innerHTML = ''; // reset output
+        // simulate boot sequence
+        bootText.forEach((line, i) => {
+          setTimeout(() => {
+            output.innerHTML += line + '\n';
+            terminal.scrollTop = terminal.scrollHeight;
+          }, i * 400);
+        });
+        setTimeout(() => input.focus(), bootText.length * 400);
+      });
+    });
+
+    // Back button
+    backBtn.addEventListener('click', () => {
+      terminal.style.display = 'none';
+    });
+
+    // Help button
+    helpBtn.addEventListener('click', () => {
+      output.innerHTML += commands.help + '\n';
+      terminal.scrollTop = terminal.scrollHeight;
+    });
+
+    // Terminal input
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const cmd = input.value.trim().toLowerCase();
+        if (!cmd) return;
+        output.innerHTML += `> ${cmd}\n`; // echo command
+
+        if (commands[cmd]) {
+          const result = typeof commands[cmd] === 'function' ? commands[cmd]() : commands[cmd];
+          output.innerHTML += result + '\n';
+        } else {
+          output.innerHTML += `Command not found. Type 'help' for list of commands.\n`;
+        }
+
+        input.value = '';
+        terminal.scrollTop = terminal.scrollHeight;
+      }
     });
   </script>
 </body>
