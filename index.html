@@ -5,40 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rainier Pearson Saputra</title>
 
-  <!-- SEO Meta -->
   <meta name="description" content="Portfolio of Rainier Pearson Saputra — student, aspiring engineer, and tech enthusiast." />
   <link rel="canonical" href="https://rainier-ps.github.io/Personal-Website/" />
 
-  <!-- Open Graph / Social Sharing -->
   <meta property="og:title" content="Rainier Pearson Saputra" />
   <meta property="og:description" content="Student, aspiring engineer, and tech enthusiast. Explore my projects and skills." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Pearson%20Saputra-Avatar.png" />
   <meta property="og:url" content="https://rainier-ps.github.io/Personal-Website/" />
 
-  <!-- Favicons -->
   <link rel="icon" href="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Pearson%20Saputra-Favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/apple-touch-icon.png" />
   <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#f8f9fa" media="(prefers-color-scheme: light)" />
 
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest" defer></script>
 
-  <!-- Keywords (optional, not impactful for modern SEO) -->
   <meta name="keywords" content="Rainier Pearson Saputra, portfolio, projects, engineering student, tech enthusiast" />
 
-  <!-- Robots -->
   <meta name="robots" content="index, follow" />
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Rainier Pearson Saputra" />
   <meta name="twitter:description" content="Student, aspiring engineer, and tech enthusiast. Explore my projects and skills." />
   <meta name="twitter:image" content="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Pearson%20Saputra-Avatar.png" />
 
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -58,9 +50,7 @@
 
   <meta name="google-site-verification" content="KclOAJlsOojPDo-nzZw4U5gCyo-2dL3ZP09HrbI7NYk" />
 
-  <!-- Styles -->
   <style>
-    /* RESET & BASE */
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
     body { background: var(--bg); color: var(--text); line-height: 1.6; scroll-behavior: smooth; transition: background .3s, color .3s; }
 
@@ -112,7 +102,7 @@
     .flip-card {
       width: 200px;
       height: 200px;
-      perspective: 1000px; /* needed for 3D flip */
+      perspective: 1000px;
     }
 
     .flip-card-inner {
@@ -123,7 +113,6 @@
       transition: transform 0.8s;
     }
 
-    /* Flip on hover */
     .flip-card:hover .flip-card-inner {
       transform: rotateY(180deg);
     }
@@ -143,7 +132,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 50%; /* optional */
+      border-radius: 50%;
     }
 
     /* Back side faces backward initially */
@@ -196,7 +185,6 @@
     }
     html.dark #theme-toggle svg { stroke:white; }
 
-    /* SECTION BACKGROUNDS */
     section:nth-of-type(odd) { background:#ffffff; }
     section:nth-of-type(even) { background:#f7fbff; }
     .dark section:nth-of-type(odd) { background:#121212; }
@@ -207,7 +195,6 @@
     .split-section > section { background:var(--card-bg); border-radius:12px; padding:2rem; box-shadow:0 4px 10px rgba(0,0,0,.1); transition: background .3s; display:flex; flex-direction:column; }
     .split-section h2 { margin-bottom:1rem; }
 
-    /* RESPONSIVE */
     @media (max-width: 992px) {
       header { flex-direction:column; align-items:flex-start; gap:.5rem; }
       nav { flex-wrap:wrap; gap:.8rem; }
@@ -247,9 +234,8 @@
     .carousel-dots button.active { background: var(--link); }
     .card.empty { display:flex; align-items:center; justify-content:center; color:var(--subtext); font-style:italic; }
 
-    /* Full screen overlay */
     .terminal {
-      display: none; /* hidden by default */
+      display: none;
       position: fixed;
       top: 0;
       left: 0;
@@ -299,10 +285,8 @@
 </head>
 
 <body id="top">
-  <!-- Skip link for accessibility -->
   <a href="#about" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
 
-  <!-- HEADER -->
   <header id="header">
     <div class="brand">
       <img class="logo logo-light" src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Reversed.svg" alt="Rainier logo Reversed" />
@@ -574,207 +558,201 @@
   </footer>
 
   <script>
-    // Ensure icons render after Lucide loads
-    if (window.lucide) { lucide.createIcons(); }
-    window.addEventListener("DOMContentLoaded", () => { if (window.lucide) lucide.createIcons(); });
+      if (window.lucide) { lucide.createIcons(); }
+      window.addEventListener("DOMContentLoaded", () => { if (window.lucide) lucide.createIcons(); });
 
-    // Animate sections on view
-    const sections = document.querySelectorAll("section");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); });
-    }, { threshold: 0.1 });
-    sections.forEach(sec => observer.observe(sec));
+      const sections = document.querySelectorAll("section");
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); });
+      }, { threshold: 0.1 });
+      sections.forEach(sec => observer.observe(sec));
 
-    // Elevate header on scroll
-    const header = document.getElementById("header");
-    window.addEventListener("scroll", () => {
-      header.style.boxShadow = window.scrollY > 50 ? "0 4px 12px rgba(0,0,0,0.2)" : "0 2px 5px rgba(0,0,0,0.1)";
-    });
-
-    // Typewriter tagline with mobile line breaks
-    const tagline = document.getElementById("tagline");
-    let text = "High School Student • Aspiring Engineer • Tech Enthusiast";
-    if (window.innerWidth <= 600) { text = text.replace(/ • /g, "\n"); tagline.style.whiteSpace = "pre-wrap"; }
-    let i = 0;
-    (function typeWriter(){
-      if (i < text.length) { tagline.textContent += text.charAt(i++); setTimeout(typeWriter, 70); }
-      else { tagline.style.borderRight = "none"; }
-    })();
-
-    // Theme toggle
-    const themeToggle = document.getElementById("theme-toggle");
-    const html = document.documentElement;
-    function setTheme(mode) {
-      if (mode === "dark") { html.classList.add("dark"); themeToggle.innerHTML = '<i data-lucide="sun"></i>'; }
-      else { html.classList.remove("dark"); themeToggle.innerHTML = '<i data-lucide="moon"></i>'; }
-      if (window.lucide) lucide.createIcons();
-      localStorage.setItem("theme", mode);
-    }
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) setTheme(savedTheme); else setTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    themeToggle.addEventListener("click", () => { setTheme(html.classList.contains("dark") ? "light" : "dark"); });
-
-    // Carousel
-    document.querySelectorAll("[data-carousel]").forEach(carousel => {
-      const track = carousel.querySelector(".carousel-track");
-      const pages = Array.from(track.children);
-      const dotsContainer = carousel.querySelector(".carousel-dots");
-      pages.forEach((_, idx) => {
-        const dot = document.createElement("button");
-        dot.setAttribute("aria-label", `Go to slide ${idx + 1}`);
-        if (idx === 0) dot.classList.add("active");
-        dot.addEventListener("click", () => {
-          track.style.transform = `translateX(-${idx * 100}%)`;
-          dotsContainer.querySelectorAll("button").forEach(b => b.classList.remove("active"));
-          dot.classList.add("active");
-        });
-        dotsContainer.appendChild(dot);
+      const header = document.getElementById("header");
+      window.addEventListener("scroll", () => {
+        header.style.boxShadow = window.scrollY > 50 ? "0 4px 12px rgba(0,0,0,0.2)" : "0 2px 5px rgba(0,0,0,0.1)";
       });
-    });
 
-    // Hamburger menu toggle
-    const menuToggle = document.getElementById("menu-toggle");
-    const navLinks = document.getElementById("nav-links");
-    menuToggle.addEventListener("click", () => {
-      navLinks.classList.toggle("show");
-      const expanded = menuToggle.getAttribute("aria-expanded") === "true";
-      menuToggle.setAttribute("aria-expanded", String(!expanded));
-    });
-
-    const logos = document.querySelectorAll('.brand img.logo');
-    const terminal = document.getElementById('terminal');
-    const output = document.getElementById('terminal-output');
-    const input = document.getElementById('terminal-input');
-    const backBtn = document.getElementById('terminal-back');
-    const helpBtn = document.getElementById('terminal-help');
-
-    // Typing animation function
-    function typeLine(line, delay = 30, callback) {
+      const tagline = document.getElementById("tagline");
+      let text = "High School Student • Aspiring Engineer • Tech Enthusiast";
+      if (window.innerWidth <= 600) { text = text.replace(/ • /g, "\n"); tagline.style.whiteSpace = "pre-wrap"; }
       let i = 0;
-      const interval = setInterval(() => {
-        output.innerHTML += line.charAt(i);
-        i++;
-        terminal.scrollTop = terminal.scrollHeight;
-        if (i === line.length) {
-          clearInterval(interval);
-          output.innerHTML += '\n';
-          if (callback) callback();
-        }
-      }, delay);
-    }
+      (function typeWriter(){
+        if (i < text.length) { tagline.textContent += text.charAt(i++); setTimeout(typeWriter, 70); }
+        else { tagline.style.borderRight = "none"; }
+      })();
 
-    // Animated progress bar
-    function showProgressBar(label, total = 20, speed = 50, callback) {
-      let progress = 0;
-      const interval = setInterval(() => {
-        let bar = '#'.repeat(progress) + '-'.repeat(total - progress);
-        output.innerHTML = output.innerHTML.split('\n').slice(0, -1).join('\n') + `\n${label}: [${bar}] ${Math.floor((progress / total) * 100)}%`;
-        terminal.scrollTop = terminal.scrollHeight;
-        progress++;
-        if (progress > total) {
-          clearInterval(interval);
-          output.innerHTML += '\n';
-          if (callback) callback();
-        }
-      }, speed);
-    }
+      const themeToggle = document.getElementById("theme-toggle");
+      const html = document.documentElement;
+      function setTheme(mode) {
+        if (mode === "dark") { html.classList.add("dark"); themeToggle.innerHTML = '<i data-lucide="sun"></i>'; }
+        else { html.classList.remove("dark"); themeToggle.innerHTML = '<i data-lucide="moon"></i>'; }
+        if (window.lucide) lucide.createIcons();
+        localStorage.setItem("theme", mode);
+      }
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) setTheme(savedTheme); else setTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      themeToggle.addEventListener("click", () => { setTheme(html.classList.contains("dark") ? "light" : "dark"); });
 
-    // Enhanced boot sequence
-    logos.forEach(logo => {
-      logo.addEventListener('click', () => {
-        terminal.style.display = 'block';
-        output.innerHTML = ''; // reset output
-        typeLine('Initializing system...', 30, () => {
-          showProgressBar('Loading modules', 30, 40, () => {
-            typeLine('Checking environment...', 30, () => {
-              typeLine('Terminal ready. Type "help" for commands.\n', 30, () => {
-                input.focus();
-              });
-            });
+      document.querySelectorAll("[data-carousel]").forEach(carousel => {
+        const track = carousel.querySelector(".carousel-track");
+        const pages = Array.from(track.children);
+        const dotsContainer = carousel.querySelector(".carousel-dots");
+        pages.forEach((_, idx) => {
+          const dot = document.createElement("button");
+          dot.setAttribute("aria-label", `Go to slide ${idx + 1}`);
+          if (idx === 0) dot.classList.add("active");
+          dot.addEventListener("click", () => {
+            track.style.transform = `translateX(-${idx * 100}%)`;
+            dotsContainer.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+            dot.classList.add("active");
           });
+          dotsContainer.appendChild(dot);
         });
       });
-    });
 
-    // Override command outputs to use typing animation
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const cmd = input.value.trim().toLowerCase();
-        if (!cmd) return;
-        output.innerHTML += `> ${cmd}\n`; // echo command
+      // Hamburger menu toggle
+      const menuToggle = document.getElementById("menu-toggle");
+      const navLinks = document.getElementById("nav-links");
+      menuToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+        const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+        menuToggle.setAttribute("aria-expanded", String(!expanded));
+      });
 
-        if (commands[cmd]) {
-          const result = typeof commands[cmd] === 'function' ? commands[cmd]() : commands[cmd];
-          if (typeof result === 'string') {
-            typeLine(result);
+      /* --- TERMINAL --- */
+      const logos = document.querySelectorAll('.brand img.logo');
+      const terminal = document.getElementById('terminal');
+      const output = document.getElementById('terminal-output');
+      const input = document.getElementById('terminal-input');
+      const backBtn = document.getElementById('terminal-back');
+      const helpBtn = document.getElementById('terminal-help');
+
+      const prompt = 'guest@portfolio:~$ ';
+      let history = [];
+      let historyIndex = -1;
+
+      // Typing effect
+      function typeLine(line, delay = 20, callback) {
+        let i = 0;
+        const interval = setInterval(() => {
+          output.innerHTML += line.charAt(i);
+          i++;
+          terminal.scrollTop = terminal.scrollHeight;
+          if (i === line.length) {
+            clearInterval(interval);
+            output.innerHTML += '\n';
+            if (callback) callback();
           }
-        } else {
-          typeLine(`Command not found. Type 'help' for list of commands.`);
-        }
-
-        input.value = '';
-        terminal.scrollTop = terminal.scrollHeight;
+        }, delay);
       }
-    });
 
-    // Commands
-    const commands = {
-      help: 'Available commands: help, about, projects, contact, clear, exit',
-      about: 'Hi! I\'m Rainier, a high school student passionate about technology, science, and innovation. I enjoy creating projects that solve real-world problems while constantly exploring new ideas and learning new skills, whether through STEM competitions or personal projects. Welcome to my portfolio.',
-      projects: 'Check out my projects in the Projects section!',
-      contact: 'You can reach me at rainierps8@gmail.com',
-      clear: () => { output.innerHTML = ''; return ''; },
-      exit: () => { 
-        terminal.style.display = 'none';
-        return 'Closing terminal...';
-      }
-    };
-
-    // Show terminal
-    logos.forEach(logo => {
-      logo.addEventListener('click', () => {
-        terminal.style.display = 'block';
-        output.innerHTML = ''; // reset output
-        // simulate boot sequence
-        bootText.forEach((line, i) => {
-          setTimeout(() => {
-            output.innerHTML += line + '\n';
-            terminal.scrollTop = terminal.scrollHeight;
-          }, i * 400);
+      // Boot sequence
+      function bootSequence() {
+        const lines = [
+          '[  OK  ] Initializing system modules...',
+          '[  OK  ] Checking environment...',
+          '[  OK  ] Network services started.',
+          '[  OK  ] User session created.',
+          '--- Terminal Ready ---',
+          'Type "help" to get started.'
+        ];
+        output.innerHTML = '';
+        lines.forEach((line, i) => {
+          setTimeout(() => typeLine(line, 10), i * 500);
         });
-        setTimeout(() => input.focus(), bootText.length * 400);
+        setTimeout(() => input.focus(), lines.length * 500 + 500);
+      }
+
+      // Collect project data from DOM
+      const projectData = {};
+      document.querySelectorAll('#projects .card').forEach(card => {
+        const title = card.querySelector('h3').textContent;
+        const desc = card.querySelector('p').textContent;
+        const links = Array.from(card.querySelectorAll('.buttons a')).map(a => a.href).join(' | ');
+        // Use kebab-case for “folder names”
+        const key = title.toLowerCase().replace(/\s+/g, '-');
+        projectData[key] = { title, desc, links };
       });
-    });
 
-    // Back button
-    backBtn.addEventListener('click', () => {
-      terminal.style.display = 'none';
-    });
+      // Commands
+      const commands = {
+        help: 'Available commands:\nhelp, about, contact, ls, cat, clear, exit',
+        about: 'Hi! I\'m Rainier, a high school student passionate about technology and engineering.',
+        contact: 'You can reach me at: rainierps8@gmail.com',
+        ls: (args) => {
+          if (args[0] === 'projects') {
+            return Object.keys(projectData).join('\n');
+          } else if (!args[0]) {
+            return 'projects';
+          } else {
+            return `ls: cannot access '${args[0]}': No such directory`;
+          }
+        },
+        cat: (args) => {
+          if (!args[0]) return 'cat: missing file operand';
+          const key = args[0].replace(/^projects\//, '');
+          if (projectData[key]) {
+            const { title, desc, links } = projectData[key];
+            return `${title}\n${desc}\nLinks: ${links}`;
+          } else {
+            return `cat: ${args[0]}: No such file`;
+          }
+        },
+        clear: () => { output.innerHTML = ''; return ''; },
+        exit: () => { terminal.style.display = 'none'; return 'Session terminated.'; }
+      };
 
-    // Help button
-    helpBtn.addEventListener('click', () => {
-      output.innerHTML += commands.help + '\n';
-      terminal.scrollTop = terminal.scrollHeight;
-    });
+      // Input handling + history
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const raw = input.value.trim();
+          if (!raw) return;
 
-    // Terminal input
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const cmd = input.value.trim().toLowerCase();
-        if (!cmd) return;
-        output.innerHTML += `> ${cmd}\n`; // echo command
+          output.innerHTML += `\n${prompt}${raw}\n`;
+          history.push(raw);
+          historyIndex = history.length;
 
-        if (commands[cmd]) {
-          const result = typeof commands[cmd] === 'function' ? commands[cmd]() : commands[cmd];
-          output.innerHTML += result + '\n';
-        } else {
-          output.innerHTML += `Command not found. Type 'help' for list of commands.\n`;
+          const parts = raw.split(' ');
+          const cmd = parts[0];
+          const args = parts.slice(1);
+
+          if (commands[cmd]) {
+            const result = typeof commands[cmd] === 'function' ? commands[cmd](args) : commands[cmd];
+            if (result) typeLine(result);
+          } else {
+            typeLine(`bash: ${cmd}: command not found`);
+          }
+
+          input.value = '';
+          terminal.scrollTop = terminal.scrollHeight;
         }
 
-        input.value = '';
-        terminal.scrollTop = terminal.scrollHeight;
-      }
-    });
+        if (e.key === 'ArrowUp') {
+          if (historyIndex > 0) {
+            historyIndex--;
+            input.value = history[historyIndex];
+          }
+        }
+        if (e.key === 'ArrowDown') {
+          if (historyIndex < history.length - 1) {
+            historyIndex++;
+            input.value = history[historyIndex];
+          } else {
+            input.value = '';
+          }
+        }
+      });
+
+      backBtn.addEventListener('click', () => terminal.style.display = 'none');
+      helpBtn.addEventListener('click', () => typeLine(commands.help));
+
+      logos.forEach(logo => {
+        logo.addEventListener('click', () => {
+          terminal.style.display = 'block';
+          bootSequence();
+        });
+      });
   </script>
+
 </body>
 </html>
