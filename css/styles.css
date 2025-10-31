@@ -203,6 +203,12 @@ section:nth-of-type(even) { background:#f7fbff; }
     white-space: pre-wrap;
 }
 
+.terminal-output pre {
+    font-family: monospace;
+    white-space: pre;
+    margin: 0;
+}
+
 .terminal-input {
     width: 100%;
     background: #000;
@@ -212,4 +218,125 @@ section:nth-of-type(even) { background:#f7fbff; }
     font-family: monospace;
     font-size: 16px;
     outline: none;
+}
+
+.help-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+  font-family: monospace;
+}
+
+.help-row {
+  display: flex;
+  justify-content: flex-start;
+  gap: 2rem;
+  white-space: nowrap;
+}
+
+.awards-table .help-row {
+    gap: 15rem;
+}
+
+.help-command {
+  width: 200px;
+  flex-shrink: 0;
+  text-align: left;
+}
+
+.help-desc {
+  flex-grow: 1;
+  color: var(--command-output-color, #0f0);
+  white-space: normal;
+}
+
+.help-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+  font-weight: normal;
+  color: var(--font-color, #0f0);
+}
+
+.cli-link {
+  color: #0f0;
+  text-decoration: none;
+}
+.cli-link:hover {
+  text-decoration: none;
+}
+
+.help-table .help-header {
+  border-bottom: none !important;
+}
+.contact-table .help-header {
+  border-bottom: none !important;
+}
+
+/* === IMAGE LIGHTBOX === */
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.image-lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.image-lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 85%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  background: #111;
+}
+
+.image-lightbox-content img {
+  display: block;
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.image-lightbox-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  gap: 0.5rem;
+}
+
+.image-lightbox button {
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.image-lightbox button:hover {
+  background: #333;
+}
+
+@media (max-width: 600px) {
+  .image-lightbox-content {
+    max-width: 95%;
+    max-height: 80%;
+  }
 }
