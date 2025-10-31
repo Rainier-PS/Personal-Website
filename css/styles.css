@@ -154,7 +154,13 @@ section:nth-of-type(even) { background:#f7fbff; }
     nav#nav-links a { padding:.7rem 0; width:100%; }
     nav#nav-links .theme-toggle { align-self:flex-start; margin-top:.5rem; }
 
-    footer .links { display:grid; grid-template-columns:repeat(2,1fr); gap:.5rem 1rem; text-align:center; }
+    footer .links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .5rem;
+        text-align: center;
+      }
     footer p { font-size:.85rem; }
 }
 
