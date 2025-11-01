@@ -92,6 +92,44 @@ function typeLine(line, delay = 20, callback) {
   }, delay);
 }
 
+function typeHTML(html, delay = 10, callback) {
+  const temp = document.createElement("div");
+  temp.innerHTML = html.trim();
+  const lines = [];
+
+  temp.querySelectorAll(":scope > *").forEach(el => {
+    lines.push(el.outerHTML);
+  });
+
+  let i = 0;
+  function typeNext() {
+    if (i < lines.length) {
+      let line = lines[i];
+      let j = 0;
+      const div = document.createElement("div");
+      output.appendChild(div);
+
+      function typeChar() {
+        if (j < line.length) {
+          div.innerHTML = line.slice(0, j + 1);
+          j++;
+          autoScroll();
+          setTimeout(typeChar, delay * 0.75);
+        } else {
+          i++;
+          setTimeout(typeNext, delay * 2);
+        }
+      }
+
+      typeChar();
+    } else if (callback) {
+      callback();
+    }
+  }
+
+  typeNext();
+}
+
 function bootSequence() {
   const lines = [
     '[  OK  ] Initializing system modules...',
@@ -146,7 +184,7 @@ function help_function() {
     container.appendChild(row);
   });
 
-  output.appendChild(container);
+  typeHTML(container.outerHTML, 10);
   autoScroll();
 }
 
@@ -180,7 +218,7 @@ function contactTable() {
     container.appendChild(row);
   });
 
-  output.appendChild(container);
+  typeHTML(container.outerHTML, 10);
   autoScroll();
 }
 
@@ -217,7 +255,6 @@ const commands = {
       header.innerHTML = `<div class="help-command">Award</div><div class="help-desc">Description</div>`;
       container.appendChild(header);
 
-      // Grab all award cards from the page
       const awardCards = document.querySelectorAll('#awards .card');
 
       awardCards.forEach(card => {
@@ -232,7 +269,6 @@ const commands = {
           <div class="help-desc"><a href="#" class="cli-link" data-cert="${imgSrc}">${desc}</a></div>
         `;
 
-        // Add click handler to open certificate in new tab
         row.querySelector('.cli-link').addEventListener('click', (e) => {
           e.preventDefault();
           window.open(imgSrc, '_blank', 'noopener');
@@ -241,11 +277,10 @@ const commands = {
         container.appendChild(row);
       });
 
-      output.appendChild(container);
+      typeHTML(container.outerHTML, 10);
       autoScroll();
       return '';
     }
-
 
     if (sections[args[0]]) return sections[args[0]].map(s => typeof s === 'string' ? s : s.title).join('\n');
 
