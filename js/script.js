@@ -68,6 +68,7 @@ const helpBtn = document.getElementById('terminal-help');
 const prompt = 'guest@portfolio:~$ ';
 let history = [];
 let historyIndex = -1;
+let loginTime = new Date();
 
 function autoScroll() {
   terminal.scrollTop = terminal.scrollHeight;
@@ -143,7 +144,7 @@ function bootSequence() {
   lines.forEach((line, i) => {
     setTimeout(() => typeLine(line, 10), i * 500);
   });
-  setTimeout(() => { input.focus(); autoScroll(); }, lines.length * 500 + 500);
+  setTimeout(() => { loginTime = new Date(); input.focus(); autoScroll(); }, lines.length * 500 + 500);
 }
 
 const projectData = {};
@@ -169,6 +170,10 @@ function help_function() {
     ["about", "Display information about me"],
     ["ls", "List sections or projects"],
     ["cat", "Display section or project content"],
+    ["echo", "Display a line of text"],
+    ["date", "Show the current date and time"],
+    ["who", "Show who is logged in"],
+    ["whoami", "Display the current user"],
     ["clear", "Clear the terminal screen"],
     ["history", "Show previously entered commands"],
     ["exit", "Close the terminal session"]
@@ -226,6 +231,40 @@ const commands = {
   help: () => { help_function(); return ''; },
 
   about: 'Hi! I\'m Rainier, a high school student passionate about technology and engineering.',
+
+  echo: (args) => args.join(' '),
+
+  date: () => {
+    const now = new Date();
+    const options = {
+      weekday: 'short',
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      year: 'numeric',
+      hour12: false,
+    };
+    const formatted = new Intl.DateTimeFormat('en-US', options)
+      .format(now)
+      .replace(',', '');
+    const offset = -now.getTimezoneOffset();
+    const sign = offset >= 0 ? '+' : '-';
+    const hours = String(Math.floor(Math.abs(offset) / 60)).padStart(2, '0');
+    const minutes = String(Math.abs(offset) % 60).padStart(2, '0');
+    return `${formatted} UTC${sign}${hours}${minutes}`;
+  },
+
+  who: () => {
+    const date = loginTime.toISOString().split('T')[0];
+    const time = loginTime.toTimeString().split(' ')[0].slice(0, 5);
+    return `guest pts/1        ${date} ${time}`;
+  },
+
+  whoami: () => {
+    return 'guest';
+  },
 
   ls: (args) => {
     const structure = {
