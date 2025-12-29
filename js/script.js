@@ -1,5 +1,14 @@
-if (window.lucide) { lucide.createIcons(); }
-window.addEventListener("DOMContentLoaded", () => { if (window.lucide) lucide.createIcons(); });
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.lucide) lucide.createIcons();
+
+  document.querySelectorAll('link[rel="preload"][as="style"]').forEach(link => {
+    function enableStylesheet() {
+      try { link.rel = 'stylesheet'; } catch (e) { /* ignore */ }
+    }
+    link.addEventListener('load', enableStylesheet);
+    if (link.sheet) enableStylesheet();
+  });
+});
 
 const sections = document.querySelectorAll("section");
 const observer = new IntersectionObserver(entries => {
@@ -8,9 +17,14 @@ const observer = new IntersectionObserver(entries => {
 sections.forEach(sec => observer.observe(sec));
 
 const header = document.getElementById("header");
-window.addEventListener("scroll", () => {
-  header.style.boxShadow = window.scrollY > 50 ? "0 4px 12px rgba(0,0,0,0.2)" : "0 2px 5px rgba(0,0,0,0.1)";
-});
+
+if (header) {
+  window.addEventListener("scroll", () => {
+    header.style.boxShadow = window.scrollY > 50
+      ? "0 4px 12px rgba(0,0,0,0.2)"
+      : "0 2px 5px rgba(0,0,0,0.1)";
+  });
+}
 
 const tagline = document.getElementById("tagline");
 let text = "High School Student • Aspiring Engineer • Tech Enthusiast";
@@ -24,14 +38,22 @@ let i = 0;
 const themeToggle = document.getElementById("theme-toggle");
 const html = document.documentElement;
 function setTheme(mode) {
-  if (mode === "dark") { html.classList.add("dark"); themeToggle.innerHTML = '<i data-lucide="sun"></i>'; }
-  else { html.classList.remove("dark"); themeToggle.innerHTML = '<i data-lucide="moon"></i>'; }
+  html.classList.toggle("dark", mode === "dark");
+
+  if (!themeToggle) return;
+
+  themeToggle.textContent = '';
+  const icon = document.createElement('i');
+  icon.setAttribute('data-lucide', mode === 'dark' ? 'sun' : 'moon');
+  themeToggle.appendChild(icon);
+
   if (window.lucide) lucide.createIcons();
   localStorage.setItem("theme", mode);
 }
+
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme) setTheme(savedTheme); else setTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-themeToggle.addEventListener("click", () => { setTheme(html.classList.contains("dark") ? "light" : "dark"); });
+themeToggle?.addEventListener("click", () => { setTheme(html.classList.contains("dark") ? "light" : "dark"); });
 
 document.querySelectorAll("[data-carousel]").forEach(carousel => {
   const track = carousel.querySelector(".carousel-track");
@@ -52,18 +74,25 @@ document.querySelectorAll("[data-carousel]").forEach(carousel => {
 
 const menuToggle = document.getElementById("menu-toggle");
 const navLinks = document.getElementById("nav-links");
-menuToggle.addEventListener("click", () => {
+menuToggle?.addEventListener("click", () => {
   navLinks.classList.toggle("show");
   const expanded = menuToggle.getAttribute("aria-expanded") === "true";
   menuToggle.setAttribute("aria-expanded", String(!expanded));
 });
 
 const logos = document.querySelectorAll('.brand img.logo');
+const awardCards = document.querySelectorAll('#awards .card');
+
+const emailUser = "rainierps8";
+const emailDomain = "gmail.com";
+const emailLink = document.getElementById('email-link');
+if (emailLink) emailLink.href = `mailto:${emailUser}@${emailDomain}`;
 const terminal = document.getElementById('terminal');
 const output = document.getElementById('terminal-output');
 const input = document.getElementById('terminal-input');
 const backBtn = document.getElementById('terminal-back');
 const helpBtn = document.getElementById('terminal-help');
+
 
 const prompt = 'guest@portfolio:~$ ';
 let history = [];
@@ -74,25 +103,23 @@ function autoScroll() {
   terminal.scrollTop = terminal.scrollHeight;
 }
 
-function scrollToBottom() {
-  autoScroll();
-}
-
 function typeLine(line, delay = 20, callback) {
   let i = 0;
   const interval = setInterval(() => {
-    output.innerHTML += line.charAt(i);
+    output.textContent += line.charAt(i);
     i++;
     autoScroll();
     if (i === line.length) {
       clearInterval(interval);
-      output.innerHTML += '\n';
+      output.textContent += '\n';
       autoScroll();
       if (callback) callback();
     }
   }, delay);
 }
 
+// NOTE: typeHTML renders internal, trusted HTML only.
+// Do NOT pass user-generated content into this function.
 function typeHTML(html, delay = 10, callback) {
   const temp = document.createElement("div");
   temp.innerHTML = html.trim();
@@ -140,7 +167,7 @@ function bootSequence() {
     '--- Terminal Ready ---',
     'Type "help" to get started.'
   ];
-  output.innerHTML = '';
+    output.textContent = '';
   lines.forEach((line, i) => {
     setTimeout(() => typeLine(line, 10), i * 500);
   });
@@ -156,7 +183,7 @@ document.querySelectorAll('#projects .card').forEach(card => {
   projectData[key] = { title, desc, links };
 });
 
-function help_function() {
+function helpFunction() {
   const container = document.createElement("div");
   container.classList.add("help-table");
 
@@ -228,7 +255,7 @@ function contactTable() {
 }
 
 const commands = {
-  help: () => { help_function(); return ''; },
+  help: () => { helpFunction(); return ''; },
 
   about: 'Hi! I\'m Rainier, a high school student passionate about technology and engineering.',
 
@@ -272,11 +299,15 @@ const commands = {
       'projects': Object.keys(projectData)
     };
 
+    const experienceItems = document.querySelectorAll('#experience ul li');
+    const educationItems = document.querySelectorAll('#education p');
+    const skillCards = document.querySelectorAll('#skills .card h3');
+
     const sections = {
-      experience: Array.from(document.querySelectorAll('#experience ul li')).map(li => li.textContent.trim()),
-      education: Array.from(document.querySelectorAll('#education p')).map(p => p.textContent.trim()),
-      skills: Array.from(document.querySelectorAll('#skills .card h3')).map(h3 => h3.textContent.trim()),
-      awards: Array.from(document.querySelectorAll('#awards .card')).map(card => ({
+      experience: Array.from(experienceItems).map(li => li.textContent.trim()),
+      education: Array.from(educationItems).map(p => p.textContent.trim()),
+      skills: Array.from(skillCards).map(h3 => h3.textContent.trim()),
+      awards: Array.from(awardCards).map(card => ({
         title: card.querySelector('h3')?.textContent.trim() || '',
         desc: card.querySelector('p')?.textContent.trim() || ''
       }))
@@ -293,8 +324,6 @@ const commands = {
       header.classList.add("help-row", "help-header");
       header.innerHTML = `<div class="help-command">Award</div><div class="help-desc">Description</div>`;
       container.appendChild(header);
-
-      const awardCards = document.querySelectorAll('#awards .card');
 
       awardCards.forEach(card => {
         const title = card.querySelector('h3')?.textContent.trim() || '';
@@ -344,7 +373,7 @@ const commands = {
         const desc = card.querySelector('p')?.textContent.trim() || '';
         return `${title}: ${desc}`;
       }).join('\n\n'),
-      awards: Array.from(document.querySelectorAll('#awards .card')).map(card => {
+      awards: Array.from(awardCards).map(card => {
         const title = card.querySelector('h3')?.textContent.trim() || '';
         const desc = card.querySelector('p')?.textContent.trim() || '';
         return `${title} — ${desc}`;
@@ -355,7 +384,7 @@ const commands = {
     return `cat: ${args[0]}: No such file or directory`;
   },
 
-  clear: () => { output.innerHTML = ''; autoScroll(); return ''; },
+  clear: () => { output.textContent = ''; autoScroll(); return ''; },
 
   history: () => {
     if (history.length === 0) return 'No commands in history.';
@@ -370,7 +399,7 @@ input.addEventListener('keydown', (e) => {
     const raw = input.value.trim();
     if (!raw) return;
 
-    output.innerHTML += `\n${prompt}${raw}\n`;
+    output.textContent += `\n${prompt}${raw}\n`;
     history.push(raw);
     historyIndex = history.length;
     autoScroll();
@@ -406,8 +435,8 @@ input.addEventListener('keydown', (e) => {
   }
 });
 
-backBtn.addEventListener('click', () => terminal.style.display = 'none');
-helpBtn.addEventListener('click', () => help_function());
+backBtn?.addEventListener('click', () => terminal.style.display = 'none');
+helpBtn?.addEventListener('click', () => helpFunction());
 
 logos.forEach(logo => {
   logo.addEventListener('click', () => {
@@ -431,13 +460,13 @@ document.querySelectorAll('#awards .card img, #projects .card img').forEach(img 
   });
 });
 
-closeBtn.addEventListener('click', () => {
+closeBtn?.addEventListener('click', () => {
   lightbox.classList.remove('active');
   document.body.style.overflow = '';
 });
 
-openBtn.addEventListener('click', () => {
-  if (lightboxImg.src) window.open(lightboxImg.src, '_blank');
+openBtn?.addEventListener('click', () => {
+  if (lightboxImg.src) window.open(lightboxImg.src, '_blank', 'noopener');
 });
 
 lightbox.addEventListener('click', e => {
@@ -446,3 +475,8 @@ lightbox.addEventListener('click', e => {
     document.body.style.overflow = '';
   }
 });
+
+document.getElementById("backToTop")
+  ?.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
