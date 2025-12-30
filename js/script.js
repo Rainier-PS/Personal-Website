@@ -167,7 +167,7 @@ function bootSequence() {
     '--- Terminal Ready ---',
     'Type "help" to get started.'
   ];
-    output.textContent = '';
+  output.textContent = '';
   lines.forEach((line, i) => {
     setTimeout(() => typeLine(line, 10), i * 500);
   });
@@ -473,6 +473,18 @@ lightbox.addEventListener('click', e => {
   if (e.target === lightbox) {
     lightbox.classList.remove('active');
     document.body.style.overflow = '';
+  }
+});
+
+function closeLightbox() {
+  if (!lightbox) return;
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' || e.key === 'Esc') {
+    if (lightbox && lightbox.classList.contains('active')) closeLightbox();
   }
 });
 
