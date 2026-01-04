@@ -646,6 +646,12 @@ section:nth-of-type(even) {
   display: flex;
   transition: transform .5s ease;
   width: 100%;
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.carousel-track:active {
+  cursor: grabbing;
 }
 
 .carousel .cards {
@@ -892,4 +898,64 @@ section:nth-of-type(even) {
 #menu-toggle.open i {
   transform: rotate(90deg);
   stroke: var(--link);
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+  text-decoration: none;
+  border-radius: 0 0 6px 0;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+.centered {
+  text-align: center;
+}
+
+.hero-actions {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.btn-disabled {
+  background: #ccc;
+  color: #666;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: not-allowed;
+}
+
+.icon-lg {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0.8rem;
+}
+
+.list-left {
+  text-align: left;
+}
+
+.back-to-top-wrapper {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+:focus-visible {
+  outline: 3px solid #4f46e5;
+  outline-offset: 3px;
+}
+
+button {
+  font-family: inherit;
 }
