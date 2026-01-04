@@ -224,32 +224,34 @@ function addSwipeSupport(carousel) {
   if (!track) return;
 
   let startX = 0;
-  let currentX = 0;
   let isDragging = false;
+  let swipeHandled = false;
 
-  const threshold = 50;
+  const threshold = 40; // px
+
+  const getIndex = () => Number(carousel.dataset.activeIndex || 0);
 
   const onStart = x => {
     startX = x;
-    currentX = x;
     isDragging = true;
+    swipeHandled = false;
   };
 
   const onMove = x => {
-    if (!isDragging) return;
-    currentX = x;
+    if (!isDragging || swipeHandled) return;
+
+    const diff = x - startX;
+
+    if (Math.abs(diff) > threshold) {
+      const index = getIndex();
+      setCarouselSlide(carousel, diff < 0 ? index + 1 : index - 1);
+      swipeHandled = true;
+    }
   };
 
   const onEnd = () => {
-    if (!isDragging) return;
-    const diff = currentX - startX;
-    const index = Number(carousel.dataset.activeIndex || 0);
-
-    if (Math.abs(diff) > threshold) {
-      setCarouselSlide(carousel, diff < 0 ? index + 1 : index - 1);
-    }
-
     isDragging = false;
+    swipeHandled = false;
   };
 
   track.addEventListener("touchstart", e => onStart(e.touches[0].clientX), { passive: true });
