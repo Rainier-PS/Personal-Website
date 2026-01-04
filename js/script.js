@@ -135,16 +135,17 @@ function startTypewriter() {
   const finalText = getTaglineText();
   tagline.style.whiteSpace = window.innerWidth <= 600 ? 'pre-wrap' : 'normal';
 
-  function typeWriterRAF() {
+  function typeWriter() {
     if (i < finalText.length) {
-      tagline.textContent += finalText.charAt(i++);
-      requestAnimationFrame(typeWriterRAF);
+      const char = finalText.charAt(i++);
+      tagline.textContent += char;
+      setTimeout(typeWriter, 60); // adjust speed here
     } else {
       tagline.style.borderRight = "none";
     }
   }
 
-  requestAnimationFrame(typeWriterRAF);
+  typeWriter();
 }
 
 startTypewriter();
