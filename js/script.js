@@ -176,18 +176,32 @@ const savedTheme = localStorage.getItem("theme");
 if (savedTheme) setTheme(savedTheme); else setTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 themeToggle?.addEventListener("click", () => { setTheme(html.classList.contains("dark") ? "light" : "dark"); });
 
+function setCarouselSlide(carousel, index) {
+  const track = carousel.querySelector(".carousel-track");
+  const dots = carousel.querySelectorAll(".carousel-dots button");
+  const max = dots.length - 1;
+
+  const clamped = Math.max(0, Math.min(index, max));
+
+  track.style.transform = `translateX(-${clamped * 100}%)`;
+
+  dots.forEach(d => d.classList.remove("active"));
+  dots[clamped]?.classList.add("active");
+
+  carousel.dataset.activeIndex = clamped;
+}
+
 function initCarousels() {
   document.querySelectorAll("[data-carousel]").forEach(carousel => {
     const track = carousel.querySelector(".carousel-track");
     if (!track) return;
-
-    track.style.transform = `translateX(0%)`;
 
     const pages = Array.from(track.children);
     const dotsContainer = carousel.querySelector(".carousel-dots");
     if (!dotsContainer) return;
 
     dotsContainer.innerHTML = '';
+    carousel.dataset.activeIndex = 0;
 
     pages.forEach((_, idx) => {
       const dot = document.createElement("button");
@@ -195,14 +209,56 @@ function initCarousels() {
       if (idx === 0) dot.classList.add("active");
 
       dot.addEventListener("click", () => {
-        track.style.transform = `translateX(-${idx * 100}%)`;
-        dotsContainer.querySelectorAll("button").forEach(b => b.classList.remove("active"));
-        dot.classList.add("active");
+        setCarouselSlide(carousel, idx);
       });
 
       dotsContainer.appendChild(dot);
     });
+
+    addSwipeSupport(carousel);
   });
+}
+
+function addSwipeSupport(carousel) {
+  const track = carousel.querySelector(".carousel-track");
+  if (!track) return;
+
+  let startX = 0;
+  let currentX = 0;
+  let isDragging = false;
+
+  const threshold = 50;
+
+  const onStart = x => {
+    startX = x;
+    currentX = x;
+    isDragging = true;
+  };
+
+  const onMove = x => {
+    if (!isDragging) return;
+    currentX = x;
+  };
+
+  const onEnd = () => {
+    if (!isDragging) return;
+    const diff = currentX - startX;
+    const index = Number(carousel.dataset.activeIndex || 0);
+
+    if (Math.abs(diff) > threshold) {
+      setCarouselSlide(carousel, diff < 0 ? index + 1 : index - 1);
+    }
+
+    isDragging = false;
+  };
+
+  track.addEventListener("touchstart", e => onStart(e.touches[0].clientX), { passive: true });
+  track.addEventListener("touchmove", e => onMove(e.touches[0].clientX), { passive: true });
+  track.addEventListener("touchend", onEnd);
+
+  track.addEventListener("mousedown", e => onStart(e.clientX));
+  window.addEventListener("mousemove", e => onMove(e.clientX));
+  window.addEventListener("mouseup", onEnd);
 }
 
 const menuToggle = document.getElementById("menu-toggle");
