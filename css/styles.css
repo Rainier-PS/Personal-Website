@@ -10,7 +10,7 @@ body {
   color: var(--text);
   line-height: 1.6;
   scroll-behavior: smooth;
-  transition: background .3s, color .3s;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 a:hover,
@@ -27,7 +27,7 @@ a {
   color: var(--link);
   text-decoration: underline;
   text-underline-position: under;
-  transition: color .3s ease;
+  transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 nav a {
@@ -267,12 +267,12 @@ section:not(.carousel) .cards {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  transition: transform .3s ease, box-shadow .3s ease, background .3s;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, .15);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, .15);
 }
 
 .card img {
@@ -553,6 +553,10 @@ section:nth-of-type(even) {
 
   header {
     padding: 1rem;
+    flex-direction: row;
+    /* Override 992px column layout */
+    align-items: center;
+    justify-content: space-between;
   }
 
   nav {
@@ -606,22 +610,53 @@ section:nth-of-type(even) {
     align-items: center;
     justify-content: center;
     margin-left: auto;
+    color: var(--text);
+    /* Ensure contrast */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #menu-toggle:active {
+    transform: scale(0.95);
   }
 
   nav#nav-links {
-    display: none;
+    display: flex;
+    /* Always flex, hide with height/opacity */
     flex-direction: column;
     width: 100%;
     background: var(--card-bg);
-    margin-top: 0.5rem;
-    padding: 0.5rem 1rem;
+    margin-top: 0;
+    /* Changed from 0.5rem for smoother flush look, or keep */
+    padding: 0 1rem;
+    /* Padding handled in transition */
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+    /* Animation definition */
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    overflow: hidden;
+    transition:
+      max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.3s ease,
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      padding 0.3s ease,
+      margin-top 0.3s ease;
   }
 
   nav#nav-links.show {
-    display: flex;
+    max-height: 500px;
+    /* Arbitrary large enough height */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    padding: 1rem;
+    /* Restore padding */
+    margin-top: 0.5rem;
   }
+
 
   footer .links {
     display: flex;
@@ -800,6 +835,24 @@ section:nth-of-type(even) {
   border-bottom: none !important;
 }
 
+/* Standalone Terminal Page Styles */
+body.terminal-body {
+  background-color: #000;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body.terminal-body .terminal {
+  display: block;
+  /* Always show on standalone page */
+  position: relative;
+  /* Reset from fixed */
+  width: 100%;
+  height: 100%;
+}
+
+
 /* === IMAGE LIGHTBOX === */
 .image-lightbox {
   position: fixed;
@@ -864,7 +917,7 @@ section:nth-of-type(even) {
     max-width: 95%;
     max-height: 80%;
   }
-} 
+}
 
 .visually-hidden {
   position: absolute;
