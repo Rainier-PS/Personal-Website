@@ -74,22 +74,21 @@
 <body id="top">
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
+
   <header id="header">
     <div class="brand">
-      <img class="logo logo-light"
-        src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Reversed.svg"
-        alt="Rainier logo Reversed" />
-      <img class="logo logo-dark"
-        src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Primary.svg"
-        alt="Rainier Logo Primary">
+      <a href="terminal.html" aria-label="Open Terminal">
+        <img class="logo logo-light"
+          src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Reversed.svg"
+          alt="Rainier logo Reversed" />
+        <img class="logo logo-dark"
+          src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Primary.svg"
+          alt="Rainier Logo Primary">
+      </a>
       <h1>Rainier P. S.</h1>
     </div>
 
-    <button
-      id="menu-toggle"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-    >
+    <button id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
       <i data-lucide="menu"></i>
     </button>
 
@@ -131,12 +130,7 @@
       <p id="tagline"></p>
 
       <div class="hero-actions">
-        <button
-          class="btn-disabled"
-          disabled
-          aria-disabled="true"
-          title="Resume coming soon"
-        >
+        <button class="btn-disabled" disabled aria-disabled="true" title="Resume coming soon">
           Download Resume (Coming Soon)
         </button>
       </div>
@@ -155,6 +149,7 @@
         <section id="experience">
           <h2>Experience</h2>
           <ul>
+            <li>Garuda Hacks 7.0 Volunteer</li>
             <li><a href="https://hackclub.com/" target="_blank" rel="noopener">Hack Club</a> Member</li>
             <li>Club Leader <a href="https://hackclub-binus-school-semarang.github.io/HackClub-BSS-Landing-Page/"
                 target="_blank" rel="noopener">Hack Club Binus School Semarang</a></li>
@@ -180,7 +175,8 @@
         <div class="card">
           <i data-lucide="atom" class="icon-lg"></i>
           <h3>Maths &amp; Science</h3>
-          <p>I have strong knowledge in mathematics and science, which I apply to problem-solving, experiments, research,
+          <p>I have strong knowledge in mathematics and science, which I apply to problem-solving, experiments,
+            research,
             and technical projects.</p>
         </div>
         <div class="card">
@@ -220,42 +216,20 @@
     <section id="projects">
       <h2>Projects</h2>
 
-      <div
-        class="carousel"
-        data-carousel
-        aria-label="Projects carousel"
-      >
-        <div
-          class="carousel-track"
-          id="projects-grid"
-          aria-live="polite"
-        ></div>
+      <div class="carousel" data-carousel aria-label="Projects carousel">
+        <div class="carousel-track" id="projects-grid" aria-live="polite"></div>
 
-        <div
-          class="carousel-dots"
-          aria-label="Project slide pagination"
-        ></div>
+        <div class="carousel-dots" aria-label="Project slide pagination"></div>
       </div>
     </section>
 
     <section id="awards">
       <h2>Awards</h2>
 
-      <div
-        class="carousel"
-        data-carousel
-        aria-label="Awards carousel"
-      >
-        <div
-          class="carousel-track"
-          id="awards-grid"
-          aria-live="polite"
-        ></div>
+      <div class="carousel" data-carousel aria-label="Awards carousel">
+        <div class="carousel-track" id="awards-grid" aria-live="polite"></div>
 
-        <div
-          class="carousel-dots"
-          aria-label="Award slide pagination"
-        ></div>
+        <div class="carousel-dots" aria-label="Award slide pagination"></div>
       </div>
     </section>
 
@@ -281,15 +255,7 @@
     </section>
   </main>
 
-  <div id="terminal" class="terminal">
-    <div class="terminal-header">
-      <button id="terminal-back">Back</button>
-      <button id="terminal-help">Help</button>
-    </div>
-    <div id="terminal-output" class="terminal-output" role="log" aria-live="polite"></div>
-    <label for="terminal-input" class="visually-hidden">Terminal input</label>
-    <input id="terminal-input" class="terminal-input" placeholder="Type your command..." />
-  </div>
+
 
   <footer>
     <div class="links">
