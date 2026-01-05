@@ -317,7 +317,7 @@ let historyIndex = -1;
 let loginTime = new Date();
 
 function autoScroll() {
-  terminal.scrollTop = terminal.scrollHeight;
+  output.scrollTop = output.scrollHeight;
 }
 
 function typeLine(line, delay = 20, callback) {
@@ -333,6 +333,15 @@ function typeLine(line, delay = 20, callback) {
       if (callback) callback();
     }
   }, delay);
+}
+
+function printBlock(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  div.style.whiteSpace = 'pre-wrap';
+  div.style.wordBreak = 'break-word';
+  output.appendChild(div);
+  autoScroll();
 }
 
 // NOTE: typeHTML renders internal, trusted HTML only.
@@ -483,7 +492,9 @@ function helpFunction() {
     ["whoami", "Display the current user"],
     ["clear", "Clear the terminal screen"],
     ["history", "Show previously entered commands"],
-    ["exit", "Close the terminal session"]
+    ["color", "Change terminal text color (RGB)"],
+    ["matrix", "Toggle matrix visual effect"],
+    ["exit", "Return to main site"]
   ];
 
   cmdList.forEach(([cmd, desc]) => {
@@ -732,7 +743,67 @@ const commands = {
     return history.map((cmd, i) => `${i + 1}  ${cmd}`).join('\n');
   },
 
-  exit: () => { terminal.style.display = 'none'; return 'Session terminated.'; }
+  exit: () => {
+    window.location.href = 'index.html';
+    return 'Logging out...';
+  },
+
+  // Secret Commands
+  dev: () => {
+    return '--- SECRET DEVELOPER MENU ---\n' +
+      'view <file>   : View source code of project files\n' +
+      'available files:\n' +
+      '  index.html, terminal.html, sitemap.xml, script.js,\n' +
+      '  styles.css, projects.json, awards.json, readme.md';
+  },
+
+  view: (args) => {
+    if (!args[0]) return 'Usage: view <filename>\nTry "dev" for a list of files.';
+
+    const file = args[0].toLowerCase();
+    const map = {
+      'index.html': 'index.html',
+      'terminal.html': 'terminal.html',
+      'sitemap.xml': 'sitemap.xml',
+      'readme.md': 'README.md',
+      'script.js': 'js/script.js',
+      'styles.css': 'css/styles.css',
+      'projects.json': 'data/projects.json',
+      'awards.json': 'data/awards.json'
+    };
+
+    if (!map[file]) return `File not found: ${file}`;
+
+    const baseUrl = 'https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/';
+    const url = baseUrl + map[file];
+
+    window.open(url, '_blank');
+    return `Opening ${file} in a new tab...`;
+  },
+
+  color: (args) => {
+    if (args.length < 3) return 'Usage: color <r> <g> <b>\nExample: color 255 100 50';
+    const [r, g, b] = args.map(Number);
+    if ([r, g, b].some(n => isNaN(n) || n < 0 || n > 255)) return 'Invalid value. Use 0-255.';
+
+    // Calculate brightness (perceived)
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    const isDark = brightness < 60; // Threshold for visibility against black bg
+
+    const colorVal = `rgb(${r}, ${g}, ${b})`;
+    terminal.style.setProperty('--terminal-color', colorVal);
+
+    // Use green if too dark, otherwise use the custom color
+    const btnColor = isDark ? '#0f0' : colorVal;
+    terminal.style.setProperty('--terminal-btn-color', btnColor);
+
+    return `Terminal color set to ${colorVal}${isDark ? ' (Buttons kept bright)' : ''}`;
+  },
+
+  matrix: () => {
+    document.body.classList.toggle('matrix-mode');
+    return document.body.classList.contains('matrix-mode') ? 'Matrix mode enabled.' : 'Matrix mode disabled.';
+  }
 };
 
 if (input) {
