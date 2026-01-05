@@ -130,12 +130,14 @@ function getTaglineText() {
 }
 
 function startTypewriter() {
+  if (!tagline) return;
   tagline.textContent = '';
   let i = 0;
   const finalText = getTaglineText();
   tagline.style.whiteSpace = window.innerWidth <= 600 ? 'pre-wrap' : 'normal';
 
   function typeWriter() {
+    if (!tagline) return;
     if (i < finalText.length) {
       const char = finalText.charAt(i++);
       tagline.textContent += char;
@@ -148,13 +150,15 @@ function startTypewriter() {
   typeWriter();
 }
 
-startTypewriter();
+if (tagline) startTypewriter();
 
 let typewriterTimeout;
-window.addEventListener('resize', () => {
-  clearTimeout(typewriterTimeout);
-  typewriterTimeout = setTimeout(startTypewriter, 200);
-});
+if (tagline) {
+  window.addEventListener('resize', () => {
+    clearTimeout(typewriterTimeout);
+    typewriterTimeout = setTimeout(startTypewriter, 200);
+  });
+}
 
 const themeToggle = document.getElementById("theme-toggle");
 const html = document.documentElement;
@@ -215,52 +219,54 @@ function initCarousels() {
       dotsContainer.appendChild(dot);
     });
 
-    addSwipeSupport(carousel);
+    addSwipeSupport(carousel); // SAFE now
   });
 }
 
 function addSwipeSupport(carousel) {
+  if (carousel.dataset.swipeBound === "true") return;
+  carousel.dataset.swipeBound = "true";
+
   const track = carousel.querySelector(".carousel-track");
   if (!track) return;
 
   let startX = 0;
-  let isDragging = false;
-  let swipeHandled = false;
+  let active = false;
+  let handled = false;
 
-  const threshold = 40; // px
+  const threshold = 45;
 
   const getIndex = () => Number(carousel.dataset.activeIndex || 0);
 
-  const onStart = x => {
+  const start = x => {
     startX = x;
-    isDragging = true;
-    swipeHandled = false;
+    active = true;
+    handled = false;
   };
 
-  const onMove = x => {
-    if (!isDragging || swipeHandled) return;
+  const move = x => {
+    if (!active || handled) return;
 
     const diff = x - startX;
-
     if (Math.abs(diff) > threshold) {
       const index = getIndex();
       setCarouselSlide(carousel, diff < 0 ? index + 1 : index - 1);
-      swipeHandled = true;
+      handled = true;
     }
   };
 
-  const onEnd = () => {
-    isDragging = false;
-    swipeHandled = false;
+  const end = () => {
+    active = false;
+    handled = false;
   };
 
-  track.addEventListener("touchstart", e => onStart(e.touches[0].clientX), { passive: true });
-  track.addEventListener("touchmove", e => onMove(e.touches[0].clientX), { passive: true });
-  track.addEventListener("touchend", onEnd);
+  track.addEventListener("touchstart", e => start(e.touches[0].clientX), { passive: true });
+  track.addEventListener("touchmove", e => move(e.touches[0].clientX), { passive: true });
+  track.addEventListener("touchend", end);
 
-  track.addEventListener("mousedown", e => onStart(e.clientX));
-  window.addEventListener("mousemove", e => onMove(e.clientX));
-  window.addEventListener("mouseup", onEnd);
+  track.addEventListener("mousedown", e => start(e.clientX));
+  window.addEventListener("mousemove", e => move(e.clientX));
+  window.addEventListener("mouseup", end);
 }
 
 const menuToggle = document.getElementById("menu-toggle");
@@ -271,6 +277,26 @@ menuToggle?.addEventListener("click", () => {
   const expanded = menuToggle.getAttribute("aria-expanded") === "true";
   menuToggle.setAttribute("aria-expanded", String(!expanded));
 });
+
+document.addEventListener('click', (e) => {
+  if (navLinks.classList.contains('show') &&
+    !navLinks.contains(e.target) &&
+    !menuToggle.contains(e.target)) {
+    closeMenu();
+  }
+});
+
+navLinks?.addEventListener('click', (e) => {
+  if (e.target.tagName === 'A' || e.target.closest('a') || e.target.closest('button')) {
+    closeMenu();
+  }
+});
+
+function closeMenu() {
+  navLinks.classList.remove('show');
+  menuToggle.classList.remove('open');
+  menuToggle.setAttribute('aria-expanded', 'false');
+}
 
 const logos = document.querySelectorAll('.brand img.logo');
 
@@ -508,6 +534,37 @@ function contactTable() {
   autoScroll();
 }
 
+const STATIC_DATA = {
+  about: "I'm a high school student passionate about technology, science, and innovation. I enjoy creating projects that solve real-world problems while constantly exploring new ideas and learning new skills, whether through STEM competitions or personal projects. Feel free to check out my projects below!",
+  experience: [
+    "- Hack Club Member",
+    "- Club Leader Hack Club Binus School Semarang",
+    "- Hack the Hat Elective Member (Raspberry Pi & Sense HAT)",
+    "- STEM Club Member",
+    "- Digital Journalism Elective Member",
+    "- RevoU SECC - Coding Camp"
+  ],
+  education: [
+    "- Binus School Semarang — High School (2024–Present)",
+    "- Daniel Creative School — Junior High School (2021–2024)",
+    "- Daniel Creative School — Elementary (2015–2021)"
+  ],
+  skills: [
+    { title: "Maths & Science", desc: "I have strong knowledge in mathematics and science, which I apply to problem-solving, experiments, research, and technical projects." },
+    { title: "3D Printing & PCB Design", desc: "I design and assemble mechanical and electronic projects using Fusion 360 for 3D modeling and KiCad for PCB design, with hands-on experience in soldering and assembling custom electronics." },
+    { title: "Programming", desc: "I have experience in programming languages such as Python, JavaScript (ES6+), SQL (basic), and Arduino (C/C++), as well as web technologies including HTML and CSS." },
+    { title: "Languages", desc: "English (Fluent), Chinese (Learning), German (Learning), Indonesian (Native)" }
+  ],
+  contact: [
+    { platform: "GitHub", link: "https://github.com/Rainier-PS" },
+    { platform: "Email", link: "mailto:rainierps8@gmail.com" },
+    { platform: "Instagram", link: "https://instagram.com/rainierps8" },
+    { platform: "Instructables", link: "https://www.instructables.com/member/Rainier-PS/" },
+    { platform: "LinkedIn", link: "https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME" },
+    { platform: "Semarang, Indonesia", link: "https://www.google.com/maps/place/Semarang,+Indonesia" }
+  ]
+};
+
 const commands = {
   help: () => { helpFunction(); return ''; },
 
@@ -558,9 +615,9 @@ const commands = {
     const skillCards = document.querySelectorAll('#skills .card h3');
 
     const sections = {
-      experience: Array.from(experienceItems).map(li => li.textContent.trim()),
-      education: Array.from(educationItems).map(p => p.textContent.trim()),
-      skills: Array.from(skillCards).map(h3 => h3.textContent.trim()),
+      experience: experienceItems.length ? Array.from(experienceItems).map(li => li.textContent.trim()) : STATIC_DATA.experience.map(s => s.replace(/^- /, '')),
+      education: educationItems.length ? Array.from(educationItems).map(p => p.textContent.trim()) : STATIC_DATA.education.map(s => s.replace(/^- /, '')),
+      skills: skillCards.length ? Array.from(skillCards).map(h3 => h3.textContent.trim()) : STATIC_DATA.skills.map(s => s.title),
       awards: DATA.awards.map(card => ({
         title: card.title || '',
         desc: card.description || ''
@@ -569,7 +626,41 @@ const commands = {
 
     if (!args[0]) return structure['/'].join('\n');
     if (args[0] === 'projects') return structure['projects'].join('\n');
-    if (args[0] === 'contact') { contactTable(); return ''; }
+    if (args[0] === 'contact') {
+      const links = document.querySelectorAll('#contact .contact-links a');
+      if (links.length) {
+        contactTable();
+      } else {
+        // Static contact table
+        const container = document.createElement("div");
+        container.classList.add("help-table", "contact-table");
+
+        const title = document.createElement("div");
+        title.textContent = "You can reach me at:";
+        title.style.marginBottom = "8px";
+        container.appendChild(title);
+
+        const header = document.createElement("div");
+        header.classList.add("help-row", "help-header");
+        header.innerHTML = `<div class="help-command">Platform</div><div class="help-desc">Username / Address</div>`;
+        container.appendChild(header);
+
+        STATIC_DATA.contact.forEach(({ platform, link }) => {
+          const row = document.createElement("div");
+          row.classList.add("help-row");
+          const shortLink = link.replace(/^https?:\/\//, '').replace(/^mailto:/, '');
+          row.innerHTML = `
+                    <div class="help-command">${platform}</div>
+                    <div class="help-desc"><a href="${link}" target="_blank" rel="noopener" class="cli-link">${shortLink}</a></div>
+                `;
+          container.appendChild(row);
+        });
+
+        typeHTML(container.outerHTML, 10);
+        autoScroll();
+      }
+      return '';
+    }
     if (args[0] === 'awards') {
       const htmlMode = args[1] === '-html';
       if (htmlMode) {
@@ -615,14 +706,14 @@ const commands = {
     }
 
     const sections = {
-      about: document.querySelector('#about p')?.textContent.trim(),
-      experience: Array.from(document.querySelectorAll('#experience ul li')).map(li => `- ${li.textContent.trim()}`).join('\n'),
-      education: Array.from(document.querySelectorAll('#education p')).map(p => `- ${p.textContent.trim()}`).join('\n'),
-      skills: Array.from(document.querySelectorAll('#skills .card')).map(card => {
+      about: document.querySelector('#about p')?.textContent.trim() || STATIC_DATA.about,
+      experience: (Array.from(document.querySelectorAll('#experience ul li')).map(li => `- ${li.textContent.trim()}`).join('\n')) || STATIC_DATA.experience.join('\n'),
+      education: (Array.from(document.querySelectorAll('#education p')).map(p => `- ${p.textContent.trim()}`).join('\n')) || STATIC_DATA.education.join('\n'),
+      skills: (Array.from(document.querySelectorAll('#skills .card')).map(card => {
         const title = card.querySelector('h3')?.textContent.trim() || '';
         const desc = card.querySelector('p')?.textContent.trim() || '';
         return `${title}: ${desc}`;
-      }).join('\n\n'),
+      }).join('\n\n')) || STATIC_DATA.skills.map(s => `${s.title}: ${s.desc}`).join('\n\n'),
       awards: DATA.awards.map(card => {
         const title = card.title || '';
         const desc = card.description || '';
@@ -644,57 +735,76 @@ const commands = {
   exit: () => { terminal.style.display = 'none'; return 'Session terminated.'; }
 };
 
-input.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    const raw = input.value.trim();
-    if (!raw) return;
+if (input) {
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const raw = input.value.trim();
+      if (!raw) return;
 
-    output.textContent += `\n${prompt}${raw}\n`;
-    history.push(raw);
-    historyIndex = history.length;
-    autoScroll();
+      output.textContent += `\n${prompt}${raw}\n`;
+      history.push(raw);
+      historyIndex = history.length;
+      autoScroll();
 
-    const parts = raw.split(' ');
-    const cmd = parts[0];
-    const args = parts.slice(1);
+      const parts = raw.split(' ');
+      const cmd = parts[0];
+      const args = parts.slice(1);
 
-    if (commands[cmd]) {
-      const result = typeof commands[cmd] === 'function' ? commands[cmd](args) : commands[cmd];
-      if (result !== undefined && result !== '') typeLine(result);
-    } else {
-      typeLine(`bash: ${cmd}: command not found`);
-    }
+      if (commands[cmd]) {
+        const result = typeof commands[cmd] === 'function' ? commands[cmd](args) : commands[cmd];
+        if (result !== undefined && result !== '') typeLine(result);
+      } else {
+        typeLine(`bash: ${cmd}: command not found`);
+      }
 
-    input.value = '';
-    autoScroll();
-  }
-
-  if (e.key === 'ArrowUp') {
-    if (historyIndex > 0) {
-      historyIndex--;
-      input.value = history[historyIndex];
-    }
-  }
-  if (e.key === 'ArrowDown') {
-    if (historyIndex < history.length - 1) {
-      historyIndex++;
-      input.value = history[historyIndex];
-    } else {
       input.value = '';
+      autoScroll();
     }
+
+    if (e.key === 'ArrowUp') {
+      if (historyIndex > 0) {
+        historyIndex--;
+        input.value = history[historyIndex];
+      }
+    }
+    if (e.key === 'ArrowDown') {
+      if (historyIndex < history.length - 1) {
+        historyIndex++;
+        input.value = history[historyIndex];
+      } else {
+        input.value = '';
+      }
+    }
+  });
+}
+
+backBtn?.addEventListener('click', () => {
+  if (document.body.classList.contains('terminal-body')) {
+    window.location.href = 'index.html';
+  } else {
+    terminal.style.display = 'none';
   }
 });
-
-backBtn?.addEventListener('click', () => terminal.style.display = 'none');
 helpBtn?.addEventListener('click', () => helpFunction());
 
 logos.forEach(logo => {
-  logo.addEventListener('click', () => {
-    terminal.style.display = 'block';
-    bootSequence();
-    autoScroll();
+  logo.addEventListener('click', (e) => {
+    if (logo.tagName === 'IMG' && logo.parentElement.tagName !== 'A') {
+      terminal.style.display = 'block';
+      bootSequence();
+      autoScroll();
+    }
   });
 });
+
+if (document.body.classList.contains('terminal-body')) {
+  terminal.style.display = 'block';
+  setTimeout(() => {
+    bootSequence();
+    autoScroll();
+    input.focus();
+  }, 100);
+}
 
 const lightbox = document.getElementById('imageLightbox');
 const lightboxImg = document.getElementById('lightboxImg');
@@ -721,12 +831,14 @@ openBtn?.addEventListener('click', () => {
   if (lightboxImg.src) window.open(lightboxImg.src, '_blank', 'noopener');
 });
 
-lightbox.addEventListener('click', e => {
-  if (e.target === lightbox) {
-    lightbox.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-});
+if (lightbox) {
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+}
 
 function closeLightbox() {
   if (!lightbox) return;
