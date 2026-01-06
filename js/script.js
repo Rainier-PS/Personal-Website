@@ -164,6 +164,7 @@ const themeToggle = document.getElementById("theme-toggle");
 const html = document.documentElement;
 function setTheme(mode) {
   html.classList.toggle("dark", mode === "dark");
+  localStorage.setItem("theme", mode); // Save immediately
 
   if (!themeToggle) return;
 
@@ -173,7 +174,6 @@ function setTheme(mode) {
   themeToggle.appendChild(icon);
 
   if (window.lucide) lucide.createIcons();
-  localStorage.setItem("theme", mode);
 }
 
 const savedTheme = localStorage.getItem("theme");
@@ -304,117 +304,7 @@ const emailUser = "rainierps8";
 const emailDomain = "gmail.com";
 const emailLink = document.getElementById('email-link');
 if (emailLink) emailLink.href = `mailto:${emailUser}@${emailDomain}`;
-const terminal = document.getElementById('terminal');
-const output = document.getElementById('terminal-output');
-const input = document.getElementById('terminal-input');
-const backBtn = document.getElementById('terminal-back');
-const helpBtn = document.getElementById('terminal-help');
 
-
-const prompt = 'guest@portfolio:~$ ';
-let history = [];
-let historyIndex = -1;
-let loginTime = new Date();
-
-function autoScroll() {
-  output.scrollTop = output.scrollHeight;
-}
-
-function typeLine(line, delay = 20, callback) {
-  let i = 0;
-  const interval = setInterval(() => {
-    output.textContent += line.charAt(i);
-    i++;
-    autoScroll();
-    if (i === line.length) {
-      clearInterval(interval);
-      output.textContent += '\n';
-      autoScroll();
-      if (callback) callback();
-    }
-  }, delay);
-}
-
-function printBlock(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  div.style.whiteSpace = 'pre-wrap';
-  div.style.wordBreak = 'break-word';
-  output.appendChild(div);
-  autoScroll();
-}
-
-// NOTE: typeHTML renders internal, trusted HTML only.
-// Do NOT pass user-generated content into this function.
-function typeHTML(html, delay = 10, callback) {
-  const temp = document.createElement("div");
-  temp.innerHTML = html.trim();
-  const lines = [];
-
-  temp.querySelectorAll(":scope > *").forEach(el => {
-    lines.push(el.outerHTML);
-  });
-
-  let i = 0;
-  function typeNext() {
-    if (i < lines.length) {
-      let line = lines[i];
-      let j = 0;
-      const div = document.createElement("div");
-      output.appendChild(div);
-
-      function typeChar() {
-        if (j < line.length) {
-          div.innerHTML = line.slice(0, j + 1);
-          j++;
-          autoScroll();
-          setTimeout(typeChar, delay * 0.75);
-        } else {
-          i++;
-          setTimeout(typeNext, delay * 2);
-        }
-      }
-
-      typeChar();
-    } else if (callback) {
-      callback();
-    }
-  }
-
-  typeNext();
-}
-
-function bootSequence() {
-  const lines = [
-    '[  OK  ] Initializing system modules...',
-    '[  OK  ] Checking environment...',
-    '[  OK  ] Network services started.',
-    '[  OK  ] User session created.',
-    '--- Terminal Ready ---',
-    'Type "help" to get started.'
-  ];
-  output.textContent = '';
-  lines.forEach((line, i) => {
-    setTimeout(() => typeLine(line, 10), i * 500);
-  });
-  setTimeout(() => { loginTime = new Date(); input.focus(); autoScroll(); }, lines.length * 500 + 500);
-}
-
-function collectProjectsFromDOM() {
-  return Array.from(document.querySelectorAll('#projects .card')).map(card => {
-    const title = card.querySelector('h3')?.textContent.trim() || '';
-    const desc = card.querySelector('p')?.textContent.trim() || '';
-    const buttons = card.querySelectorAll('.buttons a');
-
-    return {
-      slug: title.toLowerCase().replace(/\s+/g, '-'),
-      title,
-      description: desc,
-      demo: buttons[0]?.href || '',
-      github: buttons[1]?.href || ''
-    };
-  });
-}
 
 function renderCarousel({ containerId, items, perPage }) {
   const track = document.getElementById(containerId);
@@ -472,79 +362,6 @@ function renderCarousel({ containerId, items, perPage }) {
 
 const projectData = {};
 
-function helpFunction() {
-  const container = document.createElement("div");
-  container.classList.add("help-table");
-
-  const header = document.createElement("div");
-  header.classList.add("help-row", "help-header");
-  header.innerHTML = `<div class="help-command">Command</div><div class="help-desc">Description</div>`;
-  container.appendChild(header);
-
-  const cmdList = [
-    ["help", "Show all available commands"],
-    ["about", "Display information about me"],
-    ["ls", "List sections or projects"],
-    ["cat", "Display section or project content"],
-    ["echo", "Display a line of text"],
-    ["date", "Show the current date and time"],
-    ["who", "Show who is logged in"],
-    ["whoami", "Display the current user"],
-    ["clear", "Clear the terminal screen"],
-    ["history", "Show previously entered commands"],
-    ["color", "Change terminal text color (RGB)"],
-    ["matrix", "Toggle matrix visual effect"],
-    ["exit", "Return to main site"]
-  ];
-
-  cmdList.forEach(([cmd, desc]) => {
-    const row = document.createElement("div");
-    row.classList.add("help-row");
-    row.innerHTML = `
-        <div class="help-command"><span class="neon">${cmd}</span></div>
-        <div class="help-desc">${desc}</div>
-      `;
-    container.appendChild(row);
-  });
-
-  typeHTML(container.outerHTML, 10);
-  autoScroll();
-}
-
-function contactTable() {
-  const container = document.createElement("div");
-  container.classList.add("help-table", "contact-table");
-
-  const title = document.createElement("div");
-  title.textContent = "You can reach me at:";
-  title.style.marginBottom = "8px";
-  container.appendChild(title);
-
-  const header = document.createElement("div");
-  header.classList.add("help-row", "help-header");
-  header.innerHTML = `<div class="help-command">Platform</div><div class="help-desc">Username / Address</div>`;
-  container.appendChild(header);
-
-  const contacts = Array.from(document.querySelectorAll('#contact .contact-links a')).map(a => ({
-    platform: a.textContent.trim(),
-    link: a.href
-  }));
-
-  contacts.forEach(({ platform, link }) => {
-    const row = document.createElement("div");
-    row.classList.add("help-row");
-    const shortLink = link.replace(/^https?:\/\//, '').replace(/^mailto:/, '');
-    row.innerHTML = `
-        <div class="help-command">${platform}</div>
-        <div class="help-desc"><a href="${link}" target="_blank" rel="noopener" class="cli-link">${shortLink}</a></div>
-      `;
-    container.appendChild(row);
-  });
-
-  typeHTML(container.outerHTML, 10);
-  autoScroll();
-}
-
 const STATIC_DATA = {
   about: "I'm a high school student passionate about technology, science, and innovation. I enjoy creating projects that solve real-world problems while constantly exploring new ideas and learning new skills, whether through STEM competitions or personal projects. Feel free to check out my projects below!",
   experience: [
@@ -576,306 +393,7 @@ const STATIC_DATA = {
   ]
 };
 
-const commands = {
-  help: () => { helpFunction(); return ''; },
 
-  about: 'Hi! I\'m Rainier, a high school student passionate about technology and engineering.',
-
-  echo: (args) => args.join(' '),
-
-  date: () => {
-    const now = new Date();
-    const options = {
-      weekday: 'short',
-      month: 'short',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      year: 'numeric',
-      hour12: false,
-    };
-    const formatted = new Intl.DateTimeFormat('en-US', options)
-      .format(now)
-      .replace(',', '');
-    const offset = -now.getTimezoneOffset();
-    const sign = offset >= 0 ? '+' : '-';
-    const hours = String(Math.floor(Math.abs(offset) / 60)).padStart(2, '0');
-    const minutes = String(Math.abs(offset) % 60).padStart(2, '0');
-    return `${formatted} UTC${sign}${hours}${minutes}`;
-  },
-
-  who: () => {
-    const date = loginTime.toISOString().split('T')[0];
-    const time = loginTime.toTimeString().split(' ')[0].slice(0, 5);
-    return `guest pts/1        ${date} ${time}`;
-  },
-
-  whoami: () => {
-    return 'guest';
-  },
-
-  ls: (args) => {
-    const structure = {
-      '/': ['about', 'experience', 'education', 'skills', 'projects', 'awards', 'contact'],
-      'projects': Object.keys(projectData)
-    };
-
-    const experienceItems = document.querySelectorAll('#experience ul li');
-    const educationItems = document.querySelectorAll('#education p');
-    const skillCards = document.querySelectorAll('#skills .card h3');
-
-    const sections = {
-      experience: experienceItems.length ? Array.from(experienceItems).map(li => li.textContent.trim()) : STATIC_DATA.experience.map(s => s.replace(/^- /, '')),
-      education: educationItems.length ? Array.from(educationItems).map(p => p.textContent.trim()) : STATIC_DATA.education.map(s => s.replace(/^- /, '')),
-      skills: skillCards.length ? Array.from(skillCards).map(h3 => h3.textContent.trim()) : STATIC_DATA.skills.map(s => s.title),
-      awards: DATA.awards.map(card => ({
-        title: card.title || '',
-        desc: card.description || ''
-      }))
-    };
-
-    if (!args[0]) return structure['/'].join('\n');
-    if (args[0] === 'projects') return structure['projects'].join('\n');
-    if (args[0] === 'contact') {
-      const links = document.querySelectorAll('#contact .contact-links a');
-      if (links.length) {
-        contactTable();
-      } else {
-        // Static contact table
-        const container = document.createElement("div");
-        container.classList.add("help-table", "contact-table");
-
-        const title = document.createElement("div");
-        title.textContent = "You can reach me at:";
-        title.style.marginBottom = "8px";
-        container.appendChild(title);
-
-        const header = document.createElement("div");
-        header.classList.add("help-row", "help-header");
-        header.innerHTML = `<div class="help-command">Platform</div><div class="help-desc">Username / Address</div>`;
-        container.appendChild(header);
-
-        STATIC_DATA.contact.forEach(({ platform, link }) => {
-          const row = document.createElement("div");
-          row.classList.add("help-row");
-          const shortLink = link.replace(/^https?:\/\//, '').replace(/^mailto:/, '');
-          row.innerHTML = `
-                    <div class="help-command">${platform}</div>
-                    <div class="help-desc"><a href="${link}" target="_blank" rel="noopener" class="cli-link">${shortLink}</a></div>
-                `;
-          container.appendChild(row);
-        });
-
-        typeHTML(container.outerHTML, 10);
-        autoScroll();
-      }
-      return '';
-    }
-    if (args[0] === 'awards') {
-      const htmlMode = args[1] === '-html';
-      if (htmlMode) {
-        const container = document.createElement("div");
-        container.classList.add("help-table", "awards-table");
-
-        const header = document.createElement("div");
-        header.classList.add("help-row", "help-header");
-        header.innerHTML = `<div class="help-command">Award</div><div class="help-desc">Description</div>`;
-        container.appendChild(header);
-
-        DATA.awards.forEach(a => {
-          const row = document.createElement("div");
-          row.classList.add("help-row");
-          row.innerHTML = `
-              <div class="help-command">${a.title}</div>
-              <div class="help-desc">${a.description}</div>
-            `;
-          container.appendChild(row);
-        });
-
-        typeHTML(container.outerHTML, 10);
-        autoScroll();
-        return '';
-      } else {
-        return DATA.awards.map(a => a.title || '(untitled)').join('\n');
-      }
-    }
-
-
-    if (sections[args[0]]) return sections[args[0]].map(s => typeof s === 'string' ? s : s.title).join('\n');
-
-    return `ls: cannot access '${args[0]}': No such directory`;
-  },
-
-  cat: (args) => {
-    if (!args[0]) return 'cat: missing file operand';
-    const key = args[0].replace(/^projects\//, '');
-
-    if (projectData[key]) {
-      const { title, desc, links } = projectData[key];
-      return `${title}\n${desc}\nLinks: ${links}`;
-    }
-
-    const sections = {
-      about: document.querySelector('#about p')?.textContent.trim() || STATIC_DATA.about,
-      experience: (Array.from(document.querySelectorAll('#experience ul li')).map(li => `- ${li.textContent.trim()}`).join('\n')) || STATIC_DATA.experience.join('\n'),
-      education: (Array.from(document.querySelectorAll('#education p')).map(p => `- ${p.textContent.trim()}`).join('\n')) || STATIC_DATA.education.join('\n'),
-      skills: (Array.from(document.querySelectorAll('#skills .card')).map(card => {
-        const title = card.querySelector('h3')?.textContent.trim() || '';
-        const desc = card.querySelector('p')?.textContent.trim() || '';
-        return `${title}: ${desc}`;
-      }).join('\n\n')) || STATIC_DATA.skills.map(s => `${s.title}: ${s.desc}`).join('\n\n'),
-      awards: DATA.awards.map(card => {
-        const title = card.title || '';
-        const desc = card.description || '';
-        return `${title} — ${desc}`;
-      }).join('\n')
-    };
-
-    if (sections[args[0]]) return sections[args[0]] || '(empty)';
-    return `cat: ${args[0]}: No such file or directory`;
-  },
-
-  clear: () => { output.textContent = ''; autoScroll(); return ''; },
-
-  history: () => {
-    if (history.length === 0) return 'No commands in history.';
-    return history.map((cmd, i) => `${i + 1}  ${cmd}`).join('\n');
-  },
-
-  exit: () => {
-    window.location.href = 'index.html';
-    return 'Logging out...';
-  },
-
-  // Secret Commands
-  dev: () => {
-    return '--- SECRET DEVELOPER MENU ---\n' +
-      'view <file>   : View source code of project files\n' +
-      'available files:\n' +
-      '  index.html, terminal.html, sitemap.xml, script.js,\n' +
-      '  styles.css, projects.json, awards.json, readme.md';
-  },
-
-  view: (args) => {
-    if (!args[0]) return 'Usage: view <filename>\nTry "dev" for a list of files.';
-
-    const file = args[0].toLowerCase();
-    const map = {
-      'index.html': 'index.html',
-      'terminal.html': 'terminal.html',
-      'sitemap.xml': 'sitemap.xml',
-      'readme.md': 'README.md',
-      'script.js': 'js/script.js',
-      'styles.css': 'css/styles.css',
-      'projects.json': 'data/projects.json',
-      'awards.json': 'data/awards.json'
-    };
-
-    if (!map[file]) return `File not found: ${file}`;
-
-    const baseUrl = 'https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/';
-    const url = baseUrl + map[file];
-
-    window.open(url, '_blank');
-    return `Opening ${file} in a new tab...`;
-  },
-
-  color: (args) => {
-    if (args.length < 3) return 'Usage: color <r> <g> <b>\nExample: color 255 100 50';
-    const [r, g, b] = args.map(Number);
-    if ([r, g, b].some(n => isNaN(n) || n < 0 || n > 255)) return 'Invalid value. Use 0-255.';
-
-    // Calculate brightness (perceived)
-    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-    const isDark = brightness < 60; // Threshold for visibility against black bg
-
-    const colorVal = `rgb(${r}, ${g}, ${b})`;
-    terminal.style.setProperty('--terminal-color', colorVal);
-
-    // Use green if too dark, otherwise use the custom color
-    const btnColor = isDark ? '#0f0' : colorVal;
-    terminal.style.setProperty('--terminal-btn-color', btnColor);
-
-    return `Terminal color set to ${colorVal}${isDark ? ' (Buttons kept bright)' : ''}`;
-  },
-
-  matrix: () => {
-    document.body.classList.toggle('matrix-mode');
-    return document.body.classList.contains('matrix-mode') ? 'Matrix mode enabled.' : 'Matrix mode disabled.';
-  }
-};
-
-if (input) {
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const raw = input.value.trim();
-      if (!raw) return;
-
-      output.textContent += `\n${prompt}${raw}\n`;
-      history.push(raw);
-      historyIndex = history.length;
-      autoScroll();
-
-      const parts = raw.split(' ');
-      const cmd = parts[0];
-      const args = parts.slice(1);
-
-      if (commands[cmd]) {
-        const result = typeof commands[cmd] === 'function' ? commands[cmd](args) : commands[cmd];
-        if (result !== undefined && result !== '') typeLine(result);
-      } else {
-        typeLine(`bash: ${cmd}: command not found`);
-      }
-
-      input.value = '';
-      autoScroll();
-    }
-
-    if (e.key === 'ArrowUp') {
-      if (historyIndex > 0) {
-        historyIndex--;
-        input.value = history[historyIndex];
-      }
-    }
-    if (e.key === 'ArrowDown') {
-      if (historyIndex < history.length - 1) {
-        historyIndex++;
-        input.value = history[historyIndex];
-      } else {
-        input.value = '';
-      }
-    }
-  });
-}
-
-backBtn?.addEventListener('click', () => {
-  if (document.body.classList.contains('terminal-body')) {
-    window.location.href = 'index.html';
-  } else {
-    terminal.style.display = 'none';
-  }
-});
-helpBtn?.addEventListener('click', () => helpFunction());
-
-logos.forEach(logo => {
-  logo.addEventListener('click', (e) => {
-    if (logo.tagName === 'IMG' && logo.parentElement.tagName !== 'A') {
-      terminal.style.display = 'block';
-      bootSequence();
-      autoScroll();
-    }
-  });
-});
-
-if (document.body.classList.contains('terminal-body')) {
-  terminal.style.display = 'block';
-  setTimeout(() => {
-    bootSequence();
-    autoScroll();
-    input.focus();
-  }, 100);
-}
 
 const lightbox = document.getElementById('imageLightbox');
 const lightboxImg = document.getElementById('lightboxImg');
@@ -923,7 +441,177 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-document.getElementById("backToTop")
-  ?.addEventListener("click", () => {
+// Back to Top Logic
+const backToTopBtn = document.getElementById("backToTop");
+if (backToTopBtn) {
+  backToTopBtn.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.add("visible");
+    } else {
+      backToTopBtn.classList.remove("visible");
+    }
+  });
+}
+
+/* GitHub Contributions Logic */
+function initGitHubGraph() {
+  const calendar = document.getElementById("calendar");
+  if (!calendar) return;
+
+  const USERNAME = "Rainier-PS";
+  const YEARS = [2026, 2025, 2024];
+
+  const monthsRow = document.getElementById("months");
+  const summary = document.getElementById("summary");
+  const tooltip = document.getElementById("tooltip");
+  const yearSelect = document.getElementById("yearSelect");
+  const yearButtons = document.getElementById("yearButtons");
+
+  function level(count) {
+    if (count >= 8) return 4;
+    if (count >= 4) return 3;
+    if (count >= 1) return 2;
+    return 0;
+  }
+
+  function buildYearButtons(active) {
+    yearButtons.innerHTML = "";
+    YEARS.forEach(y => {
+      const btn = document.createElement("button");
+      btn.className = "year-btn" + (y === active ? " active" : "");
+      btn.textContent = y;
+      btn.onclick = () => loadYear(y);
+      yearButtons.appendChild(btn);
+    });
+  }
+
+  async function loadYear(year) {
+    calendar.innerHTML = "";
+    monthsRow.innerHTML = "";
+    summary.textContent = "Loading…";
+    yearSelect.value = year;
+    buildYearButtons(year);
+
+    try {
+      const res = await fetch(
+        `https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=${year}`
+      );
+      const data = await res.json();
+      const days = data.contributions;
+
+      summary.textContent = `${data.total[year]} contributions in the last year`;
+
+      const monthCounts = {};
+      let week = document.createElement("div");
+      week.className = "week";
+
+      const firstDay = new Date(days[0].date).getDay();
+      for (let i = 0; i < firstDay; i++) {
+        week.appendChild(document.createElement("div")).className = "day";
+      }
+
+      days.forEach(d => {
+        const date = new Date(d.date);
+        const m = date.getMonth();
+        monthCounts[m] = (monthCounts[m] || 0) + 1;
+
+        const cell = document.createElement("div");
+        const lvl = level(d.count);
+        cell.className = "day" + (lvl ? ` lvl-${lvl}` : "");
+        cell.tabIndex = 0;
+        cell.setAttribute(
+          "aria-label",
+          `${d.count} contributions on ${d.date}`
+        );
+
+        cell.onmouseenter = () => {
+          tooltip.textContent = `${d.count} contributions on ${d.date}`;
+          tooltip.style.opacity = 1;
+        };
+        cell.onmousemove = e => {
+          tooltip.style.left = e.clientX + 12 + "px";
+          tooltip.style.top = e.clientY - 12 + "px";
+        };
+        cell.onmouseleave = () => tooltip.style.opacity = 0;
+
+        week.appendChild(cell);
+
+        if (date.getDay() === 6) {
+          calendar.appendChild(week);
+          week = document.createElement("div");
+          week.className = "week";
+        }
+      });
+
+      while (week.children.length < 7) {
+        week.appendChild(document.createElement("div")).className = "day";
+      }
+      calendar.appendChild(week);
+
+      Object.entries(monthCounts).forEach(([m, count]) => {
+        const label = document.createElement("div");
+        label.className = "month";
+        label.style.setProperty("--span", Math.ceil(count / 7));
+        label.textContent = new Date(2024, m).toLocaleString("en", { month: "short" });
+        monthsRow.appendChild(label);
+      });
+    } catch (e) {
+      console.error("Failed to load GitHub contributions:", e);
+      summary.textContent = "Failed to load contributions.";
+    }
+  }
+
+  yearSelect.onchange = e => loadYear(+e.target.value);
+  loadYear(YEARS[0]);
+}
+
+async function loadPublications() {
+  const grid = document.getElementById('publications-grid');
+  if (!grid) return;
+
+  try {
+    const res = await fetch('https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/data/publications.json');
+    if (!res.ok) throw new Error('Failed to load publications');
+    const publications = await res.json();
+
+    grid.innerHTML = '';
+
+    publications.forEach(pub => {
+      const article = document.createElement('article');
+      article.className = 'pub-card';
+      article.innerHTML = `
+        <a href="${pub.url}" target="_blank" rel="noopener noreferrer" class="pub-img-link" aria-label="Read ${pub.title}">
+          <div class="pub-img-wrapper icon-cover">
+             <i data-lucide="${pub.icon || 'book'}" class="pub-icon"></i>
+          </div>
+        </a>
+        <div class="pub-content">
+          <h3><a href="${pub.url}" target="_blank" rel="noopener noreferrer">${pub.title}</a></h3>
+          <p>${pub.description}</p>
+          
+          <div class="pub-tags">
+             ${pub.tags ? pub.tags.map(t => `<span class="tag">${t}</span>`).join('') : ''}
+          </div>
+
+          <div class="pub-footer">
+             <span class="pub-source"><i data-lucide="book-open"></i> Instructables</span>
+             <a href="${pub.url}" target="_blank" rel="noopener noreferrer" class="read-more">Read</a>
+          </div>
+        </div>
+      `;
+      grid.appendChild(article);
+    });
+
+    if (window.lucide) lucide.createIcons();
+  } catch (err) {
+    console.error('Error loading publications:', err);
+    grid.innerHTML = '<p style="text-align:center; color:var(--muted);">Unable to load publications at this time.</p>';
+  }
+}
+
+initGitHubGraph();
+loadPublications();
