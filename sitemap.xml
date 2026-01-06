@@ -8,11 +8,43 @@
     <priority>1.0</priority>
   </url>
   
+  <!-- Projects -->
+  <url>
+    <loc>https://rainier-ps.github.io/Personal-Website/projects.html</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Publications -->
+  <url>
+    <loc>https://rainier-ps.github.io/Personal-Website/publications.html</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Awards -->
+  <url>
+    <loc>https://rainier-ps.github.io/Personal-Website/awards.html</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Labs -->
+  <url>
+    <loc>https://rainier-ps.github.io/Personal-Website/labs.html</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
   <!-- Terminal -->
   <url>
     <loc>https://rainier-ps.github.io/Personal-Website/terminal.html</loc>
     <lastmod>2025-01-05</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
 </urlset>
