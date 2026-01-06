@@ -1,0 +1,48 @@
+/* Projects Page Styles */
+
+.projects-header {
+    text-align: center;
+    padding: 3rem 1rem 1rem;
+}
+
+.projects-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.projects-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Reusing .card styles from styles.css, adding specific overrides if needed */
+.project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.project-card p {
+    flex-grow: 1;
+}
+
+.loader {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--subtext);
+    padding: 3rem;
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
