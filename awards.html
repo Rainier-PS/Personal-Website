@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" class="transition-colors duration-300">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Awards — Rainier Pearson Saputra</title>
+    <meta name="description" content="Awards and achievements of Rainier Pearson Saputra." />
+
+    <link rel="icon"
+        href="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Pearson%20Saputra-Favicon.svg"
+        type="image/svg+xml" />
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/awards.css">
+    <script src="https://unpkg.com/lucide@0.562.0" defer></script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header id="header">
+        <div class="brand">
+            <a href="index.html" aria-label="Home">
+                <img class="logo logo-light"
+                    src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Reversed.svg"
+                    alt="Rainier logo Reversed" />
+                <img class="logo logo-dark"
+                    src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Primary.svg"
+                    alt="Rainier Logo Primary">
+            </a>
+            <h1>Rainier P. S.</h1>
+        </div>
+
+        <button id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <i data-lucide="menu"></i>
+        </button>
+
+        <nav id="nav-links" aria-label="Primary">
+            <a href="index.html#about">ABOUT</a>
+            <a href="index.html#experience-education">EXPERIENCE & EDUCATION</a>
+            <a href="index.html#skills">SKILLS</a>
+            <a href="projects.html">PROJECTS</a>
+            <a href="publications.html">PUBLICATIONS</a>
+            <a href="awards.html" class="active">AWARDS</a>
+            <a href="labs.html">LABS</a>
+            <a href="index.html#contact">CONTACT</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <i data-lucide="moon"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="awards-header">
+            <h2>Awards</h2>
+            <p>Recognitions and achievements from competitions and events.</p>
+        </section>
+
+        <section class="awards-container">
+            <div id="awards-grid" class="awards-grid">
+                <!-- Awards will be loaded here -->
+                <div class="loader">Loading awards...</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="links">
+            <p><strong>Quick Links</strong></p>
+            <a href="index.html#about">About</a>
+            <a href="index.html#experience-education">Experience & Education</a>
+            <a href="index.html#skills">Skills</a>
+            <a href="projects.html">Projects</a>
+            <a href="awards.html">Awards</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+        <p>© 2025 Rainier Pearson Saputra | All rights reserved.</p>
+    </footer>
+
+    <div id="imageLightbox" class="image-lightbox">
+        <div class="image-lightbox-content">
+            <img id="lightboxImg" src="" alt="Award preview">
+            <div class="image-lightbox-buttons">
+                <button id="closeLightbox">Close</button>
+                <button id="openInNewTab">Open in New Tab</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/awards.js" defer></script>
+</body>
+
+</html>

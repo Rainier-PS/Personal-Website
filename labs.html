@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" class="transition-colors duration-300">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Labs | Rainier Pearson Saputra</title>
+
+    <meta name="author" content="Rainier Pearson Saputra">
+    <meta name="description"
+        content="A collection of experiments, prototypes, and technical explorations by Rainier Pearson Saputra." />
+    <link rel="canonical" href="https://rainier-ps.github.io/Personal-Website/labs.html" />
+
+    <!-- Open Graph / Twitter Meta Tags (Reused) -->
+    <meta property="og:title" content="Labs | Rainier Pearson Saputra" />
+    <meta property="og:description" content="A collection of experiments, prototypes, and technical explorations." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image"
+        content="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Pearson%20Saputra-Avatar.jpg" />
+    <meta property="og:url" content="https://rainier-ps.github.io/Personal-Website/labs.html" />
+
+    <link rel="icon"
+        href="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Pearson%20Saputra-Favicon.svg"
+        type="image/svg+xml" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon"
+        href="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/apple-touch-icon.png" />
+
+    <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f8f9fa" media="(prefers-color-scheme: light)" />
+
+    <script src="https://unpkg.com/lucide@0.562.0" defer></script>
+
+    <link rel="preload" href="js/script.js" as="script">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/labs.css">
+</head>
+
+<body id="top">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header id="header">
+        <div class="brand">
+            <a href="terminal.html" aria-label="Open Terminal">
+                <img class="logo logo-light"
+                    src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Reversed.svg"
+                    alt="Rainier logo Reversed" />
+                <img class="logo logo-dark"
+                    src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Primary.svg"
+                    alt="Rainier Logo Primary">
+            </a>
+            <h1>Rainier P. S.</h1>
+        </div>
+
+        <button id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <i data-lucide="menu"></i>
+        </button>
+
+        <nav id="nav-links" aria-label="Primary">
+            <a href="index.html#about">ABOUT</a>
+            <a href="index.html#experience-education">EXPERIENCE &amp; EDUCATION</a>
+            <a href="index.html#skills">SKILLS</a>
+            <a href="index.html#projects">PROJECTS</a>
+            <a href="publications.html">PUBLICATIONS</a>
+            <a href="index.html#awards">AWARDS</a>
+            <a href="labs.html" aria-current="page">LABS</a>
+            <a href="index.html#contact">CONTACT</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <i data-lucide="moon"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+        <section class="labs-hero">
+            <h2>Labs</h2>
+            <p>
+                Welcome to Rainier’s Labs, where I showcase my personal experiments and prototypes.<br>
+                Here, I transform ideas into reality, turning every concept I imagine into a project to explore.<br>
+                Discover unique projects that reflect my passion for technology and innovation.
+            </p>
+        </section>
+
+        <section class="labs-grid">
+            <article class="lab-card">
+                <h3>Dot Matrix Avatar</h3>
+
+                <div class="pixel-art-wrapper">
+                    <div class="px-loading-overlay" id="px-loading">SYSTEM INITIALIZING...</div>
+
+                    <button id="px-settings-trigger">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20h9"></path>
+                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                        </svg>
+                        <span>CONFIG</span>
+                    </button>
+
+                    <div class="px-canvas-wrapper">
+                        <canvas id="px-canvas"></canvas>
+                    </div>
+
+                    <div class="px-controls-panel" id="px-panel">
+                        <div class="panel-header">
+                            <h2>Visual Controls</h2>
+                            <div style="display: flex; align-items: center;">
+                                <span>PRO v3.0</span>
+                                <button class="close-btn" id="px-panel-close">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="label-row">
+                                <span>Animation Effect</span>
+                            </div>
+                            <select id="px-anim-type">
+                                <option value="none">None (Static)</option>
+                                <option value="random">Random Mix</option>
+                                <option value="linear">Linear Scan</option>
+                                <option value="radar">Radar Sweep</option>
+                                <option value="spotlight">Spotlight</option>
+                                <option value="pulse">Global Pulse</option>
+                            </select>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="label-row">
+                                <span>Avatar Shape</span>
+                            </div>
+                            <div class="shape-selector">
+                                <div class="px-shape-option" data-shape="square">Square</div>
+                                <div class="px-shape-option active" data-shape="circle">Circle</div>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="label-row">
+                                <span>Speed</span>
+                                <span class="value-tag" id="px-speed-val">1.0</span>
+                            </div>
+                            <input type="range" id="px-speed" min="1" max="15" step="0.5" value="5">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="label-row">
+                                <span>Intensity</span>
+                                <span class="value-tag" id="px-opacity-val">0.3</span>
+                            </div>
+                            <input type="range" id="px-opacity" min="0" max="1" step="0.05" value="0.4">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="label-row">
+                                <span>Beam Width / Size</span>
+                                <span class="value-tag" id="px-width-val">120</span>
+                            </div>
+                            <input type="range" id="px-width" min="50" max="400" step="10" value="120">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="label-row">
+                                <span>Angle (Linear Only)</span>
+                                <span class="value-tag" id="px-angle-val">25°</span>
+                            </div>
+                            <input type="range" id="px-angle" min="-180" max="180" step="5" value="25">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="label-row">
+                                <span>Pixel Density</span>
+                                <span class="value-tag" id="px-gap-val">High</span>
+                            </div>
+                            <input type="range" id="px-gap" min="0" max="3" step="0.5" value="1">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="lab-tags">
+                    <span>Canvas</span>
+                    <span>Generative Art</span>
+                    <span>Interactive</span>
+                </div>
+
+                <div class="lab-footer">
+                    <span class="lab-status">Production v3.0</span>
+                </div>
+            </article>
+
+            <article class="lab-card">
+                <h3>GitHub Contributions</h3>
+
+                <div class="contributions">
+                    <select id="yearSelect" class="year-select" aria-label="Select contribution year">
+                        <option value="2026">2026</option>
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                    </select>
+
+                    <div class="summary" id="summary">Loading…</div>
+
+                    <div class="layout">
+                        <div class="graph-wrapper">
+                            <div class="months" id="months"></div>
+
+                            <div class="graph">
+                                <div class="days">
+                                    <span>Mon</span>
+                                    <span></span>
+                                    <span>Wed</span>
+                                    <span></span>
+                                    <span>Fri</span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+
+                                <div class="calendar" id="calendar"></div>
+                            </div>
+                        </div>
+
+                        <div class="years" id="yearButtons"></div>
+                    </div>
+                </div>
+                <div class="tooltip" id="tooltip"></div>
+
+                <div class="lab-tags">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                    <span>Accessibility</span>
+                </div>
+
+                <div class="lab-footer">
+                    <span class="lab-status">Prototype</span>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <div class="links">
+            <p><strong>Quick Links</strong></p>
+            <a href="index.html#about">About</a>
+            <a href="index.html#experience-education">Experience</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="labs.html">Labs</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+        <p>© 2025 Rainier Pearson Saputra | All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js" defer></script>
+    <script src="js/labs.js" defer></script>
+</body>
+
+</html>
+```
