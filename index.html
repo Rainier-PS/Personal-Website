@@ -69,6 +69,7 @@
 
   <link rel="preload" href="js/script.js" as="script">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/labs.css">
 </head>
 
 <body id="top">
@@ -96,8 +97,10 @@
       <a href="#about">ABOUT</a>
       <a href="#experience-education">EXPERIENCE &amp; EDUCATION</a>
       <a href="#skills">SKILLS</a>
-      <a href="#projects">PROJECTS</a>
-      <a href="#awards">AWARDS</a>
+      <a href="projects.html">PROJECTS</a>
+      <a href="publications.html">PUBLICATIONS</a>
+      <a href="awards.html">AWARDS</a>
+      <a href="labs.html">LABS</a>
       <a href="#contact">CONTACT</a>
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
         <i data-lucide="moon"></i>
@@ -140,8 +143,53 @@
       <h2>About Me</h2>
       <p>I'm a high school student passionate about technology, science, and innovation. I enjoy creating projects that
         solve real-world problems while constantly exploring new ideas and learning new skills, whether through STEM
-        competitions or personal projects. Feel free to check out <a href="#projects" class="projects-link">my
+        competitions or personal projects. Feel free to check out <a href="projects.html" class="projects-link">my
           projects</a> below!</p>
+    </section>
+
+    <section id="open-source">
+      <h2>Open Source Activity</h2>
+      <p class="section-intro" style="margin-bottom: 1.5rem;">
+        I enjoy building consistently and contributing to personal and open-source projects.
+        Below is a snapshot of my GitHub activity over the past year.
+      </p>
+
+      <div class="contributions">
+        <select id="yearSelect" class="year-select" aria-label="Select contribution year">
+          <option value="2026">2026</option>
+          <option value="2025">2025</option>
+          <option value="2024">2024</option>
+        </select>
+
+        <div class="summary" id="summary">Loading…</div>
+
+        <div class="layout">
+          <div class="graph-wrapper">
+            <div class="months" id="months"></div>
+
+            <div class="graph">
+              <div class="days">
+                <span>Mon</span>
+                <span></span>
+                <span>Wed</span>
+                <span></span>
+                <span>Fri</span>
+                <span></span>
+                <span></span>
+              </div>
+
+              <div class="calendar" id="calendar"></div>
+            </div>
+          </div>
+
+          <div class="years" id="yearButtons"></div>
+        </div>
+      </div>
+      <div class="tooltip" id="tooltip"></div>
+
+      <div class="centered" style="margin-top: 1.5rem;">
+        <a href="labs.html" class="btn">View All Labs <i data-lucide="flask-conical"></i></a>
+      </div>
     </section>
 
     <section id="experience-education">
@@ -221,6 +269,10 @@
 
         <div class="carousel-dots" aria-label="Project slide pagination"></div>
       </div>
+
+      <div class="centered" style="margin-top: 1.5rem;">
+        <a href="projects.html" class="btn">View All Projects <i data-lucide="arrow-right"></i></a>
+      </div>
     </section>
 
     <section id="awards">
@@ -230,6 +282,10 @@
         <div class="carousel-track" id="awards-grid" aria-live="polite"></div>
 
         <div class="carousel-dots" aria-label="Award slide pagination"></div>
+      </div>
+
+      <div class="centered" style="margin-top: 1.5rem;">
+        <a href="awards.html" class="btn">View All Awards <i data-lucide="arrow-right"></i></a>
       </div>
     </section>
 
@@ -263,8 +319,8 @@
       <a href="#about">About</a>
       <a href="#experience-education">Experience &amp; Education</a>
       <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#awards">Awards</a>
+      <a href="projects.html">Projects</a>
+      <a href="awards.html">Awards</a>
       <a href="#contact">Contact</a>
     </div>
     <p>© 2025 Rainier Pearson Saputra | All rights reserved.</p>
@@ -281,6 +337,7 @@
   </div>
 
   <script src="js/script.js" defer></script>
+  <script src="js/labs.js" defer></script>
 </body>
 
 </html>
