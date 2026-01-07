@@ -17,15 +17,15 @@ function autoScroll() {
 
 function typeLine(line, delay = 20, callback) {
     if (!output) return;
+    const lineDiv = document.createElement('div');
+    output.appendChild(lineDiv);
     let i = 0;
     const interval = setInterval(() => {
-        output.textContent += line.charAt(i);
+        lineDiv.textContent += line.charAt(i);
         i++;
         autoScroll();
         if (i === line.length) {
             clearInterval(interval);
-            output.textContent += '\n';
-            autoScroll();
             if (callback) callback();
         }
     }, delay);
@@ -284,8 +284,14 @@ const commands = {
     },
 
     // Secret Commands
+    repo: () => {
+        window.open('https://github.com/Rainier-PS/Personal-Website', '_blank');
+        return 'Opening GitHub repository...';
+    },
+
     dev: () => {
         return '--- SECRET DEVELOPER VIEW ---\n' +
+            'repo          : Open main GitHub repository\n' +
             'view <file>   : View source code (opens GitHub)\n\n' +
             '[ HTML ]\n' +
             '  index.html, projects.html, publications.html,\n' +
