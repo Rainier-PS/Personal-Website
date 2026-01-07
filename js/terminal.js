@@ -285,11 +285,20 @@ const commands = {
 
     // Secret Commands
     dev: () => {
-        return '--- SECRET DEVELOPER MENU ---\n' +
-            'view <file>   : View source code of project files\n' +
-            'available files:\n' +
-            '  index.html, terminal.html, sitemap.xml, script.js,\n' +
-            '  styles.css, projects.json, awards.json, readme.md';
+        return '--- SECRET DEVELOPER VIEW ---\n' +
+            'view <file>   : View source code (opens GitHub)\n\n' +
+            '[ HTML ]\n' +
+            '  index.html, projects.html, publications.html,\n' +
+            '  labs.html, awards.html, terminal.html\n\n' +
+            '[ CSS ]\n' +
+            '  styles.css, projects.css, labs.css,\n' +
+            '  awards.css, terminal.css\n\n' +
+            '[ JavaScript ]\n' +
+            '  script.js, projects.js, labs.js,\n' +
+            '  awards.js, terminal.js\n\n' +
+            '[ Data / Config ]\n' +
+            '  publications.json, projects.json, awards.json,\n' +
+            '  sitemap.xml, readme.md';
     },
 
     view: (args) => {
@@ -299,12 +308,25 @@ const commands = {
         const map = {
             'index.html': 'index.html',
             'terminal.html': 'terminal.html',
+            'projects.html': 'projects.html',
+            'publications.html': 'publications.html',
+            'labs.html': 'labs.html',
+            'awards.html': 'awards.html',
             'sitemap.xml': 'sitemap.xml',
             'readme.md': 'README.md',
             'script.js': 'js/script.js',
+            'projects.js': 'js/projects.js',
+            'labs.js': 'js/labs.js',
+            'awards.js': 'js/awards.js',
+            'terminal.js': 'js/terminal.js',
             'styles.css': 'css/styles.css',
+            'projects.css': 'css/projects.css',
+            'labs.css': 'css/labs.css',
+            'awards.css': 'css/awards.css',
+            'terminal.css': 'css/terminal.css',
             'projects.json': 'data/projects.json',
-            'awards.json': 'data/awards.json'
+            'awards.json': 'data/awards.json',
+            'publications.json': 'data/publications.json'
         };
 
         if (!map[file]) return `File not found: ${file}`;
