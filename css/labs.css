@@ -143,7 +143,7 @@
 }
 
 .year-btn.active {
-    background: #1f6feb;
+    background: var(--link);
     color: #fff;
 }
 
