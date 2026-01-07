@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
   if (window.lucide) lucide.createIcons();
 
+  initCopyrightYear();
+
   document.querySelectorAll('link[rel="preload"][as="style"]').forEach(link => {
     function enableStylesheet() {
       try { link.rel = 'stylesheet'; } catch (e) { }
@@ -14,63 +16,65 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadAwardsFromJSON()
   ]);
 
-  DATA.projects = projects;
+  if (projects.length > 0) {
+    DATA.projects = projects;
+    DATA.projects.forEach(p => {
+      projectData[p.slug] = {
+        title: p.title,
+        desc: p.description,
+        links: [p.demo, p.github].filter(Boolean).join(' | ')
+      };
+    });
+  }
 
   const rawAwards = Array.isArray(awardsData)
     ? awardsData
     : (awardsData.awards || awardsData.data || []);
 
-  DATA.awards = rawAwards.map(item => ({
-    title: item.title || item.award || item.name || item.eventName || "Untitled Award",
-    description: item.description || item.desc || item.details || item.date || "",
-    image: item.image || item.logo || null,
-    ...item
-  }));
-
-  console.log('Loaded projects:', DATA.projects);
-  console.log('Loaded awards:', DATA.awards);
-
-  DATA.projects.forEach(p => {
-    projectData[p.slug] = {
-      title: p.title,
-      desc: p.description,
-      links: [p.demo, p.github].filter(Boolean).join(' | ')
-    };
-  });
+  if (rawAwards.length > 0) {
+    DATA.awards = rawAwards.map(item => ({
+      title: item.title || item.award || item.name || item.eventName || "Untitled Award",
+      description: item.description || item.desc || item.details || item.date || "",
+      image: item.image || item.logo || null,
+      ...item
+    }));
+  }
 
   const getPerPage = () => window.innerWidth <= 600 ? 1 : window.innerWidth <= 900 ? 2 : 3;
 
-  renderCarousel({
-    containerId: 'projects-grid',
-    items: DATA.projects,
-    perPage: getPerPage()
-  });
+  const projectsGrid = document.getElementById('projects-grid');
+  const awardsGrid = document.getElementById('awards-grid');
 
-  renderCarousel({
-    containerId: 'awards-grid',
-    items: DATA.awards,
-    perPage: getPerPage()
-  });
+  if (projectsGrid && DATA.projects.length > 0) {
+    renderCarousel({ containerId: 'projects-grid', items: DATA.projects, perPage: getPerPage() });
+  }
+  if (awardsGrid && DATA.awards.length > 0) {
+    renderCarousel({ containerId: 'awards-grid', items: DATA.awards, perPage: getPerPage() });
+  }
 
   initCarousels();
   bindLightboxImages();
 
   window.addEventListener('resize', () => {
-    renderCarousel({
-      containerId: 'projects-grid',
-      items: DATA.projects,
-      perPage: getPerPage()
-    });
-    renderCarousel({
-      containerId: 'awards-grid',
-      items: DATA.awards,
-      perPage: getPerPage()
-    });
-
+    if (projectsGrid && DATA.projects.length > 0) {
+      renderCarousel({ containerId: 'projects-grid', items: DATA.projects, perPage: getPerPage() });
+    }
+    if (awardsGrid && DATA.awards.length > 0) {
+      renderCarousel({ containerId: 'awards-grid', items: DATA.awards, perPage: getPerPage() });
+    }
     initCarousels();
     bindLightboxImages();
   });
 });
+
+function initCopyrightYear() {
+  const copyrightYearSpan = document.getElementById("copyright-year");
+  if (copyrightYearSpan) {
+    const startYear = 2025;
+    const currentYear = new Date().getFullYear();
+    copyrightYearSpan.textContent = startYear === currentYear ? startYear : `${startYear}–${currentYear}`;
+  }
+}
 
 const DATA = {
   projects: [],
@@ -457,7 +461,6 @@ if (backToTopBtn) {
   });
 }
 
-/* GitHub Contributions Logic */
 function initGitHubGraph() {
   const calendar = document.getElementById("calendar");
   if (!calendar) return;
@@ -522,7 +525,7 @@ function initGitHubGraph() {
         const cell = document.createElement("div");
         const lvl = level(d.count);
         cell.className = "day" + (lvl ? ` lvl-${lvl}` : "");
-        cell.tabIndex = 0;
+
         cell.setAttribute(
           "aria-label",
           `${d.count} contributions on ${d.date}`
