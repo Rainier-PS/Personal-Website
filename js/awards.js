@@ -1,11 +1,11 @@
 // Awards Page Logic
-
 document.addEventListener('DOMContentLoaded', () => {
+    // Theme Toggle Logic
     const toggleBtn = document.getElementById('theme-toggle');
     const root = document.documentElement;
     const updateIcon = () => {
         const isDark = root.classList.contains('dark');
-        toggleBtn.innerHTML = isDark ? '<i data-lucide="sun"></i>' : '<i data-lucide="moon"></i>';
+        if (toggleBtn) toggleBtn.innerHTML = isDark ? '<i data-lucide="sun"></i>' : '<i data-lucide="moon"></i>';
         if (window.lucide) lucide.createIcons();
     };
 
@@ -16,30 +16,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     updateIcon();
 
-    toggleBtn?.addEventListener('click', () => {
-        root.classList.toggle('dark');
-        localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
-        updateIcon();
-    });
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            root.classList.toggle('dark');
+            localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+            updateIcon();
+        });
+    }
 
+    // Mobile Menu Logic
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
-    menuToggle?.addEventListener('click', () => {
-        navLinks.classList.toggle('show');
-        menuToggle.classList.toggle('open');
-        menuToggle.setAttribute('aria-expanded', navLinks.classList.contains('show'));
-    });
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+            menuToggle.classList.toggle('open');
+            menuToggle.setAttribute('aria-expanded', navLinks.classList.contains('show'));
+        });
+    }
+
+    // Intersection Observer for Fade-in Animations
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section').forEach(sec => observer.observe(sec));
 
     loadAwards();
 });
 
 async function loadAwards() {
-    console.log('loadAwards called');
     const grid = document.getElementById('awards-grid');
-    if (!grid) {
-        console.error('awards-grid element not found!');
-        return;
-    }
+    if (!grid) return;
 
     try {
         let res;
@@ -57,7 +69,6 @@ async function loadAwards() {
         grid.innerHTML = '';
 
         awards.forEach(award => {
-
             const card = document.createElement('div');
             card.className = `card award-card ${!award.image ? 'no-image' : ''}`;
 
@@ -74,8 +85,7 @@ async function loadAwards() {
 
     } catch (err) {
         console.error('Award loading error:', err);
-        alert('Sorry for the inconvenience. The coder is still trying his best to fix it. :)');
-        grid.innerHTML = '<h1 style="grid-column: 1/-1; text-align: center; padding: 2rem;">Sorry for the inconvenience. The coder is still trying his best to fix it. :)</h1>';
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--subtext);">Unable to load awards at this time.</p>';
     }
 }
 
@@ -100,7 +110,7 @@ function initLightbox() {
         document.body.style.overflow = '';
     };
 
-    closeBtn?.addEventListener('click', close);
+    if (closeBtn) closeBtn.addEventListener('click', close);
     lightbox.addEventListener('click', e => {
         if (e.target === lightbox) close();
     });
@@ -109,7 +119,9 @@ function initLightbox() {
         if (e.key === 'Escape') close();
     });
 
-    openBtn?.addEventListener('click', () => {
-        if (lightboxImg.src) window.open(lightboxImg.src, '_blank');
-    });
+    if (openBtn) {
+        openBtn.addEventListener('click', () => {
+            if (lightboxImg.src) window.open(lightboxImg.src, '_blank');
+        });
+    }
 }
