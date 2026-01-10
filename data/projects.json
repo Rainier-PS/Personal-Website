@@ -1,5 +1,14 @@
 [
   {
+    "slug": "invitation-website-template",
+    "title": "Invitation Website Template",
+    "description": "A free, modern, and responsive invitation website template built with HTML, CSS, and vanilla JavaScript. Easily customizable via a single JSON file.",
+    "image": "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/media/images/Thumbnail.png",
+    "labels": ["Software", "Open Source", "Website"],
+    "demo": "https://rainier-ps.github.io/Invitation-Template/",
+    "github": "https://github.com/Rainier-PS/Invitation-Template"
+  },
+  {
     "slug": "diy-bluetooth-mechanical-keyboard",
     "title": "DIY Bluetooth Mechanical Keyboard",
     "description": "This custom-designed DIY Bluetooth mechanical keyboard features hot-swappable switches, USB-C, a slide potentiometer, built-in NFC, and a 6° ergonomic tilt with wrist rest.",
