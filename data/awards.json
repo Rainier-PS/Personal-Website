@@ -82,9 +82,90 @@
   },
   {
     "slug": "coming-soon-1",
-    "title": "More Certificates Coming Soon",
-    "description": "",
-    "image": "",
+    "title": "Introduction to Python",
+    "description": "Sololearn",
+    "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/images/certificates/Sololearn-Introduction%20to%20Python.avif",
+    "labels": [],
+    "demo": "",
+    "github": ""
+  },
+  {
+    "slug": "sololearn-python-intermediate",
+    "title": "Python Intermediate",
+    "description": "Sololearn",
+    "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/images/certificates/Sololearn-Python%20Intermediate.avif",
+    "labels": [],
+    "demo": "",
+    "github": ""
+  },
+  {
+    "slug": "python-developer",
+    "title": "Python Developer",
+    "description": "Sololearn",
+    "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/images/certificates/Python%20Developer.avif",
+    "labels": [],
+    "demo": "",
+    "github": ""
+  },
+  {
+    "slug": "sololearn-tech-for-everyone",
+    "title": "Tech for Everyone",
+    "description": "Sololearn",
+    "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/images/certificates/Sololearn-Tech%20for%20Everyone.avif",
+    "labels": [],
+    "demo": "",
+    "github": ""
+  },
+  {
+    "slug": "coding-foundations",
+    "title": "Coding Foundations",
+    "description": "Sololearn",
+    "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/images/certificates/Coding%20Foundations.avif",
+    "labels": [],
+    "demo": "",
+    "github": ""
+  },
+  {
+    "slug": "sololearn-web-development",
+    "title": "Web Development",
+    "description": "Sololearn",
+    "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/images/certificates/Sololearn-Web%20Development.avif",
+    "labels": [],
+    "demo": "",
+    "github": ""
+  },
+  {
+    "slug": "sololearn-intro-html",
+    "title": "Introduction to HTML",
+    "description": "Sololearn",
+    "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/images/certificates/Sololearn-Introduction%20to%20HTML.avif",
+    "labels": [],
+    "demo": "",
+    "github": ""
+  },
+  {
+    "slug": "sololearn-intro-javascript",
+    "title": "Introduction to Javascript",
+    "description": "Sololearn",
+    "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/images/certificates/Sololearn-Introduction%20to%20Javascript.avif",
+    "labels": [],
+    "demo": "",
+    "github": ""
+  },
+  {
+    "slug": "sololearn-javascript-intermediate",
+    "title": "Javascript Intermediate",
+    "description": "Sololearn",
+    "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/images/certificates/Sololearn-Javascript%20Intermediate.avif",
+    "labels": [],
+    "demo": "",
+    "github": ""
+  },
+  {
+    "slug": "sololearn-intro-css",
+    "title": "Introduction to CSS",
+    "description": "Sololearn",
+    "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/images/certificates/Sololearn-Introduction%20to%20CSS.avif",
     "labels": [],
     "demo": "",
     "github": ""
