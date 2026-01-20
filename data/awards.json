@@ -81,7 +81,7 @@
     "github": ""
   },
   {
-    "slug": "coming-soon-1",
+    "slug": "sololearn-intro-python",
     "title": "Introduction to Python",
     "description": "Sololearn",
     "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/images/certificates/Sololearn-Introduction%20to%20Python.avif",
@@ -99,7 +99,7 @@
     "github": ""
   },
   {
-    "slug": "python-developer",
+    "slug": "sololearn-python-developer",
     "title": "Python Developer",
     "description": "Sololearn",
     "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/images/certificates/Python%20Developer.avif",
@@ -117,7 +117,7 @@
     "github": ""
   },
   {
-    "slug": "coding-foundations",
+    "slug": "sololearn-coding-foundations",
     "title": "Coding Foundations",
     "description": "Sololearn",
     "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/images/certificates/Coding%20Foundations.avif",
@@ -171,19 +171,19 @@
     "github": ""
   },
   {
-    "slug": "coming-soon-2",
-    "title": "More Certificates Coming Soon",
+    "slug": "sololearn-intro-sql",
+    "title": "Introduction to SQL",
     "description": "",
-    "image": "",
+    "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/images/certificates/Sololearn-Introduction%20to%20SQL.avif",
     "labels": [],
     "demo": "",
     "github": ""
   },
   {
-    "slug": "coming-soon-3",
-    "title": "More Certificates Coming Soon",
-    "description": "",
-    "image": "",
+    "slug": "dicoding-belajar-dasar-ai",
+    "title": "Belajar Dasar AI",
+    "description": "Dicoding",
+    "image": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/refs/heads/main/images/certificates/Dicoding-Belajar%20Dasar%20AI-1.avif",
     "labels": [],
     "demo": "",
     "github": ""
